@@ -125,11 +125,5 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SpinerBaseBO\SpinerBaseBE.csproj">
-      <Project>{2255cef2-429d-424f-bcb6-e5ba62984ac0}</Project>
-      <Name>SpinerBaseBE</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
