@@ -1,0 +1,5 @@
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBO\bin\Debug\SpinerBaseBO.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBO\bin\Debug\SpinerBaseBO.pdb
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBO\obj\Debug\SpinerBaseBO.csproj.CoreCompileInputs.cache
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBO\obj\Debug\SpinerBaseBO.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBO\obj\Debug\SpinerBaseBO.pdb

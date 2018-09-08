@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpinerBase", "SpinerBase\SpinerBase.csproj", "{51AFF341-5D6C-4A19-8CAD-CEC8FD49C328}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpinerBaseFE", "SpinerBase\SpinerBaseFE.csproj", "{51AFF341-5D6C-4A19-8CAD-CEC8FD49C328}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpinerBaseBO", "SpinerBaseBO\SpinerBaseBO.csproj", "{2255CEF2-429D-424F-BCB6-E5BA62984AC0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpinerBaseBE", "SpinerBaseBO\SpinerBaseBE.csproj", "{2255CEF2-429D-424F-BCB6-E5BA62984AC0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SpinerBaseBO")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("SpinerBaseBE")]
+[assembly: AssemblyDescription("Spiner Base BackEnd")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SpinerBaseBO")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyCompany("KelvysB.")]
+[assembly: AssemblyProduct("SpinerBase Helper")]
+[assembly: AssemblyCopyright("Copyright © Kelvys B.  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
