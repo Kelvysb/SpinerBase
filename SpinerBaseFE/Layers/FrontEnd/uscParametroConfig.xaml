@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="SpinerBaseBE.Layers.FrontEnd.uscParameterConfig"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SpinerBaseBE.Layers.FrontEnd"
+             mc:Ignorable="d" 
+             d:DesignHeight="60" d:DesignWidth="250">
+    <Border Style="{StaticResource ButtonRoundRectangleStyle}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            
+            <Label Style="{StaticResource stlLabelBase}" Content="Tag:" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0" Margin="10,0,0,0" Grid.Column="0" Grid.Row="0"/>
+            <Label Style="{StaticResource stlLabelBase}" Content="Description:" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0" Margin="10,0,0,0" Grid.Column="1" Grid.Row="0"/>
+            <Label Name="lblTag" Style="{StaticResource stlLabelBase}" Content="#TAG;" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0" Margin="10,0,0,0" Grid.Column="0" Grid.Row="1"/>
+            <TextBox Name="txtDescription" Style="{StaticResource stlTextBoxBase}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="2,0,10,0" Grid.Column="1" Grid.Row="1" TextChanged="txtDescription_TextChanged"/>
+        </Grid>
+    </Border>
+</UserControl>

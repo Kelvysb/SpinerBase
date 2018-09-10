@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SpinerBase.Properties
+namespace SpinerBaseBE.Properties
 {
 
 

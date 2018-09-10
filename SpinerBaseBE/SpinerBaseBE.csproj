@@ -71,6 +71,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Basic\SpinerBaseBasics.cs" />
     <Compile Include="Layers\BackEnd\SpinerBaseBO.cs" />
     <Compile Include="Layers\Repository\SpinerBaseRep.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

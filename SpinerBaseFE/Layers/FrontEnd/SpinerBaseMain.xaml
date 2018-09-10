@@ -1,31 +1,88 @@
-﻿<Window x:Class="SpinerBase.Layers.FrontEnd.SpinerBaseMain"
+﻿<Window x:Class="SpinerBaseBE.Layers.FrontEnd.SpinerBaseMain"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SpinerBase.Layers.FrontEnd"
+        xmlns:local="clr-namespace:SpinerBaseBE.Layers.FrontEnd"
         mc:Ignorable="d"
-       Title="SpinerBase" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+       Title="SpinerBase" Height="600" Width="1100" WindowStartupLocation="CenterScreen"
+        MinWidth="1100" MinHeight="600" Background="{StaticResource BackColor}" Icon="/SpinerBase;component/Icon.ico" Loaded="Window_Loaded">
+
     <Grid Name="grdPrincipal">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50*"/>
             <ColumnDefinition Width="50*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0">
-            <Grid Name="grdCards">
+        <Image Name="imgBackground" Margin="0" Grid.ColumnSpan="2" Source="/SpinerBase;component/Resources/SpinerBaseBackground.jpg" HorizontalAlignment="Left" VerticalAlignment="Stretch" Stretch="UniformToFill"/>
+
+        <Border Grid.Column="0" BorderThickness="0,0,2,0" BorderBrush="{StaticResource DetailColor}">
+            <Grid Name="grdCards" Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="57"/>
                 </Grid.RowDefinitions>
+
+                <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}" Margin="5" Grid.Row="0">
+                    <Grid Name="grdFilter">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70*"/>
+                            <ColumnDefinition Width="30*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Name="lblFilter" Content="Filter:" Style="{StaticResource stlLabelBase}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0"/>
+                            <TextBox Name="txtFilter" Text="" Style="{StaticResource stlTextBoxBase}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1" TextChanged="txtFilter_TextChanged"/>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <CheckBox Name="chkDescription" IsChecked="True" Style="{StaticResource stlCheckboxBase}" Content="Description" VerticalAlignment="Center" Grid.Row="0"/>
+                            <CheckBox Name="chkTags" IsChecked="True" Style="{StaticResource stlCheckboxBase}" Content="Tags" VerticalAlignment="Center" Grid.Row="1"/>
+                        </Grid>
+                    </Grid>
+                </Border>
+                
+
+                <Border Grid.Row="1">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <WrapPanel Name="wrpCards" Margin="0">
+       
+                        </WrapPanel>
+                    </ScrollViewer>
+                </Border>
+
+                <Border Grid.Row="2">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Name="btnAdd" Style="{StaticResource ButtonRoundStyle}" Margin="1" Grid.Column="0" Click="btnAdd_Click">
+                            <Grid>
+                                <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}"/>
+                                <Image Source="/SpinerBase;component/Resources/Plus.png"/>
+                            </Grid>
+                        </Button>
+                        <Button Name="btnConnect" Style="{StaticResource ButtonRoundStyle}" Margin="1" Grid.Column="0" Click="btnConnect_Click">
+                            <Grid>
+                                <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}"/>
+                                <Image Source="/SpinerBase;component/Resources/Connect.png"/>
+                            </Grid>
+                        </Button>
+                    </StackPanel>
+                </Border>
 
             </Grid>
         </Border>
 
-        <Grid Name="grdResults" Grid.Column="1">
-
+        <Grid Name="grdResults" Grid.Column="1" Margin="5">
+       
         </Grid>
+
+       
 
     </Grid>
 </Window>
