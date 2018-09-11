@@ -31,25 +31,43 @@
                 <Border Grid.Row="0" Style="{StaticResource ButtonRoundRectangleStyle}" Margin="2">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="15"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Label Content="Data Base Type:" Style="{StaticResource stlLabelBase}" Padding="0" Margin="10,0,0,0" Grid.Row="0"/>
-                        <RadioButton Name="radMsSql" Content="MsSQL" GroupName="grpDataBaseType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" IsChecked="True" Grid.Row="1" Checked="radMsSql_Checked"/>
-                        <RadioButton Name="radMySql" Content="MySQL" GroupName="grpDataBaseType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" Grid.Row="2"/>
+                        <Grid  Grid.Row="1" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <RadioButton Name="radMsSql" Content="MsSQL" GroupName="grpDataBaseType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" IsChecked="True" Grid.Row="0" Grid.Column="0" Checked="radMsSql_Checked"/>
+                            <RadioButton Name="radMySql" Content="MySQL" GroupName="grpDataBaseType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" Grid.Row="1"  Grid.Column="0" Checked="radMsSql_Checked"/>
+                            <RadioButton Name="radSqlite" Content="Sqlite" GroupName="grpDataBaseType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" Grid.Row="0" Grid.Column="1" Checked="radMsSql_Checked"/>
+                            
+                        </Grid>
                     </Grid>
                 </Border>
                 <Border Grid.Row="1" Style="{StaticResource ButtonRoundRectangleStyle}"  Margin="2">
                     <Grid >
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="15"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Label Content="Result Type:" Style="{StaticResource stlLabelBase}" Padding="0" Margin="10,0,0,0" Grid.Row="0"/>
-                        <RadioButton Name="radGrid" Content="Grid" GroupName="grpResultType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" IsChecked="True" Grid.Row="1" Checked="radGrid_Checked"/>
-                        <RadioButton Name="radText" Content="Text" GroupName="grpResultType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" Grid.Row="2"/>
+                        <Grid  Grid.Row="1" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <RadioButton Name="radGrid" Content="Grid" GroupName="grpResultType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" IsChecked="True" Grid.Column="0" Checked="radGrid_Checked"/>
+                            <RadioButton Name="radText" Content="Text" GroupName="grpResultType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" Grid.Column="1"  Checked="radGrid_Checked"/>
+                        </Grid>
+                        
+                        
                     </Grid>
                 </Border>
                 <Button Name="btnOk" Style="{StaticResource ButtonRoundStyle}" Margin="1" Grid.Row="2" HorizontalAlignment="Left" Click="btnOk_Click">

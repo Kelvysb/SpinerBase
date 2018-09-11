@@ -104,6 +104,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Layers\FrontEnd\uscConnection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Layers\FrontEnd\uscGridResult.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -131,6 +135,9 @@
     </Compile>
     <Compile Include="Layers\FrontEnd\uscCardConfig.xaml.cs">
       <DependentUpon>uscCardConfig.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Layers\FrontEnd\uscConnection.xaml.cs">
+      <DependentUpon>uscConnection.xaml</DependentUpon>
     </Compile>
     <Compile Include="Layers\FrontEnd\uscGridResult.xaml.cs">
       <DependentUpon>uscGridResult.xaml</DependentUpon>

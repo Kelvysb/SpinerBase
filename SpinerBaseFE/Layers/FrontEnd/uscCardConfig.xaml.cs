@@ -158,9 +158,13 @@ namespace SpinerBaseBE.Layers.FrontEnd
                 {
                     radMsSql.IsChecked = true;
                 }
-                else
+                else if(card.DataBaseType == enmDataBaseType.MySQL)
                 {
                     radMySql.IsChecked = true;
+                }
+                else
+                {
+                    radSqlite.IsChecked = true;
                 }
 
                 if (card.ResultType == enmResultType.Grid)
@@ -188,9 +192,12 @@ namespace SpinerBaseBE.Layers.FrontEnd
                 {
                     card.DataBaseType = enmDataBaseType.MsSQL;
                 }
-                else
+                else if((bool)radMySql.IsChecked)
                 {
                     card.DataBaseType = enmDataBaseType.MySQL;
+                }else
+                {
+                    card.DataBaseType = enmDataBaseType.SQLite;
                 }
 
                 if ((bool)radGrid.IsChecked)

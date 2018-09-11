@@ -31,6 +31,16 @@ namespace SpinerBaseBE.Basic
         public Card card { get; set; }
     }
 
+    public class ConnectionEventArgs : EventArgs
+    {
+        public ConnectionEventArgs(Connection connection)
+        {
+            this.connection = connection;
+        }
+
+        public Connection connection { get; set; }
+    }
+
     public class SpinerBaseConfig
     {
 

@@ -15,25 +15,24 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SpinerBaseBE.Layers.FrontEnd
+namespace SpinerBase.Layers.FrontEnd
 {
     /// <summary>
-    /// Interaction logic for SpinerBaseCard.xaml
+    /// Interaction logic for uscConnection.xaml
     /// </summary>
-    public partial class uscCard : UserControl
+    public partial class uscConnection : UserControl
     {
-
         #region Declarations
-        private Card card;
+        private Connection connection;
         #endregion
 
         #region Constructor        
-        public uscCard()
+        public uscConnection()
         {
             try
             {
                 InitializeComponent();
-                card = new Card();
+                connection = new Connection();
                 sbLoad();
             }
             catch (Exception)
@@ -42,12 +41,12 @@ namespace SpinerBaseBE.Layers.FrontEnd
             }
         }
 
-        public uscCard(Card p_card)
+        public uscConnection(Connection p_connection)
         {
             try
             {
                 InitializeComponent();
-                card = p_card;
+                connection = p_connection;
                 sbLoad();
             }
             catch (Exception)
@@ -64,19 +63,19 @@ namespace SpinerBaseBE.Layers.FrontEnd
         public event EventHandler evPlay;
         protected virtual void onEvPlay()
         {
-            evPlay?.Invoke(this, new CardEventArgs(card));
+            evPlay?.Invoke(this, new ConnectionEventArgs(connection));
         }
 
         public event EventHandler evEdit;
         protected virtual void onEvEdit()
         {
-            evEdit?.Invoke(this, new CardEventArgs(card));
+            evEdit?.Invoke(this, new ConnectionEventArgs(connection));
         }
 
         public event EventHandler evRemove;
         protected virtual void onEvRemove()
         {
-            evRemove?.Invoke(this, new CardEventArgs(card));
+            evRemove?.Invoke(this, new ConnectionEventArgs(connection));
         }
 
         private void btnPlay_Click(object sender, RoutedEventArgs e)
@@ -121,8 +120,27 @@ namespace SpinerBaseBE.Layers.FrontEnd
         {
             try
             {
-                lblName.Content = card.Name;
-                lblDescription.Text = card.Description;
+                lblName.Content = connection.Name;
+                lblDescription.Text = connection.Description;
+                lblServer.Content = connection.Server;
+                lblInstance.Content = connection.Instance;
+                lblDatabase.Content = connection.DataBase;
+                lblUser.Content = connection.User;
+                lblPassword.Content = connection.Password;
+
+                if(connection.DataBaseType == enmDataBaseType.MsSQL)
+                {
+                    lblType.Content = "MsSql";
+                }
+                else if(connection.DataBaseType == enmDataBaseType.MySQL)
+                {
+                    lblType.Content = "MySql";
+                }
+                else
+                {
+                    lblType.Content = "SQLite";
+                }
+
             }
             catch (Exception)
             {
@@ -132,7 +150,7 @@ namespace SpinerBaseBE.Layers.FrontEnd
         #endregion
 
         #region Properties
-        public Card Card { get => card; set => card = value; }
+        public Connection Connection { get => connection; set => connection = value; }
         #endregion
     }
 }

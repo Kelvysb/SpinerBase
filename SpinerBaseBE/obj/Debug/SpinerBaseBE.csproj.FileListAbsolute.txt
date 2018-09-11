@@ -23,7 +23,6 @@ C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Debug\EntityFramewor
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Debug\System.Data.SQLite.xml
-C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\obj\Debug\SpinerBaseBE.csprojAssemblyReference.cache
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\obj\Debug\SpinerBaseBE.csproj.CoreCompileInputs.cache
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\obj\Debug\SpinerBaseBE.csproj.CopyComplete
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\obj\Debug\SpinerBaseBE.dll

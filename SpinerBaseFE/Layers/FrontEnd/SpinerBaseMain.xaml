@@ -27,25 +27,11 @@
                 <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}" Margin="5" Grid.Row="0">
                     <Grid Name="grdFilter">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="70*"/>
-                            <ColumnDefinition Width="30*"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Label Name="lblFilter" Content="Filter:" Style="{StaticResource stlLabelBase}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0"/>
-                            <TextBox Name="txtFilter" Text="" Style="{StaticResource stlTextBoxBase}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1" TextChanged="txtFilter_TextChanged"/>
-                        </Grid>
-                        <Grid Grid.Column="1" Margin="5">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <CheckBox Name="chkDescription" IsChecked="True" Style="{StaticResource stlCheckboxBase}" Content="Description" VerticalAlignment="Center" Grid.Row="0"/>
-                            <CheckBox Name="chkTags" IsChecked="True" Style="{StaticResource stlCheckboxBase}" Content="Tags" VerticalAlignment="Center" Grid.Row="1"/>
-                        </Grid>
+                        <Label Name="lblFilter" Content="Filter:" Style="{StaticResource stlLabelBase}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0"/>
+                        <TextBox Name="txtFilter" Text="" Style="{StaticResource stlTextBoxBase}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,10,0" TextChanged="txtFilter_TextChanged"/>
                     </Grid>
                 </Border>
                 
@@ -53,7 +39,7 @@
                 <Border Grid.Row="1">
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                         <WrapPanel Name="wrpCards" Margin="0">
-       
+ 
                         </WrapPanel>
                     </ScrollViewer>
                 </Border>

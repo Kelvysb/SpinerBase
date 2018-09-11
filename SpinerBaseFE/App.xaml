@@ -89,6 +89,7 @@
             </Setter>
             <Setter Property="Width" Value="50"/>
             <Setter Property="Height" Value="50"/>
+            <Setter Property="Cursor" Value="Hand"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="Transparent" />
@@ -99,13 +100,18 @@
         <Style x:Key="ButtonRoundRectangleStyle" TargetType="{x:Type Border}">
             <Setter Property="Background" Value="{StaticResource LightColor}" />
             <Setter Property="CornerRadius" Value="10,10,10,10"/>
+        </Style>
+
+        <Style x:Key="ButtonRoundRectangleStyleSelect" TargetType="{x:Type Border}">
+            <Setter Property="Background" Value="{StaticResource LightColor}" />
+            <Setter Property="CornerRadius" Value="10,10,10,10"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="{StaticResource BaseColorSelected}" />
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
+
         <Style x:Key="ButtonRoundElipseStyle" TargetType="{x:Type Ellipse}">
             <Setter Property="Fill" Value="{StaticResource BaseColor}" />
             <Style.Triggers>
