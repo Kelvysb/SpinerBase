@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using SpinerBaseBE.Basic;
+using System.Data;
 
 namespace SpinerBaseBE.Layers.BackEnd
 {
@@ -13,6 +14,7 @@ namespace SpinerBaseBE.Layers.BackEnd
         #region Declarations
         private static SpinerBaseBO instance;
         private SpinerBaseConfig configBase;
+        private Repository.SpinerBaseRep objRepository;
         #endregion
 
         #region Constructor
@@ -21,6 +23,7 @@ namespace SpinerBaseBE.Layers.BackEnd
             try
             {
                 configBase = SpinerBaseConfig.Load(p_basePath);
+                objRepository = null;
             }
             catch (Exception)
             {
@@ -35,6 +38,44 @@ namespace SpinerBaseBE.Layers.BackEnd
             try
             {
                 instance = new SpinerBaseBO(p_Path);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataSet fnExecuteCardDataSet(Card p_card)
+        {
+            try
+            {
+                if(objRepository != null)
+                {
+                    return objRepository.fnExecuteDataSet(p_card);
+                }
+                else
+                {
+                    throw new Exception("Not connected");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public String fnExecuteCardText(Card p_card)
+        {
+            try
+            {
+                if (objRepository != null)
+                {
+                    return objRepository.fnExecuteText(p_card);
+                }
+                else
+                {
+                    throw new Exception("Not connected");
+                }
             }
             catch (Exception)
             {
@@ -103,6 +144,27 @@ namespace SpinerBaseBE.Layers.BackEnd
                 throw;
             }
         }
+
+        public void fnConnect(Connection p_connection)
+        {
+            try
+            {
+
+                if(objRepository is null == false)
+                {
+                    objRepository.Dispose();
+                    objRepository = null;
+                }
+
+                objRepository = new Repository.SpinerBaseRep(p_connection);
+
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
 
         #region Properties
@@ -113,7 +175,23 @@ namespace SpinerBaseBE.Layers.BackEnd
             }            
         }
 
-        public SpinerBaseConfig ConfigBase { get => configBase; }      
+        public SpinerBaseConfig ConfigBase { get => configBase; }
+
+        public Connection actualConnection
+        {
+            get
+            {
+                if(objRepository != null)
+                {
+                    return objRepository.Connection;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+        }
 
         #endregion
     }

@@ -84,5 +84,7 @@ C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEn
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEnd\uscGridResult.baml
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEnd\uscTextResult.baml
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEnd\uscConnection.g.cs
-C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEnd\uscConnection.baml
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\bin\Debug\x86\sqlite3.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\bin\Debug\x64\sqlite3.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\bin\Debug\SpinerBaseBE.dll.config

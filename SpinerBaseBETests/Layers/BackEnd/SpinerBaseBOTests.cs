@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 
 namespace SpinerBaseBE.Layers.BackEnd.Tests
 {
@@ -53,6 +54,149 @@ namespace SpinerBaseBE.Layers.BackEnd.Tests
             }
 
         }
-       
+
+        [TestMethod()]
+        public void fnExecuteCardTextTest()
+        {
+
+            try
+            {
+                Card objCard;
+                Connection objConnection;
+                String strReturn = "";
+
+                SpinerBaseBO.InitiateInstance(Environment.CurrentDirectory + "\\SpinerBaseData.json");
+
+                objConnection = fnGetExampleConection();
+                objCard = fnGetExampleCardForText();
+
+
+                SpinerBaseBO.Instance.fnConnect(objConnection);
+                strReturn = SpinerBaseBO.Instance.fnExecuteCardText(objCard);
+
+                if (strReturn == "")
+                {
+                    Assert.Fail("No result");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("Error: " + ex.Message);
+            }
+
+
+        }
+
+        [TestMethod()]
+        public void fnExecuteCardDataSetTest()
+        {
+            try
+            {
+                Card objCard;
+                Connection objConnection;
+                DataSet objReturn = null;
+
+                SpinerBaseBO.InitiateInstance(Environment.CurrentDirectory + "\\SpinerBaseData.json");
+
+                objConnection = fnGetExampleConection();
+                objCard = fnGetExampleCardForDataSet();
+
+                SpinerBaseBO.Instance.fnConnect(objConnection);
+                objReturn = SpinerBaseBO.Instance.fnExecuteCardDataSet(objCard);
+
+                if (objReturn is null)
+                {
+                    Assert.Fail("No result");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("Error: " + ex.Message);
+            }
+
+        }
+
+        private Connection fnGetExampleConection()
+        {
+            Connection objConnection;
+
+            try
+            {
+
+                objConnection = new Connection();
+                objConnection.Server = Environment.CurrentDirectory + "\\Resources";
+                objConnection.DataBase = "exampledatabase.db";
+                objConnection.User = "test";
+                objConnection.Password = "test";
+                objConnection.DataBaseType = enmDataBaseType.SQLite;
+
+
+
+                return objConnection;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+
+        private Card fnGetExampleCardForDataSet()
+        {
+            Card objCard;
+
+            try
+            {
+
+                objCard = new Card();
+                objCard.DataBaseType = enmDataBaseType.SQLite;
+                objCard.Name = "Test Card";
+                objCard.Description = "Test Card";
+                objCard.Command = "Select * from testTable where age > #AGE;;";
+                objCard.Parameters.Add(new Parameter());
+                objCard.Parameters.Last().Description = "Age";
+                objCard.Parameters.Last().Tag = "#AGE;";
+                objCard.Parameters.Last().Value = "20";
+
+                return objCard;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private Card fnGetExampleCardForText()
+        {
+            Card objCard;
+
+            try
+            {
+
+                objCard = new Card();
+                objCard.DataBaseType = enmDataBaseType.SQLite;
+                objCard.Name = "Test Card";
+                objCard.Description = "Test Card";
+                objCard.Command = "Select Name || ' ' || Surname || ' Died with ' || Age || ' years.' from testTable where Age > #AGE;;";
+                objCard.Parameters.Add(new Parameter());
+                objCard.Parameters.Last().Description = "Age";
+                objCard.Parameters.Last().Tag = "#AGE;";
+                objCard.Parameters.Last().Value = "20";
+
+                return objCard;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
     }
 }

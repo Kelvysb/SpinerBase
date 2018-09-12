@@ -16,3 +16,17 @@ C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\obj\Debug\SpinerBas
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\obj\Debug\SpinerBaseBETests.csproj.CopyComplete
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\obj\Debug\SpinerBaseBETests.dll
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\obj\Debug\SpinerBaseBETests.pdb
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Debug\Resources\exampledatabase.db
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Debug\BDataBase.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Debug\MySql.Data.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Debug\System.Data.SQLite.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Debug\BDataBase.xml
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Debug\BDataBase.dll.config
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Debug\System.Data.SQLite.xml
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\obj\Debug\SpinerBaseBETests.Properties.Resources.resources
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\obj\Debug\SpinerBaseBETests.csproj.GenerateResource.cache
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Debug\x86\sqlite3.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Debug\x64\sqlite3.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Debug\SpinerBaseBETests.dll.config
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Debug\SpinerBaseBE.dll.config
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Debug\System.Data.SQLite.dll.config

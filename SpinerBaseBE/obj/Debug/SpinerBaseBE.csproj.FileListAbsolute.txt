@@ -27,3 +27,8 @@ C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\obj\Debug\SpinerBaseBE.c
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\obj\Debug\SpinerBaseBE.csproj.CopyComplete
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\obj\Debug\SpinerBaseBE.dll
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\obj\Debug\SpinerBaseBE.pdb
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Debug\x86\sqlite3.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Debug\x64\sqlite3.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Debug\SpinerBaseBE.dll.config
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\obj\Debug\SpinerBaseBE.csprojAssemblyReference.cache
