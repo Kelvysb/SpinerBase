@@ -36,6 +36,7 @@ com este programa, Se não, veja <http://www.gnu.org/licenses/>.
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -64,17 +65,27 @@ namespace SpinerBase.Layers.FrontEnd
         #region Constructor
         public SpinerBaseMain()
         {
+            string strWorkDirectory;
+
             try
             {
                 InitializeComponent();
+
+                strWorkDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\SpinerBase\\";
+
+                if(Directory.Exists(strWorkDirectory) == false)
+                {
+                    Directory.CreateDirectory(strWorkDirectory);
+                }
+            
                 BMessage.sbInitialize((Brush)FindResource("BaseColor"),
                                         (Brush)FindResource("BackColor"),
                                         (Brush)FindResource("FontColor"),
                                         (Brush)FindResource("FontColor"),
                                         (FontFamily)FindResource("Font"),
-                                        Environment.CurrentDirectory + "\\Log");
+                                        strWorkDirectory + "\\Log");
 
-                SpinerBaseBO.InitiateInstance(Environment.CurrentDirectory + "\\SpinerBaseData.json");
+                SpinerBaseBO.InitiateInstance(strWorkDirectory + "\\SpinerBaseData.json");
 
             }
             catch (Exception)
@@ -263,7 +274,7 @@ namespace SpinerBase.Layers.FrontEnd
 
                 wrpCards.Children.Clear();
 
-                if(SpinerBaseBO.Instance.actualConnection is null == false)
+                if (SpinerBaseBO.Instance.actualConnection is null == false)
                 {
                     SpinerBaseBO.Instance.fnConnect(SpinerBaseBO.Instance.actualConnection);
                     lblConnection.Content = SpinerBaseBO.Instance.actualConnection.Name.Trim() + " - " + SpinerBaseBO.Instance.actualConnection.DataBaseType.ToString();
@@ -284,7 +295,7 @@ namespace SpinerBase.Layers.FrontEnd
                     wrpCards.Children.Add(card);
                 }
 
-                if(SpinerBaseBO.Instance.ConfigBase.LastConnection is null == false)
+                if (SpinerBaseBO.Instance.ConfigBase.LastConnection is null == false)
                 {
                     SpinerBaseBO.Instance.fnConnect(SpinerBaseBO.Instance.ConfigBase.LastConnection);
                     lblConnection.Content = SpinerBaseBO.Instance.actualConnection.Name.Trim() + " - " + SpinerBaseBO.Instance.actualConnection.DataBaseType.ToString();
@@ -361,7 +372,7 @@ namespace SpinerBase.Layers.FrontEnd
 
                 if (objDialog.ShowDialog() == CommonFileDialogResult.Ok)
                 {
-                    sbAddCard(Card.Load(objDialog.FileName));                                       
+                    sbAddCard(Card.Load(objDialog.FileName));
                 }
 
                 objDialog = null;
@@ -397,8 +408,8 @@ namespace SpinerBase.Layers.FrontEnd
             {
 
                 sbclearResultsGrid();
-                
-                if(p_card.ResultType == enmResultType.Text)
+
+                if (p_card.ResultType == enmResultType.Text)
                 {
                     objCardText = new uscTextResult(p_card);
                     objCardText.evRemove += evRemoveTextCardFromResults;
@@ -412,7 +423,7 @@ namespace SpinerBase.Layers.FrontEnd
                 }
 
                 SpinerBaseBO.Instance.ConfigBase.LastCard = p_card;
-                
+
             }
             catch (Exception ex)
             {
@@ -443,7 +454,7 @@ namespace SpinerBase.Layers.FrontEnd
                 }
 
                 //Use Filter
-                if(txtFilter.Text.Trim() != "")
+                if (txtFilter.Text.Trim() != "")
                 {
                     objFilteredResults.AddRange(objCards.FindAll(card => !card.Card.Name.ToUpper().Contains(txtFilter.Text.Trim().ToUpper())));
                 }
@@ -468,25 +479,25 @@ namespace SpinerBase.Layers.FrontEnd
 
             try
             {
-                if(BMessage.Instance.fnMessage(Properties.Resources.ResourceManager.GetString("msgRemoveCard").ToString(), Properties.Resources.ResourceManager.GetString("AppName").ToString(), MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (BMessage.Instance.fnMessage(Properties.Resources.ResourceManager.GetString("msgRemoveCard").ToString(), Properties.Resources.ResourceManager.GetString("AppName").ToString(), MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
 
                     objauxCard = objCards.Find(card => card.Card.Equals(p_card));
-                    if(objauxCard is null == false)
+                    if (objauxCard is null == false)
                     {
                         objauxCard.evEdit -= evEditCard;
                         objauxCard.evPlay -= evSelectCard;
                         objauxCard.evRemove -= evRemoveCard;
                         wrpCards.Children.Remove(objauxCard);
                         objCards.Remove(objauxCard);
-                    }               
+                    }
 
                     SpinerBaseBO.Instance.ConfigBase.Cards.Remove(p_card);
                     SpinerBaseBO.Instance.sbSaveConfig();
                     sbclearResultsGrid();
-                    BMessage.Instance.fnMessage(Properties.Resources.ResourceManager.GetString("msgRemoved").ToString(), Properties.Resources.ResourceManager.GetString("AppName").ToString(), MessageBoxButton.OK);                    
+                    BMessage.Instance.fnMessage(Properties.Resources.ResourceManager.GetString("msgRemoved").ToString(), Properties.Resources.ResourceManager.GetString("AppName").ToString(), MessageBoxButton.OK);
 
-                }               
+                }
             }
             catch (Exception ex)
             {
@@ -556,7 +567,7 @@ namespace SpinerBase.Layers.FrontEnd
                 throw new Exception(Properties.Resources.ResourceManager.GetString("msgError").ToString(), ex);
             }
         }
-   
+
         private void sbAbout()
         {
             About objAbout;
@@ -580,7 +591,7 @@ namespace SpinerBase.Layers.FrontEnd
             }
             catch (Exception)
             {
-                
+
             }
         }
         #endregion
@@ -589,6 +600,6 @@ namespace SpinerBase.Layers.FrontEnd
 
         #endregion
 
-        
+
     }
 }

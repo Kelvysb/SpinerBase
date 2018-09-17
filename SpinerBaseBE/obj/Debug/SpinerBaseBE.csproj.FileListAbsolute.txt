@@ -33,3 +33,4 @@ C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Debug\SpinerBaseBE.d
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Debug\System.Data.SQLite.dll.config
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\obj\Debug\SpinerBaseBE.csprojAssemblyReference.cache
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Debug\BDataBase.pdb
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Debug\BGlobal.pdb
