@@ -1,5 +1,85 @@
 {
   "USER": "",
-  "CARDS": [],
-  "CONNECTIONS": []
+  "CARDS": [
+    {
+      "NAME": "Teste",
+      "DESCRIPTION": "Teste Teste teste\r\nteste teste teste\r\n",
+      "TAGS": "",
+      "PARAMETERS": [
+        {
+          "TAG": "<%AGE%>",
+          "DESCRIPTION": "Age",
+          "VALUE": "10"
+        }
+      ],
+      "COMMAND": "Select * from testTable where age > <%AGE%>;\r\n\r\n",
+      "RESULT": "",
+      "RESULTTYPE": 1,
+      "DATABASETYPE": 2
+    },
+    {
+      "NAME": "teste sql server",
+      "DESCRIPTION": "Teste de sql server\r\nutilizando o adventure works",
+      "TAGS": "",
+      "PARAMETERS": [
+        {
+          "TAG": "<%TABLENAME%>",
+          "DESCRIPTION": "Table Name",
+          "VALUE": "Person.Person"
+        }
+      ],
+      "COMMAND": "\r\nCreate table #tmpResult (id int identity, result varchar(max))\r\n\r\ndeclare @name varchar(300), @typename varchar(300), @size int, @identity int\r\ndeclare @tableName varchar(300)\r\n\r\nset @tableName = '<%TABLENAME%>'\r\n\r\ninsert into #tmpResult(result) values(@tableName + ' Columns:')\r\ninsert into #tmpResult(result) values('----------------------')\r\n\r\ndeclare cColumns cursor for\r\n Select \r\n  c.name,\r\n  t.name,\r\n  c.max_length,\r\n  c.is_identity\r\n from \r\n  sys.columns c \r\n  inner join sys.types t on\r\n   t.user_type_id = c.user_type_id\r\n where \r\n  object_id = object_id(@tableName)\r\n\r\nopen cColumns\r\n\r\nfetch next from cColumns into @name, @typename, @size, @identity\r\n\r\nwhile(@@FETCH_STATUS = 0)\r\nbegin\r\n \r\n insert into #tmpResult(result) values('Column name: ' + @name)\r\n insert into #tmpResult(result) values(Char(9) + 'Type: ' + @typename)\r\n insert into #tmpResult(result) values(Char(9) + 'Size: ' + convert(varchar, @size))\r\n insert into #tmpResult(result) values(Char(9) + 'Identity: ' + case when @identity = 0 then 'no' else 'yes' end) \r\n\r\n fetch next from cColumns into @name, @typename, @size, @identity\r\n\r\nend\r\n\r\nclose cColumns\r\ndeallocate cColumns\r\n\r\ninsert into #tmpResult(result) values('----------------------')\r\n\r\nselect result from #tmpResult order by id asc\r\ndrop table #tmpResult",
+      "RESULT": "",
+      "RESULTTYPE": 0,
+      "DATABASETYPE": 0
+    }
+  ],
+  "CONNECTIONS": [
+    {
+      "NAME": "test",
+      "DESCRIPTION": "test connection",
+      "SERVER": "C:\\Users\\Kelvy\\Desktop",
+      "INSTANCE": "",
+      "DATABASE": "exampledatabase.db",
+      "USER": "test",
+      "PASSWORD": "test",
+      "DATABASETYPE": 2
+    },
+    {
+      "NAME": "MsSQL teste",
+      "DESCRIPTION": "Adventure works test",
+      "SERVER": "127.0.0.1,1433",
+      "INSTANCE": "",
+      "DATABASE": "AdventureWorks2017",
+      "USER": "testUser",
+      "PASSWORD": "test",
+      "DATABASETYPE": 0
+    }
+  ],
+  "LASTCONNECTION": {
+    "NAME": "MsSQL teste",
+    "DESCRIPTION": "Adventure works test",
+    "SERVER": "127.0.0.1,1433",
+    "INSTANCE": "",
+    "DATABASE": "AdventureWorks2017",
+    "USER": "testUser",
+    "PASSWORD": "test",
+    "DATABASETYPE": 0
+  },
+  "LASTCARD": {
+    "NAME": "teste sql server",
+    "DESCRIPTION": "Teste de sql server\r\nutilizando o adventure works",
+    "TAGS": "",
+    "PARAMETERS": [
+      {
+        "TAG": "<%TABLENAME%>",
+        "DESCRIPTION": "Table Name",
+        "VALUE": "Person.Person"
+      }
+    ],
+    "COMMAND": "\r\nCreate table #tmpResult (id int identity, result varchar(max))\r\n\r\ndeclare @name varchar(300), @typename varchar(300), @size int, @identity int\r\ndeclare @tableName varchar(300)\r\n\r\nset @tableName = '<%TABLENAME%>'\r\n\r\ninsert into #tmpResult(result) values(@tableName + ' Columns:')\r\ninsert into #tmpResult(result) values('----------------------')\r\n\r\ndeclare cColumns cursor for\r\n Select \r\n  c.name,\r\n  t.name,\r\n  c.max_length,\r\n  c.is_identity\r\n from \r\n  sys.columns c \r\n  inner join sys.types t on\r\n   t.user_type_id = c.user_type_id\r\n where \r\n  object_id = object_id(@tableName)\r\n\r\nopen cColumns\r\n\r\nfetch next from cColumns into @name, @typename, @size, @identity\r\n\r\nwhile(@@FETCH_STATUS = 0)\r\nbegin\r\n \r\n insert into #tmpResult(result) values('Column name: ' + @name)\r\n insert into #tmpResult(result) values(Char(9) + 'Type: ' + @typename)\r\n insert into #tmpResult(result) values(Char(9) + 'Size: ' + convert(varchar, @size))\r\n insert into #tmpResult(result) values(Char(9) + 'Identity: ' + case when @identity = 0 then 'no' else 'yes' end) \r\n\r\n fetch next from cColumns into @name, @typename, @size, @identity\r\n\r\nend\r\n\r\nclose cColumns\r\ndeallocate cColumns\r\n\r\ninsert into #tmpResult(result) values('----------------------')\r\n\r\nselect result from #tmpResult order by id asc\r\ndrop table #tmpResult",
+    "RESULT": "",
+    "RESULTTYPE": 0,
+    "DATABASETYPE": 0
+  }
 }

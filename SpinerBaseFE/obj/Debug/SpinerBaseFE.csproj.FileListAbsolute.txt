@@ -88,3 +88,14 @@ C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEn
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\bin\Debug\x86\sqlite3.dll
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\bin\Debug\x64\sqlite3.dll
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\bin\Debug\SpinerBaseBE.dll.config
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEnd\uscConnectionConfig.g.cs
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEnd\uscConnectionConfig.baml
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\bin\Debug\Microsoft.WindowsAPICodePack.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\bin\Debug\BGlobal.pdb
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\bin\Debug\Microsoft.WindowsAPICodePack.xml
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\bin\Debug\BDataBase.pdb
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEnd\About.g.cs
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEnd\About.baml

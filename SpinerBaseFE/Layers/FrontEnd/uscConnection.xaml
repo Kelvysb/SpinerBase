@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SpinerBase.Layers.FrontEnd"
              mc:Ignorable="d" 
-             Height="170" Width="260">
+             Height="150" Width="300">
 
     <Border Style="{StaticResource ButtonRoundRectangleStyle}">
 
@@ -34,23 +34,20 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
                     <Label Style="{StaticResource stlLabelBase}" Content="Server:" Margin="0" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
-                    <Label Style="{StaticResource stlLabelBase}" Content="Instance:" Margin="0" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
-                    <Label Style="{StaticResource stlLabelBase}" Content="Data Base:" Margin="0" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"/>
-                    <Label Style="{StaticResource stlLabelBase}" Content="User:" Margin="0" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"/>
-                    <Label Style="{StaticResource stlLabelBase}" Content="Password:" Margin="0" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0"/>
-                    <Label Style="{StaticResource stlLabelBase}" Content="Type:" Margin="0" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0"/>
+                    <Label Style="{StaticResource stlLabelBase}" Content="Data Base:" Margin="0" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
+                    <Label Style="{StaticResource stlLabelBase}" Content="User:" Margin="0" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"/>
+                    <Label Style="{StaticResource stlLabelBase}" Content="Password:" Margin="0" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"/>
+                    <Label Style="{StaticResource stlLabelBase}" Content="Type:" Margin="0" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0"/>
 
 
                     <Label Name="lblServer" Style="{StaticResource stlLabelBase}" Content="000.000.000" Margin="0" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
-                    <Label Name="lblInstance" Style="{StaticResource stlLabelBase}" Content="Instance" Margin="0" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
-                    <Label Name="lblDatabase" Style="{StaticResource stlLabelBase}" Content="Data Base Name" Margin="0" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1"/>
-                    <Label Name="lblUser" Style="{StaticResource stlLabelBase}" Content="User" Margin="0" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1"/>
-                    <Label Name="lblPassword" Style="{StaticResource stlLabelBase}" Content="Password" Margin="0" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1"/>
-                    <Label Name="lblType" Style="{StaticResource stlLabelBase}" Content="Type" Margin="0" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1"/>
+                    <Label Name="lblDatabase" Style="{StaticResource stlLabelBase}" Content="Data Base Name" Margin="0" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
+                    <Label Name="lblUser" Style="{StaticResource stlLabelBase}" Content="User" Margin="0" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1"/>
+                    <Label Name="lblPassword" Style="{StaticResource stlLabelBase}" Content="Password" Margin="0" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1"/>
+                    <Label Name="lblType" Style="{StaticResource stlLabelBase}" Content="Type" Margin="0" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1"/>
 
                  
                 </Grid>
@@ -59,15 +56,9 @@
 
             <StackPanel Name="stkButtons" Grid.Column="1" Margin="0">
 
-                <Button Name="btnPlay" Style="{StaticResource ButtonRoundStyle}" Margin="1" Click="btnPlay_Click">
+                <Button Name="btnSelect" Style="{StaticResource ButtonRoundStyle}" Margin="1" Click="btnPlay_Click">
                     <Grid>
-                        <Image Source="/SpinerBase;component/Resources/Play.png"/>
-                    </Grid>
-                </Button>
-
-                <Button Name="btnConfig" Style="{StaticResource ButtonRoundStyle}" Margin="1" Click="btnConfig_Click">
-                    <Grid>
-                        <Image Source="/SpinerBase;component/Resources/Config.png"/>
+                        <Image Source="/SpinerBase;component/Resources/Up.png"/>
                     </Grid>
                 </Button>
 

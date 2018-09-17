@@ -1,4 +1,4 @@
-﻿using SpinerBaseBE.Basic;
+﻿using SpinerBase.Basic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SpinerBaseBE.Layers.FrontEnd
+namespace SpinerBase.Layers.FrontEnd
 {
     /// <summary>
     /// Interaction logic for uscParametroConfig.xaml
@@ -45,6 +45,7 @@ namespace SpinerBaseBE.Layers.FrontEnd
             try
             {
                 InitializeComponent();
+                parameter = p_parameter;
                 Update();
             }
             catch (Exception)

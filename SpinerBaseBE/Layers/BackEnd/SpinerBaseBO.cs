@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using SpinerBaseBE.Basic;
+using SpinerBase.Basic;
 using System.Data;
 
-namespace SpinerBaseBE.Layers.BackEnd
+namespace SpinerBase.Layers.BackEnd
 {
     public class SpinerBaseBO
     {
         #region Declarations
+        private string strBasePath;
         private static SpinerBaseBO instance;
         private SpinerBaseConfig configBase;
         private Repository.SpinerBaseRep objRepository;
@@ -22,7 +20,8 @@ namespace SpinerBaseBE.Layers.BackEnd
         {
             try
             {
-                configBase = SpinerBaseConfig.Load(p_basePath);
+                strBasePath = p_basePath;
+                configBase = SpinerBaseConfig.Load(strBasePath);
                 objRepository = null;
             }
             catch (Exception)
@@ -104,23 +103,23 @@ namespace SpinerBaseBE.Layers.BackEnd
 
                 do
                 {
-                    intIndex = p_command.IndexOf("#", intLastIndex);
+                    intIndex = p_command.IndexOf("<%", intLastIndex);
 
                     if(intIndex != -1)
                     {
-                        intFinalIndex = p_command.IndexOf(";", intIndex);
+                        intFinalIndex = p_command.IndexOf("%>", intIndex);
 
                         if(intFinalIndex != -1)
                         {
 
-                            strAuxTag = p_command.Substring(intIndex,  intFinalIndex - intIndex + 1);
+                            strAuxTag = p_command.Substring(intIndex,  intFinalIndex - intIndex + 2);
                             
                             if(!strAuxTag.Contains(" "))
                             {
 
                                 objReturn.Add(new Parameter());
                                 objReturn.Last().Tag = strAuxTag;
-                                objReturn.Last().Description = strAuxTag.Substring(1, strAuxTag.Length-2);
+                                objReturn.Last().Description = strAuxTag.Substring(2, strAuxTag.Length-4);
 
                             }
 
@@ -158,7 +157,23 @@ namespace SpinerBaseBE.Layers.BackEnd
 
                 objRepository = new Repository.SpinerBaseRep(p_connection);
 
+                ConfigBase.LastConnection = p_connection;
 
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        public void sbSaveConfig()
+        {
+
+            try
+            {
+                configBase.Save(strBasePath);
             }
             catch (Exception)
             {

@@ -1,5 +1,5 @@
 ﻿using BControls;
-using SpinerBaseBE.Basic;
+using SpinerBase.Basic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +33,7 @@ namespace SpinerBase.Layers.FrontEnd
             {
                 InitializeComponent();
                 connection = new Connection();
-                sbLoad();
+                Update();
             }
             catch (Exception)
             {
@@ -47,7 +47,7 @@ namespace SpinerBase.Layers.FrontEnd
             {
                 InitializeComponent();
                 connection = p_connection;
-                sbLoad();
+                Update();
             }
             catch (Exception)
             {
@@ -60,19 +60,13 @@ namespace SpinerBase.Layers.FrontEnd
 
         #region Events
 
-        public event EventHandler evPlay;
-        protected virtual void onEvPlay()
+        public event EventHandler<ConnectionEventArgs> evSelect;
+        protected virtual void onEvSelect()
         {
-            evPlay?.Invoke(this, new ConnectionEventArgs(connection));
+            evSelect?.Invoke(this, new ConnectionEventArgs(connection));
         }
 
-        public event EventHandler evEdit;
-        protected virtual void onEvEdit()
-        {
-            evEdit?.Invoke(this, new ConnectionEventArgs(connection));
-        }
-
-        public event EventHandler evRemove;
+        public event EventHandler<ConnectionEventArgs> evRemove;
         protected virtual void onEvRemove()
         {
             evRemove?.Invoke(this, new ConnectionEventArgs(connection));
@@ -82,19 +76,7 @@ namespace SpinerBase.Layers.FrontEnd
         {
             try
             {
-                onEvPlay();
-            }
-            catch (Exception ex)
-            {
-                BMessage.Instance.fnErrorMessage(ex);
-            }
-        }
-
-        private void btnConfig_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                onEvEdit();
+                onEvSelect();
             }
             catch (Exception ex)
             {
@@ -116,23 +98,22 @@ namespace SpinerBase.Layers.FrontEnd
         #endregion
 
         #region Function
-        private void sbLoad()
+        public void Update()
         {
             try
             {
                 lblName.Content = connection.Name;
                 lblDescription.Text = connection.Description;
                 lblServer.Content = connection.Server;
-                lblInstance.Content = connection.Instance;
                 lblDatabase.Content = connection.DataBase;
                 lblUser.Content = connection.User;
                 lblPassword.Content = connection.Password;
 
-                if(connection.DataBaseType == enmDataBaseType.MsSQL)
+                if (connection.DataBaseType == enmDataBaseType.MsSQL)
                 {
                     lblType.Content = "MsSql";
                 }
-                else if(connection.DataBaseType == enmDataBaseType.MySQL)
+                else if (connection.DataBaseType == enmDataBaseType.MySQL)
                 {
                     lblType.Content = "MySql";
                 }
@@ -140,13 +121,13 @@ namespace SpinerBase.Layers.FrontEnd
                 {
                     lblType.Content = "SQLite";
                 }
-
             }
             catch (Exception)
             {
                 throw;
             }
         }
+
         #endregion
 
         #region Properties

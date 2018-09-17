@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SpinerBaseBE.Properties {
+namespace SpinerBase.Properties {
     using System;
     
     
@@ -61,6 +61,16 @@ namespace SpinerBaseBE.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap About {
+            get {
+                object obj = ResourceManager.GetObject("About", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SpinerBase.
         /// </summary>
         internal static string AppName {
@@ -100,6 +110,44 @@ namespace SpinerBaseBE.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Export {
+            get {
+                object obj = ResourceManager.GetObject("Export", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Import {
+            get {
+                object obj = ResourceManager.GetObject("Import", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Added.
+        /// </summary>
+        internal static string msgAdded {
+            get {
+                return ResourceManager.GetString("msgAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connected.
+        /// </summary>
+        internal static string msgConnected {
+            get {
+                return ResourceManager.GetString("msgConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copied to clipboard.
         /// </summary>
         internal static string msgCopied {
@@ -114,6 +162,42 @@ namespace SpinerBaseBE.Properties {
         internal static string msgError {
             get {
                 return ResourceManager.GetString("msgError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Imported.
+        /// </summary>
+        internal static string msgImported {
+            get {
+                return ResourceManager.GetString("msgImported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to remove this card?.
+        /// </summary>
+        internal static string msgRemoveCard {
+            get {
+                return ResourceManager.GetString("msgRemoveCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to remove this connection?.
+        /// </summary>
+        internal static string msgRemoveConnection {
+            get {
+                return ResourceManager.GetString("msgRemoveConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removed.
+        /// </summary>
+        internal static string msgRemoved {
+            get {
+                return ResourceManager.GetString("msgRemoved", resourceCulture);
             }
         }
         
@@ -202,6 +286,16 @@ namespace SpinerBaseBE.Properties {
         internal static System.Drawing.Bitmap TextureBlock {
             get {
                 object obj = ResourceManager.GetObject("TextureBlock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Up {
+            get {
+                object obj = ResourceManager.GetObject("Up", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

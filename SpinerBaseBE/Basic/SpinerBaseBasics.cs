@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace SpinerBaseBE.Basic
+namespace SpinerBase.Basic
 {
     public enum enmResultType
     {
@@ -50,6 +50,8 @@ namespace SpinerBaseBE.Basic
             User = "";
             Cards = new List<Card>();
             Connections = new List<Connection>();
+            LastCard = null;
+            LastConnection = null;
         }
         #endregion
 
@@ -155,6 +157,12 @@ namespace SpinerBaseBE.Basic
 
         [JsonProperty("CONNECTIONS")]
         public List<Connection> Connections { get; set; }
+
+        [JsonProperty("LASTCONNECTION")]
+        public Connection LastConnection { get; set; }
+
+        [JsonProperty("LASTCARD")]
+        public Card LastCard { get; set; }
         #endregion
 
     }
@@ -175,6 +183,98 @@ namespace SpinerBaseBE.Basic
                 Result = "";
                 ResultType = enmResultType.Text;
                 DataBaseType = enmDataBaseType.MsSQL;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
+
+        #region Functions
+        public Card Clone()
+        {
+            try
+            {
+                return Card.Deserialize(Serialize());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public String Serialize()
+        {
+            try
+            {
+                return JsonConvert.SerializeObject(this, Formatting.Indented);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static Card Deserialize(String p_strJson)
+        {
+            try
+            {
+                return JsonConvert.DeserializeObject<Card>(p_strJson);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void Save(String p_path)
+        {
+
+            StreamWriter objFile;
+
+            try
+            {
+
+                if (File.Exists(p_path))
+                {
+                    File.Delete(p_path);
+                }
+                objFile = new StreamWriter(p_path);
+                objFile.Write(this.Serialize());
+                objFile.Close();
+                objFile.Dispose();
+                objFile = null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static Card Load(String p_path)
+        {
+            Card objReturn;
+            String strFile;
+            StreamReader objFile;
+
+            try
+            {
+                objReturn = null;
+
+                if (!File.Exists(p_path))
+                {
+                    throw new FileNotFoundException(p_path);
+                }
+
+                objFile = new StreamReader(p_path);
+                strFile = objFile.ReadToEnd();
+                objFile.Close();
+                objFile.Dispose();
+                objFile = null;
+                objReturn = Card.Deserialize(strFile);
+
+                return objReturn;
             }
             catch (Exception)
             {

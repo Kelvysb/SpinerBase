@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SpinerBaseBE.Basic;
+using SpinerBase.Basic;
 using BDataBase;
 using System.Data;
 
-namespace SpinerBaseBE.Layers.Repository
+namespace SpinerBase.Layers.Repository
 {
     internal class SpinerBaseRep : IDisposable
     {
@@ -54,6 +54,7 @@ namespace SpinerBaseBE.Layers.Repository
                 dataBaseConfig.DataBase = p_connection.DataBase;
                 dataBaseConfig.User = p_connection.User;
                 dataBaseConfig.Password = p_connection.Password;
+                dataBaseConfig.ConnetionTimeout = 5;
 
                 objDataBase = DataBase.fnOpenConnection(dataBaseConfig);
 
@@ -130,10 +131,14 @@ namespace SpinerBaseBE.Layers.Repository
                 }
 
                 objAuxReturn = objDataBase.fnExecute(strCommand);
-
+                
                 foreach (DataRow row in objAuxReturn.Tables[0].Rows)
-                {                    
-                    strReturn = strReturn + row[0].ToString() + (char)13;
+                {
+                    foreach (DataColumn column in objAuxReturn.Tables[0].Columns)
+                    {
+                        strReturn = strReturn + row[column.ColumnName].ToString() + (char)9;
+                    }
+                    strReturn = strReturn + (char)13 + (char)10;
                 }
 
             }

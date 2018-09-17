@@ -1,5 +1,5 @@
 ﻿using BControls;
-using SpinerBaseBE.Basic;
+using SpinerBase.Basic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SpinerBaseBE.Layers.FrontEnd
+namespace SpinerBase.Layers.FrontEnd
 {
     /// <summary>
     /// Interaction logic for SpinerBaseCard.xaml
@@ -34,7 +34,7 @@ namespace SpinerBaseBE.Layers.FrontEnd
             {
                 InitializeComponent();
                 card = new Card();
-                sbLoad();
+                Update();
             }
             catch (Exception)
             {
@@ -48,7 +48,7 @@ namespace SpinerBaseBE.Layers.FrontEnd
             {
                 InitializeComponent();
                 card = p_card;
-                sbLoad();
+                Update();
             }
             catch (Exception)
             {
@@ -61,19 +61,19 @@ namespace SpinerBaseBE.Layers.FrontEnd
 
         #region Events
 
-        public event EventHandler evPlay;
+        public event EventHandler<CardEventArgs> evPlay;
         protected virtual void onEvPlay()
         {
             evPlay?.Invoke(this, new CardEventArgs(card));
         }
 
-        public event EventHandler evEdit;
+        public event EventHandler<CardEventArgs> evEdit;
         protected virtual void onEvEdit()
         {
             evEdit?.Invoke(this, new CardEventArgs(card));
         }
 
-        public event EventHandler evRemove;
+        public event EventHandler<CardEventArgs> evRemove;
         protected virtual void onEvRemove()
         {
             evRemove?.Invoke(this, new CardEventArgs(card));
@@ -117,7 +117,7 @@ namespace SpinerBaseBE.Layers.FrontEnd
         #endregion
 
         #region Function
-        private void sbLoad()
+        internal void Update()
         {
             try
             {

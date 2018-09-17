@@ -30,3 +30,4 @@ C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Debug\x64\sqlit
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Debug\SpinerBaseBETests.dll.config
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Debug\SpinerBaseBE.dll.config
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Debug\BDataBase.pdb

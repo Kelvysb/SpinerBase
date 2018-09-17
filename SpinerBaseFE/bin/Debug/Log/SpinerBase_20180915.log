@@ -1,0 +1,129 @@
+{
+  "PROCESS": "SpinerBase",
+  "LOGDATE": "20180915",
+  "FIRSTLOG": "2018-09-15 18:55:28",
+  "LASTLOG": "2018-09-15 22:12:02",
+  "LOGS": [
+    {
+      "CODE": "5394248",
+      "PROCESS": "SpinerBase",
+      "DESCRIPTION": "Unknow Error: \r\n-------------   em SpinerBase.Layers.FrontEnd.uscCardConfig.sbUpdateFileds() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 222\r\n   em SpinerBase.Layers.FrontEnd.uscCardConfig.radMsSql_Checked(Object sender, RoutedEventArgs e) na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 74\r\n\r\nReferência de objeto não definida para uma instância de um objeto.\r\n-------------   em SpinerBase.Layers.FrontEnd.uscCardConfig.sbUpdateFileds() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 198\r\n\r\n",
+      "SUBROUTINE": "sbUpdateFileds",
+      "CURRENTCLASS": "uscCardConfig",
+      "LINE": 0,
+      "USER": "Kelvy",
+      "COMPUTER": "LAPTOP-B94P00VB",
+      "ISERROR": true
+    },
+    {
+      "CODE": "9248440",
+      "PROCESS": "SpinerBase",
+      "DESCRIPTION": "Unknow Error: \r\n-------------   em SpinerBase.Layers.FrontEnd.uscCardConfig.sbUpdateFileds() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 222\r\n   em SpinerBase.Layers.FrontEnd.uscCardConfig.radGrid_Checked(Object sender, RoutedEventArgs e) na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 86\r\n\r\nReferência de objeto não definida para uma instância de um objeto.\r\n-------------   em SpinerBase.Layers.FrontEnd.uscCardConfig.sbUpdateFileds() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 198\r\n\r\n",
+      "SUBROUTINE": "sbUpdateFileds",
+      "CURRENTCLASS": "uscCardConfig",
+      "LINE": 0,
+      "USER": "Kelvy",
+      "COMPUTER": "LAPTOP-B94P00VB",
+      "ISERROR": true
+    },
+    {
+      "CODE": "11766267",
+      "PROCESS": "SpinerBase",
+      "DESCRIPTION": "Unknow Error: \r\n-------------   em SpinerBase.Layers.FrontEnd.uscCardConfig.sbUpdateFileds() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 222\r\n   em SpinerBase.Layers.FrontEnd.uscCardConfig.radMsSql_Checked(Object sender, RoutedEventArgs e) na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 74\r\n\r\nReferência de objeto não definida para uma instância de um objeto.\r\n-------------   em SpinerBase.Layers.FrontEnd.uscCardConfig.sbUpdateFileds() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 198\r\n\r\n",
+      "SUBROUTINE": "sbUpdateFileds",
+      "CURRENTCLASS": "uscCardConfig",
+      "LINE": 0,
+      "USER": "Kelvy",
+      "COMPUTER": "LAPTOP-B94P00VB",
+      "ISERROR": true
+    },
+    {
+      "CODE": "8674443",
+      "PROCESS": "SpinerBase",
+      "DESCRIPTION": "Unknow Error: \r\n-------------   em SpinerBase.Layers.FrontEnd.uscCardConfig.sbUpdateFileds() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 222\r\n   em SpinerBase.Layers.FrontEnd.uscCardConfig.radMsSql_Checked(Object sender, RoutedEventArgs e) na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 74\r\n\r\nReferência de objeto não definida para uma instância de um objeto.\r\n-------------   em SpinerBase.Layers.FrontEnd.uscCardConfig.sbUpdateFileds() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 198\r\n\r\n",
+      "SUBROUTINE": "sbUpdateFileds",
+      "CURRENTCLASS": "uscCardConfig",
+      "LINE": 0,
+      "USER": "Kelvy",
+      "COMPUTER": "LAPTOP-B94P00VB",
+      "ISERROR": true
+    },
+    {
+      "CODE": "48788849",
+      "PROCESS": "SpinerBase",
+      "DESCRIPTION": "Unknow Error: \r\n-------------   em SpinerBase.Layers.FrontEnd.uscCardConfig.sbUpdateFileds() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 222\r\n   em SpinerBase.Layers.FrontEnd.uscCardConfig.radGrid_Checked(Object sender, RoutedEventArgs e) na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 86\r\n\r\nReferência de objeto não definida para uma instância de um objeto.\r\n-------------   em SpinerBase.Layers.FrontEnd.uscCardConfig.sbUpdateFileds() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 198\r\n\r\n",
+      "SUBROUTINE": "sbUpdateFileds",
+      "CURRENTCLASS": "uscCardConfig",
+      "LINE": 0,
+      "USER": "Kelvy",
+      "COMPUTER": "LAPTOP-B94P00VB",
+      "ISERROR": true
+    },
+    {
+      "CODE": "23909939",
+      "PROCESS": "SpinerBase",
+      "DESCRIPTION": "Unknow Error: \r\n-------------   em SpinerBase.Layers.FrontEnd.uscCardConfig.sbUpdateFileds() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 222\r\n   em SpinerBase.Layers.FrontEnd.uscCardConfig.radMsSql_Checked(Object sender, RoutedEventArgs e) na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 74\r\n\r\nReferência de objeto não definida para uma instância de um objeto.\r\n-------------   em SpinerBase.Layers.FrontEnd.uscCardConfig.sbUpdateFileds() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 198\r\n\r\n",
+      "SUBROUTINE": "sbUpdateFileds",
+      "CURRENTCLASS": "uscCardConfig",
+      "LINE": 0,
+      "USER": "Kelvy",
+      "COMPUTER": "LAPTOP-B94P00VB",
+      "ISERROR": true
+    },
+    {
+      "CODE": "37285554",
+      "PROCESS": "SpinerBase",
+      "DESCRIPTION": "Unknow Error: \r\n-------------   em SpinerBase.Layers.FrontEnd.uscCardConfig.sbUpdateFileds() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 222\r\n   em SpinerBase.Layers.FrontEnd.uscCardConfig.radGrid_Checked(Object sender, RoutedEventArgs e) na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 86\r\n\r\nReferência de objeto não definida para uma instância de um objeto.\r\n-------------   em SpinerBase.Layers.FrontEnd.uscCardConfig.sbUpdateFileds() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 198\r\n\r\n",
+      "SUBROUTINE": "sbUpdateFileds",
+      "CURRENTCLASS": "uscCardConfig",
+      "LINE": 0,
+      "USER": "Kelvy",
+      "COMPUTER": "LAPTOP-B94P00VB",
+      "ISERROR": true
+    },
+    {
+      "CODE": "28619802",
+      "PROCESS": "SpinerBase",
+      "DESCRIPTION": "Unknow Error: \r\n-------------   em SpinerBase.Layers.FrontEnd.uscCardConfig.sbSetParameters() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 154\r\n   em SpinerBase.Layers.FrontEnd.uscCardConfig.btnOk_Click(Object sender, RoutedEventArgs e) na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 36\r\n\r\nReferência de objeto não definida para uma instância de um objeto.\r\n-------------   em SpinerBase.Layers.FrontEnd.uscParameterConfig.Update() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscParametroConfig.xaml.cs:linha 67\r\n   em SpinerBase.Layers.FrontEnd.uscParameterConfig..ctor(Parameter p_parameter) na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscParametroConfig.xaml.cs:linha 52\r\n   em SpinerBase.Layers.FrontEnd.uscCardConfig.sbLoadParameters() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 295\r\n   em SpinerBase.Layers.FrontEnd.uscCardConfig.sbSetParameters() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscCardConfig.xaml.cs:linha 149\r\n\r\n",
+      "SUBROUTINE": "Update",
+      "CURRENTCLASS": "uscParameterConfig",
+      "LINE": 0,
+      "USER": "Kelvy",
+      "COMPUTER": "LAPTOP-B94P00VB",
+      "ISERROR": true
+    },
+    {
+      "CODE": "53606711",
+      "PROCESS": "SpinerBase",
+      "DESCRIPTION": "Unknow Error: \r\n-------------   em SpinerBase.Layers.FrontEnd.SpinerBaseMain.sbSelectCard(Card p_card) na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\SpinerBaseMain.xaml.cs:linha 362\r\n   em SpinerBase.Layers.FrontEnd.SpinerBaseMain.evCardSaved(Object sender, CardEventArgs e) na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\SpinerBaseMain.xaml.cs:linha 186\r\n\r\nReferência de objeto não definida para uma instância de um objeto.\r\n-------------   em SpinerBase.Layers.FrontEnd.uscParameter.Update() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscParameter.xaml.cs:linha 68\r\n   em SpinerBase.Layers.FrontEnd.uscParameter..ctor(Parameter p_parameter) na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscParameter.xaml.cs:linha 53\r\n   em SpinerBase.Layers.FrontEnd.uscTextResult.sbLoadParameters() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscTextResult.xaml.cs:linha 193\r\n   em SpinerBase.Layers.FrontEnd.uscTextResult..ctor(Card p_card) na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\uscTextResult.xaml.cs:linha 105\r\n   em SpinerBase.Layers.FrontEnd.SpinerBaseMain.sbSelectCard(Card p_card) na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\SpinerBaseMain.xaml.cs:linha 348\r\n\r\n",
+      "SUBROUTINE": "Update",
+      "CURRENTCLASS": "uscParameter",
+      "LINE": 0,
+      "USER": "Kelvy",
+      "COMPUTER": "LAPTOP-B94P00VB",
+      "ISERROR": true
+    },
+    {
+      "CODE": "2601186",
+      "PROCESS": "SpinerBase",
+      "DESCRIPTION": "Unknow Error: \r\n-------------   em SpinerBase.Layers.FrontEnd.SpinerBaseMain.sbLoadPage() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\SpinerBaseMain.xaml.cs:linha 260\r\n   em SpinerBase.Layers.FrontEnd.SpinerBaseMain.Window_Loaded(Object sender, RoutedEventArgs e) na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\SpinerBaseMain.xaml.cs:linha 64\r\n\r\nReferência de objeto não definida para uma instância de um objeto.\r\n-------------   em SpinerBase.Layers.FrontEnd.SpinerBaseMain.sbLoadPage() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\SpinerBaseMain.xaml.cs:linha 217\r\n\r\n",
+      "SUBROUTINE": "sbLoadPage",
+      "CURRENTCLASS": "SpinerBaseMain",
+      "LINE": 0,
+      "USER": "Kelvy",
+      "COMPUTER": "LAPTOP-B94P00VB",
+      "ISERROR": true
+    },
+    {
+      "CODE": "2601186",
+      "PROCESS": "SpinerBase",
+      "DESCRIPTION": "Unknow Error: \r\n-------------   em SpinerBase.Layers.FrontEnd.SpinerBaseMain.sbLoadPage() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\SpinerBaseMain.xaml.cs:linha 260\r\n   em SpinerBase.Layers.FrontEnd.SpinerBaseMain.Window_Loaded(Object sender, RoutedEventArgs e) na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\SpinerBaseMain.xaml.cs:linha 64\r\n\r\nReferência de objeto não definida para uma instância de um objeto.\r\n-------------   em SpinerBase.Layers.FrontEnd.SpinerBaseMain.sbLoadPage() na C:\\Users\\Kelvy\\Documents\\GitHub\\SpinerBase\\SpinerBaseFE\\Layers\\FrontEnd\\SpinerBaseMain.xaml.cs:linha 217\r\n\r\n",
+      "SUBROUTINE": "sbLoadPage",
+      "CURRENTCLASS": "SpinerBaseMain",
+      "LINE": 0,
+      "USER": "Kelvy",
+      "COMPUTER": "LAPTOP-B94P00VB",
+      "ISERROR": true
+    }
+  ]
+}

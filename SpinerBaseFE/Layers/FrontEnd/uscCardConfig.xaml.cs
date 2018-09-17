@@ -1,22 +1,14 @@
-﻿using SpinerBaseBE.Basic;
+﻿using SpinerBase.Basic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using BControls;
-using SpinerBaseBE.Layers.BackEnd;
+using SpinerBase.Layers.BackEnd;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
-namespace SpinerBaseBE.Layers.FrontEnd
+namespace SpinerBase.Layers.FrontEnd
 {
     /// <summary>
     /// Interaction logic for SpinerBaseCardConfig.xaml
@@ -25,16 +17,17 @@ namespace SpinerBaseBE.Layers.FrontEnd
     {
 
         #region Declarations
-            private List<uscParameterConfig> parametersControls;
-            private Card card;
+        private List<uscParameterConfig> parametersControls;
+        private Card objCard;
+        private bool blnLoaded = false;
         #endregion
 
         #region Events
 
-        public event EventHandler evSaved;
+        public event EventHandler<CardEventArgs> evSaved;
         protected virtual void onEvSaved()
         {
-            evSaved?.Invoke(this, new CardEventArgs(card));
+            evSaved?.Invoke(this, new CardEventArgs(objCard));
         }
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
@@ -55,6 +48,18 @@ namespace SpinerBaseBE.Layers.FrontEnd
             try
             {
                 sbSave();
+            }
+            catch (Exception ex)
+            {
+                BMessage.Instance.fnErrorMessage(ex);
+            }
+        }
+
+        private void btnExport_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                sbExport();
             }
             catch (Exception ex)
             {
@@ -97,6 +102,30 @@ namespace SpinerBaseBE.Layers.FrontEnd
                 BMessage.Instance.fnErrorMessage(ex);
             }
         }
+
+        private void txtName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                sbUpdateFileds();
+            }
+            catch (Exception ex)
+            {
+                BMessage.Instance.fnErrorMessage(ex);
+            }
+        }
+
+        private void txtDescription_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                sbUpdateFileds();
+            }
+            catch (Exception ex)
+            {
+                BMessage.Instance.fnErrorMessage(ex);
+            }
+        }
         #endregion
 
         #region Constructor
@@ -105,11 +134,11 @@ namespace SpinerBaseBE.Layers.FrontEnd
             try
             {
                 InitializeComponent();
-                card = p_card;
-                txtCommand.Text = card.Command;
+                objCard = p_card;
                 parametersControls = new List<uscParameterConfig>();
                 sbLoadParameters();
                 sbSetFields();
+                blnLoaded = true;
             }
             catch (Exception)
             {
@@ -123,22 +152,37 @@ namespace SpinerBaseBE.Layers.FrontEnd
         {
 
             List<Parameter> objAuxParameters;
+            List<Parameter> objAuxRemoveParameters;
             int intauxIndex;
 
             try
             {
                 sbSetFields();
 
-                objAuxParameters = SpinerBaseBO.Instance.fnExtractParameters(card.Command);
-
-                foreach (Parameter parameter in card.Parameters)
+                objAuxParameters = SpinerBaseBO.Instance.fnExtractParameters(objCard.Command);
+            
+                objAuxRemoveParameters = new List<Parameter>();
+                foreach (Parameter parameter in objCard.Parameters)
                 {
-                    intauxIndex = objAuxParameters.RemoveAll(par => par.Tag.Trim() == parameter.Tag.Trim());      
+                    if (objAuxParameters.Find(par => par.Tag.Trim() == parameter.Tag.Trim()) is null)
+                    {
+                        objAuxRemoveParameters.Add(parameter);
+                    }
                 }
 
-                if(objAuxParameters.Count > 0)
+                foreach (Parameter parameter in objCard.Parameters)
                 {
-                    card.Parameters.AddRange(objAuxParameters);
+                    intauxIndex = objAuxParameters.RemoveAll(par => par.Tag.Trim() == parameter.Tag.Trim());
+                }
+
+                if (objAuxParameters.Count > 0)
+                {
+                    objCard.Parameters.AddRange(objAuxParameters);
+                }
+               
+                foreach (Parameter parameter in objAuxRemoveParameters)
+                {
+                    objCard.Parameters.Remove(parameter);                  
                 }
 
                 sbLoadParameters();
@@ -146,7 +190,7 @@ namespace SpinerBaseBE.Layers.FrontEnd
             }
             catch (Exception ex)
             {
-                throw new Exception((String)FindResource("msgError"), ex);
+                throw new Exception(Properties.Resources.ResourceManager.GetString("msgError").ToString(), ex);
             }
         }
 
@@ -154,11 +198,16 @@ namespace SpinerBaseBE.Layers.FrontEnd
         {
             try
             {
-                if (card.DataBaseType == enmDataBaseType.MsSQL)
+
+                txtCommand.Text = objCard.Command;
+                txtName.Text = objCard.Name;
+                txtDescription.Text = objCard.Description;
+
+                if (objCard.DataBaseType == enmDataBaseType.MsSQL)
                 {
                     radMsSql.IsChecked = true;
                 }
-                else if(card.DataBaseType == enmDataBaseType.MySQL)
+                else if (objCard.DataBaseType == enmDataBaseType.MySQL)
                 {
                     radMySql.IsChecked = true;
                 }
@@ -167,20 +216,20 @@ namespace SpinerBaseBE.Layers.FrontEnd
                     radSqlite.IsChecked = true;
                 }
 
-                if (card.ResultType == enmResultType.Grid)
+                if (objCard.ResultType == enmResultType.Grid)
                 {
-                    radGrid.IsChecked = true;                    
+                    radGrid.IsChecked = true;
                 }
                 else
                 {
                     radText.IsChecked = true;
                 }
 
-                txtCommand.Text = card.Command;
+
             }
             catch (Exception ex)
             {
-                throw new Exception((String)FindResource("msgError"), ex);
+                throw new Exception(Properties.Resources.ResourceManager.GetString("msgError").ToString(), ex);
             }
         }
 
@@ -188,33 +237,41 @@ namespace SpinerBaseBE.Layers.FrontEnd
         {
             try
             {
-                if ((bool)radMsSql.IsChecked)
+                if (objCard is null == false && blnLoaded)
                 {
-                    card.DataBaseType = enmDataBaseType.MsSQL;
-                }
-                else if((bool)radMySql.IsChecked)
-                {
-                    card.DataBaseType = enmDataBaseType.MySQL;
-                }else
-                {
-                    card.DataBaseType = enmDataBaseType.SQLite;
-                }
 
-                if ((bool)radGrid.IsChecked)
-                {
-                    card.ResultType = enmResultType.Grid;
-                }
-                else
-                {
-                    card.ResultType = enmResultType.Text;
-                }
+                    objCard.Command = txtCommand.Text;
+                    objCard.Name = txtName.Text;
+                    objCard.Description = txtDescription.Text;
 
-                card.Command = txtCommand.Text;
+                    if ((bool)radMsSql.IsChecked)
+                    {
+                        objCard.DataBaseType = enmDataBaseType.MsSQL;
+                    }
+                    else if ((bool)radMySql.IsChecked)
+                    {
+                        objCard.DataBaseType = enmDataBaseType.MySQL;
+                    }
+                    else
+                    {
+                        objCard.DataBaseType = enmDataBaseType.SQLite;
+                    }
+
+                    if ((bool)radGrid.IsChecked)
+                    {
+                        objCard.ResultType = enmResultType.Grid;
+                    }
+                    else
+                    {
+                        objCard.ResultType = enmResultType.Text;
+                    }
+
+                }
 
             }
             catch (Exception ex)
             {
-                throw new Exception((String)FindResource("msgError"), ex);
+                throw new Exception(Properties.Resources.ResourceManager.GetString("msgError").ToString(), ex);
             }
         }
 
@@ -227,7 +284,36 @@ namespace SpinerBaseBE.Layers.FrontEnd
             }
             catch (Exception ex)
             {
-                throw new Exception((String)FindResource("msgError"), ex);
+                throw new Exception(Properties.Resources.ResourceManager.GetString("msgError").ToString(), ex);
+            }
+        }
+
+        private void sbExport()
+        {
+            CommonSaveFileDialog objDialog;
+
+            try
+            {
+
+                sbUpdateFileds();
+                objDialog = new CommonSaveFileDialog();
+                objDialog.Title = Properties.Resources.ResourceManager.GetString("AppName").ToString();
+                objDialog.DefaultFileName = objCard.Name.Replace(" ", "_") + ".sbc";
+                objDialog.DefaultExtension = "sbc";
+                objDialog.Filters.Add(new CommonFileDialogFilter("SpineBase Card", "*.sbc"));
+
+                if (objDialog.ShowDialog() == CommonFileDialogResult.Ok)
+                {
+                    objCard.Save(objDialog.FileName);
+                    BMessage.Instance.fnMessage(Properties.Resources.ResourceManager.GetString("msgSaved").ToString(), Properties.Resources.ResourceManager.GetString("AppName").ToString(), MessageBoxButton.OK);
+                }
+
+                objDialog = null;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(Properties.Resources.ResourceManager.GetString("msgError").ToString(), ex);
             }
         }
 
@@ -239,7 +325,7 @@ namespace SpinerBaseBE.Layers.FrontEnd
                 parametersControls.Clear();
                 stkParameters.Children.Clear();
 
-                foreach (Parameter parameter in card.Parameters)
+                foreach (Parameter parameter in objCard.Parameters)
                 {
                     parametersControls.Add(new uscParameterConfig(parameter));
                     parametersControls.Last().Margin = new Thickness(2);
@@ -255,8 +341,9 @@ namespace SpinerBaseBE.Layers.FrontEnd
         #endregion
 
         #region Properties
-        public Card Card { get => card; set => card = value; }
+        public Card Card { get => objCard; set => objCard = value; }
         #endregion
-        
+
+
     }
 }

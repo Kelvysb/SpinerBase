@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SpinerBaseBE.Basic;
-using SpinerBaseBE.Layers.BackEnd;
+using SpinerBase.Basic;
+using SpinerBase.Layers.BackEnd;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 
-namespace SpinerBaseBE.Layers.BackEnd.Tests
+namespace SpinerBase.Layers.BackEnd.Tests
 {
     [TestClass()]
     public class SpinerBaseBOTests
