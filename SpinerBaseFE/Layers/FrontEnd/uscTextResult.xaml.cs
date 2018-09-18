@@ -43,6 +43,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -123,6 +124,17 @@ namespace SpinerBase.Layers.FrontEnd
             }
         }
 
+        public event EventHandler evBeginWait;
+        protected virtual void onEvBeginWait()
+        {
+            evBeginWait?.Invoke(this, new EventArgs());
+        }
+
+        public event EventHandler evEndWait;
+        protected virtual void onEvEndWait()
+        {
+            evEndWait?.Invoke(this, new EventArgs());
+        }
         #endregion
 
         #region Constructor
@@ -149,11 +161,16 @@ namespace SpinerBase.Layers.FrontEnd
         {
             try
             {
+                onEvBeginWait();         
                 txtResult.Text = SpinerBaseBO.Instance.fnExecuteCardText(card);
             }
             catch (Exception ex)
             {
                 throw new Exception(Properties.Resources.ResourceManager.GetString("msgError").ToString(), ex);
+            }
+            finally
+            {
+                onEvEndWait();
             }
         }
 

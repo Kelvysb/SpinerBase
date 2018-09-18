@@ -126,6 +126,17 @@ namespace SpinerBase.Layers.FrontEnd
             }
         }
 
+        public event EventHandler evBeginWait;
+        protected virtual void onEvBeginWait()
+        {
+            evBeginWait?.Invoke(this, new EventArgs());
+        }
+
+        public event EventHandler evEndWait;
+        protected virtual void onEvEndWait()
+        {
+            evEndWait?.Invoke(this, new EventArgs());
+        }
         #endregion
 
         #region Constructor
@@ -154,6 +165,7 @@ namespace SpinerBase.Layers.FrontEnd
             
             try
             {
+                onEvBeginWait();
                 objDataSet = SpinerBaseBO.Instance.fnExecuteCardDataSet(card);
                 if(objDataSet is null == false)
                 {
@@ -164,6 +176,10 @@ namespace SpinerBase.Layers.FrontEnd
             catch (Exception ex)
             {
                 throw new Exception(Properties.Resources.ResourceManager.GetString("msgError").ToString(), ex);
+            }
+            finally
+            {
+                onEvEndWait();
             }
         }
 

@@ -38,9 +38,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Threading;
 using BControls;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using SpinerBase.Basic;
@@ -253,6 +255,30 @@ namespace SpinerBase.Layers.FrontEnd
             }
         }
 
+        private void evBeginWait(object sender, EventArgs e)
+        {
+            try
+            {
+                sbPleseWait(true);
+            }
+            catch (Exception)
+            {
+                sbPleseWait(false);
+            }
+        }
+
+        private void evEndWait(object sender, EventArgs e)
+        {
+            try
+            {
+                sbPleseWait(false);
+            }
+            catch (Exception)
+            {
+                sbPleseWait(false);
+            }
+        }
+
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             try
@@ -413,12 +439,16 @@ namespace SpinerBase.Layers.FrontEnd
                 {
                     objCardText = new uscTextResult(p_card);
                     objCardText.evRemove += evRemoveTextCardFromResults;
+                    objCardText.evBeginWait += evBeginWait;
+                    objCardText.evEndWait += evEndWait;
                     grdResults.Children.Add(objCardText);
                 }
                 else
                 {
                     objCardGrid = new uscGridResult(p_card);
                     objCardGrid.evRemove += evRemoveGridCardFromResults;
+                    objCardGrid.evBeginWait += evBeginWait;
+                    objCardGrid.evEndWait += evEndWait;
                     grdResults.Children.Add(objCardGrid);
                 }
 
@@ -515,18 +545,24 @@ namespace SpinerBase.Layers.FrontEnd
                 if (objCardText is null == false)
                 {
                     objCardText.evRemove -= evRemoveTextCardFromResults;
+                    objCardText.evBeginWait -= evBeginWait;
+                    objCardText.evEndWait -= evEndWait;
                     objCardText = null;
                 }
 
                 if (objCardGrid is null == false)
                 {
                     objCardGrid.evRemove -= evRemoveGridCardFromResults;
+                    objCardGrid.evBeginWait -= evBeginWait;
+                    objCardGrid.evEndWait -= evEndWait;
                     objCardGrid = null;
                 }
 
                 if (objConnectionConfig is null == false)
                 {
                     objConnectionConfig.evClose -= evRemoveConfigFromResults;
+                    objConnectionConfig.evBeginWait -= evBeginWait;
+                    objConnectionConfig.evEndWait -= evEndWait;
                     objConnectionConfig = null;
                 }
 
@@ -544,6 +580,8 @@ namespace SpinerBase.Layers.FrontEnd
                 }
 
                 sbFilter();
+
+                sbPleseWait(false);
             }
             catch (Exception ex)
             {
@@ -559,6 +597,8 @@ namespace SpinerBase.Layers.FrontEnd
                 grdResults.Children.Clear();
                 objConnectionConfig = new uscConnectionConfig();
                 objConnectionConfig.evClose += evRemoveConfigFromResults;
+                objConnectionConfig.evBeginWait += evBeginWait;
+                objConnectionConfig.evEndWait += evEndWait;
                 grdResults.Children.Add(objConnectionConfig);
 
             }
@@ -583,6 +623,30 @@ namespace SpinerBase.Layers.FrontEnd
             }
         }
 
+        private void sbPleseWait(bool p_active)
+        {
+            try
+            {
+                Thread.Sleep(100);
+                if (p_active)
+                {
+                    grdLoading.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    grdLoading.Visibility = Visibility.Collapsed;
+                }
+
+            }
+            catch (Exception)
+            {
+                grdLoading.Visibility = Visibility.Collapsed;                
+            }finally
+            {
+                grdLoading.Refresh();
+            }
+        }
+
         private void sbClose()
         {
             try
@@ -600,6 +664,15 @@ namespace SpinerBase.Layers.FrontEnd
 
         #endregion
 
+    }
+}
 
+public static class ExtensionMethods
+{
+    private static Action EmptyDelegate = delegate () { };
+
+    public static void Refresh(this UIElement uiElement)
+    {
+        uiElement.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
     }
 }

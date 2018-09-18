@@ -139,6 +139,18 @@ namespace SpinerBase.Layers.FrontEnd
         {
             evClose?.Invoke(this, new EventArgs());
         }
+
+        public event EventHandler evBeginWait;
+        protected virtual void onEvBeginWait()
+        {
+            evBeginWait?.Invoke(this, new EventArgs());
+        }
+
+        public event EventHandler evEndWait;
+        protected virtual void onEvEndWait()
+        {
+            evEndWait?.Invoke(this, new EventArgs());
+        }
         #endregion
 
         #region Functions
@@ -179,6 +191,7 @@ namespace SpinerBase.Layers.FrontEnd
             {
                 if (objSelectedConnection is null == false)
                 {
+                    onEvBeginWait();
                     SpinerBaseBO.Instance.fnConnect(objSelectedConnection);
                     BMessage.Instance.fnMessage(Properties.Resources.ResourceManager.GetString("msgConnected").ToString(), Properties.Resources.ResourceManager.GetString("AppName").ToString(), MessageBoxButton.OK);
                     onEvClose();
@@ -187,6 +200,10 @@ namespace SpinerBase.Layers.FrontEnd
             catch (Exception ex)
             {
                 throw new Exception(Properties.Resources.ResourceManager.GetString("msgError") + ex.Message, ex);
+            }
+            finally
+            {
+                onEvEndWait();
             }
         }
 

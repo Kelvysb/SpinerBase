@@ -13,7 +13,7 @@
             <ColumnDefinition Width="50*"/>
             <ColumnDefinition Width="50*"/>
         </Grid.ColumnDefinitions>
-
+      
         <Image Name="imgBackground" Margin="0" Grid.ColumnSpan="2" Source="/SpinerBase;component/Resources/SpinerBaseBackground.jpg" HorizontalAlignment="Left" VerticalAlignment="Stretch" Stretch="UniformToFill"/>
 
         <Border Grid.Column="0" BorderThickness="0,0,2,0" BorderBrush="{StaticResource DetailColor}">
@@ -93,7 +93,10 @@
        
         </Grid>
 
-       
-
+        <Grid Name="grdLoading" Grid.ColumnSpan="2" Margin="0" Visibility="Collapsed" Panel.ZIndex="999">
+            <Rectangle Margin="0" Fill="#66000000"/>
+            <Label Content="Please Wait..." Style="{StaticResource stlLabelBase}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26"/>
+        </Grid>
+        
     </Grid>
 </Window>
