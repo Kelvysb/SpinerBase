@@ -126,3 +126,5 @@ C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Release\Spi
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Release\SpinerBaseFE.csproj.CopyComplete
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Release\SpinerBase.exe
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Release\SpinerBase.pdb
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\bin\Release\Oracle.ManagedDataAccess.dll
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\bin\Release\BDataBase.pdb

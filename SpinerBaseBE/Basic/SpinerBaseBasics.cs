@@ -55,7 +55,8 @@ namespace SpinerBase.Basic
     {
         MsSQL = 0,
         MySQL = 1,
-        SQLite = 2
+        SQLite = 2,
+        Oracle = 3
     }
 
     public class CardEventArgs : EventArgs

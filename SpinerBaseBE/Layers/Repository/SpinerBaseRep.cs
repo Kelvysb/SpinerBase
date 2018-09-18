@@ -81,10 +81,14 @@ namespace SpinerBase.Layers.Repository
                 {
                     dataBaseConfig.Type = DataBase.enmDataBaseType.MySql;
                 }
-                else
+                else if (p_connection.DataBaseType == enmDataBaseType.SQLite)
                 {
                     dataBaseConfig.Type = DataBase.enmDataBaseType.SqLite;
-                    dataBaseConfig.Server = p_connection.Server + "\\" + p_connection.DataBase; 
+                    dataBaseConfig.Server = p_connection.Server + "\\" + p_connection.DataBase;
+                }
+                else
+                {
+                    dataBaseConfig.Type = DataBase.enmDataBaseType.Oracle;
                 }
 
                 dataBaseConfig.DataBase = p_connection.DataBase;

@@ -162,6 +162,7 @@ namespace SpinerBase.Layers.FrontEnd
                 cmbType.Items.Add("MsSql");
                 cmbType.Items.Add("MySql");
                 cmbType.Items.Add("Sqlite");
+                cmbType.Items.Add("Oracle");
                 cmbType.SelectedIndex = 0;
 
                 foreach (Connection connection in SpinerBaseBO.Instance.ConfigBase.Connections)

@@ -70,6 +70,7 @@
                             <RadioButton Name="radMsSql" Content="MsSQL" GroupName="grpDataBaseType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" IsChecked="True" Grid.Row="0" Grid.Column="0" Checked="radMsSql_Checked"/>
                             <RadioButton Name="radMySql" Content="MySQL" GroupName="grpDataBaseType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" Grid.Row="1"  Grid.Column="0" Checked="radMsSql_Checked"/>
                             <RadioButton Name="radSqlite" Content="Sqlite" GroupName="grpDataBaseType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" Grid.Row="0" Grid.Column="1" Checked="radMsSql_Checked"/>
+                            <RadioButton Name="radOracle" Content="Oracle" GroupName="grpDataBaseType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" Grid.Row="1" Grid.Column="1" Checked="radMsSql_Checked"/>
                             
                         </Grid>
                     </Grid>

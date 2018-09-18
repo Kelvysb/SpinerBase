@@ -63,3 +63,5 @@ C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBE\obj\Debug\Spine
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBE\obj\Debug\SpinerBaseBE.csproj.CopyComplete
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBE\obj\Debug\SpinerBaseBE.dll
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBE\obj\Debug\SpinerBaseBE.pdb
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBE\bin\Debug\Oracle.ManagedDataAccess.dll
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBE\bin\Debug\BDataBase.pdb

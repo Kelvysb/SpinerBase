@@ -109,5 +109,13 @@ BDataBase
  <returns></returns>
  <remarks></remarks>
 </member>
+<member name="P:BDataBase.clsConfiguration.ConnetionTimeout">
+ <summary>
+ Connection timeout
+ </summary>
+ <value></value>
+ <returns></returns>
+ <remarks></remarks>
+</member>
 </members>
 </doc>
