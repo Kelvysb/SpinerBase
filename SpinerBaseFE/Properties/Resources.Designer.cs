@@ -175,6 +175,15 @@ namespace SpinerBase.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No data.
+        /// </summary>
+        internal static string msgNoData {
+            get {
+                return ResourceManager.GetString("msgNoData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to remove this card?.
         /// </summary>
         internal static string msgRemoveCard {

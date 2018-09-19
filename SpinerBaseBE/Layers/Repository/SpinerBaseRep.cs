@@ -132,7 +132,7 @@ namespace SpinerBase.Layers.Repository
             }
             catch (DataBaseException exbd)
             {
-                if (exbd.Code != DataBaseException.enmDataBaseExeptionCode.NotExists)
+                if (exbd.Code != DataBaseException.enmDataBaseExeptionCode.NotExists && !exbd.Message.Trim().ToUpper().Contains("NOT EXISTS"))
                 {
                     throw new Exception(exbd.Message, exbd);
                 }
@@ -184,7 +184,7 @@ namespace SpinerBase.Layers.Repository
             }
             catch (DataBaseException exbd)
             {
-                if (exbd.Code != DataBaseException.enmDataBaseExeptionCode.NotExists)
+                if(exbd.Code != DataBaseException.enmDataBaseExeptionCode.NotExists && !exbd.Message.Trim().ToUpper().Contains("NOT EXISTS"))
                 {
                     throw new Exception(exbd.Message, exbd);
                 }

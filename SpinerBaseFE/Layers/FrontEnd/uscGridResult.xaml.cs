@@ -172,6 +172,11 @@ namespace SpinerBase.Layers.FrontEnd
                     intTableIndex = 0;
                     grdResult.ItemsSource = objDataSet.Tables[intTableIndex].DefaultView;
                 }
+                else
+                {
+                   grdResult.ItemsSource = null;
+                   BMessage.Instance.fnMessage(Properties.Resources.ResourceManager.GetString("msgNoData").ToString(), Properties.Resources.ResourceManager.GetString("AppName").ToString(), MessageBoxButton.OK);
+                }
             }
             catch (Exception ex)
             {

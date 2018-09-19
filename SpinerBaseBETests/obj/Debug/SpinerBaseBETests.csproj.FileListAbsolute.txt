@@ -64,3 +64,4 @@ C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBETests\obj\Debug\
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBETests\obj\Debug\SpinerBaseBETests.csproj.CopyComplete
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBETests\obj\Debug\SpinerBaseBETests.dll
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBETests\obj\Debug\SpinerBaseBETests.pdb
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBETests\bin\Debug\Oracle.ManagedDataAccess.dll

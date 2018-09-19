@@ -58,10 +58,10 @@ C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBE\bin\Debug\Entit
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBE\bin\Debug\Newtonsoft.Json.xml
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBE\bin\Debug\System.Data.SQLite.xml
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBE\bin\Debug\System.Data.SQLite.dll.config
-C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBE\obj\Debug\SpinerBaseBE.csprojAssemblyReference.cache
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBE\obj\Debug\SpinerBaseBE.csproj.CoreCompileInputs.cache
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBE\obj\Debug\SpinerBaseBE.csproj.CopyComplete
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBE\obj\Debug\SpinerBaseBE.dll
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBE\obj\Debug\SpinerBaseBE.pdb
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBE\bin\Debug\Oracle.ManagedDataAccess.dll
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBE\bin\Debug\BDataBase.pdb
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBE\obj\Debug\SpinerBaseBE.csprojAssemblyReference.cache
