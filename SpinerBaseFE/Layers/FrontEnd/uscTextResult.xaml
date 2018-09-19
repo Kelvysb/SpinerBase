@@ -35,7 +35,7 @@
         </Grid>
 
         <Border BorderThickness="0,2,0,2" BorderBrush="{StaticResource DetailColor}" Grid.Row="1">
-            <TextBox Name="txtResult" Margin="4" Text="" Style="{StaticResource stlTextBoxBase}" AcceptsReturn="True" IsReadOnly="True" Background="White" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"/>
+            <TextBox Name="txtResult" Margin="4" Text="" Style="{StaticResource stlTextBoxBase}" AcceptsReturn="True" IsReadOnly="True" Background="White" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"/>
         </Border>
 
         <Grid Margin="4,0,0,4" Grid.Row="2">

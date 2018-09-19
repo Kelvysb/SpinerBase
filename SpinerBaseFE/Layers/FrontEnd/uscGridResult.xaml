@@ -35,7 +35,7 @@
         </Grid>
 
         <Border BorderThickness="0,2,0,2" BorderBrush="{StaticResource DetailColor}" Grid.Row="1">
-            <DataGrid Name="grdResult" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
+            <DataGrid Name="grdResult" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" SelectionUnit="Cell" IsReadOnly="True">
 
             </DataGrid>
         </Border>
