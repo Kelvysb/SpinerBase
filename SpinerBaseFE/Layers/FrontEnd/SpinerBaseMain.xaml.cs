@@ -75,11 +75,11 @@ namespace SpinerBase.Layers.FrontEnd
 
                 strWorkDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\SpinerBase\\";
 
-                if(Directory.Exists(strWorkDirectory) == false)
+                if (Directory.Exists(strWorkDirectory) == false)
                 {
                     Directory.CreateDirectory(strWorkDirectory);
                 }
-            
+
                 BMessage.sbInitialize((Brush)FindResource("BaseColor"),
                                         (Brush)FindResource("BackColor"),
                                         (Brush)FindResource("FontColor"),
@@ -386,6 +386,7 @@ namespace SpinerBase.Layers.FrontEnd
 
         private void sbImportCard()
         {
+
             CommonOpenFileDialog objDialog;
 
             try
@@ -395,10 +396,23 @@ namespace SpinerBase.Layers.FrontEnd
                 objDialog.Title = Properties.Resources.ResourceManager.GetString("AppName").ToString();
                 objDialog.DefaultExtension = "sbc";
                 objDialog.Filters.Add(new CommonFileDialogFilter("SpineBase Card", "*.sbc"));
+                objDialog.Multiselect = true;
 
                 if (objDialog.ShowDialog() == CommonFileDialogResult.Ok)
                 {
-                    sbAddCard(Card.Load(objDialog.FileName));
+
+                    foreach (string file in objDialog.FileNames)
+                    {
+                        SpinerBaseBO.Instance.ConfigBase.Cards.Add(Card.Load(file));
+                        objCards.Add(new uscCard(SpinerBaseBO.Instance.ConfigBase.Cards.Last()));
+                        objCards.Last().Margin = new Thickness(2);
+                        objCards.Last().evEdit += evEditCard;
+                        objCards.Last().evPlay += evSelectCard;
+                        objCards.Last().evRemove += evRemoveCard;
+                        wrpCards.Children.Add(objCards.Last());
+                    }
+
+                    sbFilter();
                 }
 
                 objDialog = null;
@@ -640,8 +654,9 @@ namespace SpinerBase.Layers.FrontEnd
             }
             catch (Exception)
             {
-                grdLoading.Visibility = Visibility.Collapsed;                
-            }finally
+                grdLoading.Visibility = Visibility.Collapsed;
+            }
+            finally
             {
                 grdLoading.Refresh();
             }
