@@ -203,6 +203,34 @@ namespace SpinerBase.Layers.Repository
 
         }
 
+        public void sbExecuteDirect(string p_command)
+        {
+            try
+            {
+                objDataBase.sbBegin();
+                objDataBase.sbExecute(p_command);
+                objDataBase.sbCommit();
+            }
+            catch (DataBaseException exbd)
+            {              
+                try
+                {
+                    objDataBase.sbRollBack();
+                }
+                catch (Exception)
+                {
+
+                }
+                throw new Exception(exbd.Message, exbd);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
         public bool isOpen()
         {
             bool blnReturn;

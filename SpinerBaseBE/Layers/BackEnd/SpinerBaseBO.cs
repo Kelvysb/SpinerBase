@@ -39,11 +39,28 @@ using System.Collections.Generic;
 using System.Linq;
 using SpinerBase.Basic;
 using System.Data;
+using System.IO;
 
 namespace SpinerBase.Layers.BackEnd
 {
     public class SpinerBaseBO
     {
+        #region Types
+        public class SpinerBaseEventArgs : EventArgs
+        {
+            public SpinerBaseEventArgs(int currentProgress, int totalProgress, string message)
+            {
+                CurrentProgress = currentProgress;
+                TotalProgress = totalProgress;
+                Message = message;
+            }
+
+            public int CurrentProgress { get; set; }
+            public int TotalProgress { get; set; }
+            public string Message { get; set; }
+        }
+        #endregion
+    
         #region Declarations
         private string strBasePath;
         private static SpinerBaseBO instance;
@@ -64,7 +81,15 @@ namespace SpinerBase.Layers.BackEnd
             {
                 throw;
             }
-        }   
+        }
+        #endregion
+
+        #region Events
+        public event EventHandler<SpinerBaseEventArgs> evProgress;
+        protected virtual void onEvProgress(int currentProgress, int totalProgress, string message)
+        {
+            evProgress?.Invoke(this, new SpinerBaseEventArgs(currentProgress, totalProgress, message));
+        }
         #endregion
 
         #region Functions       
@@ -118,6 +143,55 @@ namespace SpinerBase.Layers.BackEnd
             }
         }
 
+        public void sbDoMigration(Migration p_migration)
+        {
+
+            //StreamWriter fileOutput;
+            //StreamReader fileInput;
+            Repository.SpinerBaseRep objSourceRepository;
+            Repository.SpinerBaseRep objTargetRepository;
+            DataSet objReturn;
+            int intProcessed;
+
+            try
+
+            {
+                intProcessed = 0;               
+
+                //Read    
+                onEvProgress(0, 0, "Reading source data.");
+                objReturn = objRepository.fnExecuteDataSet(p_migration.GetCard());
+                onEvProgress(0, 0, "Data retreived.");
+
+                //Prepare target
+                objTargetRepository = new Repository.SpinerBaseRep(p_migration.TargetConnection);
+                onEvProgress(0, 0, "Connecting to target.");
+
+                //Write
+                onEvProgress(0, objReturn.Tables[0].Rows.Count, "Sending data to target.");
+                foreach (DataRow row in objReturn.Tables[0].Rows)
+                {
+                    intProcessed++;
+                    try
+                    {
+                        objTargetRepository.sbExecuteDirect(row[0].ToString());
+                        onEvProgress(intProcessed, objReturn.Tables[0].Rows.Count, "Processed: " + row[0].ToString());
+                    }
+                    catch (Exception ex)
+                    {
+                        onEvProgress(intProcessed, objReturn.Tables[0].Rows.Count, "Error: " + ex.Message);
+                    }
+                }
+
+                onEvProgress(intProcessed, objReturn.Tables[0].Rows.Count, "Finished.");
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public List<Parameter> fnExtractParameters(string p_command)
         {
 
@@ -126,7 +200,8 @@ namespace SpinerBase.Layers.BackEnd
             int intFinalIndex;
             int intLastIndex;
             string strAuxTag;
-
+            string strAuxDescription;
+            string strAuxType;
             try
             {
 
@@ -136,6 +211,8 @@ namespace SpinerBase.Layers.BackEnd
                 intFinalIndex = -1;
                 intLastIndex = 0;
                 strAuxTag = "";
+                strAuxDescription = "";
+                strAuxType = "";
 
                 do
                 {
@@ -154,8 +231,38 @@ namespace SpinerBase.Layers.BackEnd
                             {
 
                                 objReturn.Add(new Parameter());
+
+                                strAuxDescription = strAuxTag.Substring(2, strAuxTag.Length - 4);
+
+                                if(strAuxDescription.Contains("|"))
+                                {
+                                    strAuxType = strAuxDescription.Split('|')[1].Trim();
+                                    strAuxDescription = strAuxDescription.Split('|')[0].Trim();
+                                }
+                                else
+                                {
+                                    strAuxType = "TEXT";
+                                }
+
+                                if (strAuxType.Trim().ToUpper() == "NUMBER")
+                                {
+                                    objReturn.Last().Type = enmParameterType.Number;
+                                }
+                                else if (strAuxType.Trim().ToUpper() == "SEPARATEDNUMBER")
+                                {
+                                    objReturn.Last().Type = enmParameterType.SeparatedNumber;
+                                }
+                                else if (strAuxType.Trim().ToUpper() == "DATETIME")
+                                {
+                                    objReturn.Last().Type = enmParameterType.DateTime;
+                                }
+                                else
+                                {
+                                    objReturn.Last().Type = enmParameterType.Text;
+                                }
+
                                 objReturn.Last().Tag = strAuxTag;
-                                objReturn.Last().Description = strAuxTag.Substring(2, strAuxTag.Length-4);
+                                objReturn.Last().Description = strAuxDescription;
 
                             }
 

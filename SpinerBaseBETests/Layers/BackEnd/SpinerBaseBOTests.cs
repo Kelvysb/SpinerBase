@@ -69,7 +69,7 @@ namespace SpinerBase.Layers.BackEnd.Tests
             {
                 //Basic Test
                 SpinerBaseBO.InitiateInstance(Environment.CurrentDirectory + "\\SpinerBaseData.json");
-                String strTestString = "teste string to Stract #TAGS; from This is the next #TAG; and #ComplexTAG;";
+                String strTestString = "teste string to Stract <%TAGS%> from This is the next #<%TAG%> and <%ComplexTAG%>";
                 List<Parameter> testReturn;
                 testReturn = SpinerBaseBO.Instance.fnExtractParameters(strTestString);
 
@@ -78,7 +78,7 @@ namespace SpinerBase.Layers.BackEnd.Tests
                     Assert.Fail("Wrong return count.");
                 }
 
-                if (testReturn[0].Tag != "#TAGS;" || testReturn[1].Tag != "#TAG;" || testReturn[2].Tag != "#ComplexTAG;")
+                if (testReturn[0].Tag != "<%TAGS%>" || testReturn[1].Tag != "<%TAG%>" || testReturn[2].Tag != "<%ComplexTAG%>")
                 {
                     Assert.Fail("Wrong return values.");
                 }
@@ -155,6 +155,29 @@ namespace SpinerBase.Layers.BackEnd.Tests
 
         }
 
+        [TestMethod()]
+        public void sbDoMigrationTest()
+        {
+            try
+            {
+                Migration objMigration;
+                Connection objConnection;
+
+                SpinerBaseBO.InitiateInstance(Environment.CurrentDirectory + "\\SpinerBaseData.json");
+
+                objConnection = fnGetExampleConection();
+                objMigration = fnGetExampleMigration();
+
+                SpinerBaseBO.Instance.fnConnect(objConnection);
+                SpinerBaseBO.Instance.sbDoMigration(objMigration);
+
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("Error: " + ex.Message);
+            }
+        }
+
         private Connection fnGetExampleConection()
         {
             Connection objConnection;
@@ -179,6 +202,31 @@ namespace SpinerBase.Layers.BackEnd.Tests
                 throw;
             }
         }
+
+        private Connection fnGetExampleConectionMsSQL()
+        {
+            Connection objConnection;
+
+            try
+            {
+
+                objConnection = new Connection();
+                objConnection.Server = "127.0.0.1,1433";
+                objConnection.DataBase = "testDatabase";
+                objConnection.User = "test";
+                objConnection.Password = "test";
+                objConnection.DataBaseType = enmDataBaseType.MsSQL;
+
+
+                return objConnection;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
 
 
@@ -219,7 +267,7 @@ namespace SpinerBase.Layers.BackEnd.Tests
                 objCard.DataBaseType = enmDataBaseType.SQLite;
                 objCard.Name = "Test Card";
                 objCard.Description = "Test Card";
-                objCard.Command = "Select Name || ' ' || Surname || ' Died with ' || Age || ' years.' from testTable where Age > <%AGE%>;;";
+                objCard.Command = "";
                 objCard.Parameters.Add(new Parameter());
                 objCard.Parameters.Last().Description = "Age";
                 objCard.Parameters.Last().Tag = "<%AGE%>";
@@ -234,6 +282,32 @@ namespace SpinerBase.Layers.BackEnd.Tests
             }
         }
 
+        private Migration fnGetExampleMigration()
+        {
+            Migration objMigration;
 
+            try
+            {
+
+                objMigration = new Migration();
+                objMigration.Name = "Test Card";
+                objMigration.Description = "Test Card";
+                objMigration.Command = "select \"insert into tbTeste(name, surname, age, address) values('\" || name || \"', '\" || surname || \"', \" || age || \", '\" || address || \"')\" as Result from testTable";
+                objMigration.Parameters.Add(new Parameter());
+                objMigration.Parameters.Last().Description = "Age";
+                objMigration.Parameters.Last().Tag = "<%AGE%>";
+                objMigration.Parameters.Last().Value = "20";
+                objMigration.TargetConnection = fnGetExampleConectionMsSQL();
+
+                return objMigration;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+     
     }
 }

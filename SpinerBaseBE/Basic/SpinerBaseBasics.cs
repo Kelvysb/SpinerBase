@@ -59,6 +59,16 @@ namespace SpinerBase.Basic
         Oracle = 3
     }
 
+    public enum enmParameterType
+    {
+        Text,
+        Number,
+        Decimal,
+        SeparatedText,
+        SeparatedNumber,
+        DateTime        
+    }
+
     public class CardEventArgs : EventArgs
     {
         public CardEventArgs(Card card)
@@ -375,6 +385,9 @@ namespace SpinerBase.Basic
 
         [JsonProperty("VALUE")]
         public string Value { get; set; }
+
+        [JsonProperty("")]
+        public enmParameterType Type { get; set; }
         #endregion
     }
 
@@ -420,4 +433,169 @@ namespace SpinerBase.Basic
         public enmDataBaseType DataBaseType { get; set; }
         #endregion
     }
+
+    public class Migration
+    {
+
+        #region Constructor
+        public Migration()
+        {
+            try
+            {
+                Name = "";
+                Description = "";
+                Parameters = new List<Parameter>();
+                TargetConnection = null;
+                UseTempFile = true;
+                Command = "";
+                Result = "";
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
+
+        #region Functions
+        public Migration Clone()
+        {
+            try
+            {
+                return Migration.Deserialize(Serialize());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public String Serialize()
+        {
+            try
+            {
+                return JsonConvert.SerializeObject(this, Formatting.Indented);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static Migration Deserialize(String p_strJson)
+        {
+            try
+            {
+                return JsonConvert.DeserializeObject<Migration>(p_strJson);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void Save(String p_path)
+        {
+
+            StreamWriter objFile;
+
+            try
+            {
+
+                if (File.Exists(p_path))
+                {
+                    File.Delete(p_path);
+                }
+                objFile = new StreamWriter(p_path);
+                objFile.Write(this.Serialize());
+                objFile.Close();
+                objFile.Dispose();
+                objFile = null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static Migration Load(String p_path)
+        {
+            Migration objReturn;
+            String strFile;
+            StreamReader objFile;
+
+            try
+            {
+                objReturn = null;
+
+                if (!File.Exists(p_path))
+                {
+                    throw new FileNotFoundException(p_path);
+                }
+
+                objFile = new StreamReader(p_path);
+                strFile = objFile.ReadToEnd();
+                objFile.Close();
+                objFile.Dispose();
+                objFile = null;
+                objReturn = Migration.Deserialize(strFile);
+
+                return objReturn;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Card GetCard()
+        {
+            Card objReturn;
+
+            try
+            {
+                objReturn = new Card();
+                objReturn.Name = Name;
+                objReturn.Description = Description;
+                objReturn.Parameters = Parameters;
+                objReturn.ResultType = enmResultType.Grid;
+                objReturn.Command = Command;
+
+                return objReturn;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
+
+        #region Properties
+
+        [JsonProperty("NAME")]
+        public String Name { get; set; }
+
+        [JsonProperty("DESCRIPTION")]
+        public String Description { get; set; }
+
+        [JsonProperty("PARAMETERS")]
+        public List<Parameter> Parameters { get; set; }
+
+        [JsonProperty("TARGETCONNECTION")]
+        public Connection TargetConnection { get; set; }
+
+        [JsonProperty("USETEMPFILE")]
+        public bool UseTempFile { get; set; }
+
+        [JsonProperty("COMMAND")]
+        public String Command { get; set; }
+
+        [JsonProperty("RESULT")]
+        public String Result { get; set; }
+
+        #endregion
+
+    }
+
 }
