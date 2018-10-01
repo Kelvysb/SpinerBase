@@ -160,7 +160,7 @@ namespace SpinerBase.Layers.BackEnd
 
                 //Read    
                 onEvProgress(0, 0, "Reading source data.");
-                objReturn = objRepository.fnExecuteDataSet(p_migration.GetCard());
+                objReturn = objRepository.fnExecuteDataSet(p_migration.Card);
                 onEvProgress(0, 0, "Data retreived.");
 
                 //Prepare target

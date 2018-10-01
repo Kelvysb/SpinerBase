@@ -347,6 +347,9 @@ namespace SpinerBase.Basic
         [JsonProperty("COMMAND")]
         public String Command { get; set; }
 
+        [JsonProperty("PYTHONSCRIPT")]
+        public string PythonScript { get; set; }
+
         [JsonProperty("RESULT")]
         public String Result { get; set; }
 
@@ -444,11 +447,9 @@ namespace SpinerBase.Basic
             {
                 Name = "";
                 Description = "";
-                Parameters = new List<Parameter>();
+                Card = new Card();
                 TargetConnection = null;
                 UseTempFile = true;
-                Command = "";
-                Result = "";
 
             }
             catch (Exception)
@@ -547,28 +548,7 @@ namespace SpinerBase.Basic
             {
                 throw;
             }
-        }
-
-        public Card GetCard()
-        {
-            Card objReturn;
-
-            try
-            {
-                objReturn = new Card();
-                objReturn.Name = Name;
-                objReturn.Description = Description;
-                objReturn.Parameters = Parameters;
-                objReturn.ResultType = enmResultType.Grid;
-                objReturn.Command = Command;
-
-                return objReturn;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        }    
         #endregion
 
         #region Properties
@@ -579,20 +559,14 @@ namespace SpinerBase.Basic
         [JsonProperty("DESCRIPTION")]
         public String Description { get; set; }
 
-        [JsonProperty("PARAMETERS")]
-        public List<Parameter> Parameters { get; set; }
+        [JsonProperty("CARD")]
+        public Card Card { get; set; }
 
         [JsonProperty("TARGETCONNECTION")]
         public Connection TargetConnection { get; set; }
 
         [JsonProperty("USETEMPFILE")]
         public bool UseTempFile { get; set; }
-
-        [JsonProperty("COMMAND")]
-        public String Command { get; set; }
-
-        [JsonProperty("RESULT")]
-        public String Result { get; set; }
 
         #endregion
 

@@ -164,3 +164,11 @@ C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Debug\Spine
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Debug\SpinerBase.pdb
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\bin\Debug\Oracle.ManagedDataAccess.dll
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\bin\Debug\BDataBase.pdb
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\bin\Debug\Microsoft.Scripting.dll
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\bin\Debug\IronPython.dll
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\bin\Debug\Microsoft.Dynamic.dll
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\bin\Debug\Microsoft.Scripting.Metadata.dll
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\bin\Debug\Microsoft.Scripting.xml
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\bin\Debug\IronPython.xml
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\bin\Debug\Microsoft.Dynamic.xml
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\bin\Debug\Microsoft.Scripting.Metadata.xml
