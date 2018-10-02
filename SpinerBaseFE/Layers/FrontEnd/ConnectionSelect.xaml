@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SpinerBase.Layers.FrontEnd"
        mc:Ignorable="d" Name="Connections"
       Title="SpinerBase - Connections" Height="600" Width="500" WindowStartupLocation="CenterScreen"
-        Background="{StaticResource BackColor}" Icon="/SpinerBase;component/Icon.ico" ShowInTaskbar="False" WindowStyle="ToolWindow" Loaded="PythonScript_Loaded" Topmost="True">
+        Background="{StaticResource BackColor}" Icon="/SpinerBase;component/Icon.ico" ShowInTaskbar="False" WindowStyle="ToolWindow" Loaded="UserControl_Loaded" Topmost="True">
 
     <Grid Name="grdPrincipal">
 

@@ -61,7 +61,9 @@ namespace SpinerBase.Layers.FrontEnd
         private uscConnectionConfig objConnectionConfig;
         private uscGridResult objCardGrid;
         private uscTextResult objCardText;
+        private uscMigration objCardMigration;
         private uscCardConfig objCardEditor;
+        private bool blnLoaded = false;
         #endregion
 
         #region Constructor
@@ -135,6 +137,18 @@ namespace SpinerBase.Layers.FrontEnd
         }
 
         private void txtFilter_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                sbFilter();
+            }
+            catch (Exception ex)
+            {
+                BMessage.Instance.fnErrorMessage(ex);
+            }
+        }
+
+        private void radQuery_Checked(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -332,6 +346,7 @@ namespace SpinerBase.Layers.FrontEnd
                     sbSelectCard(SpinerBaseBO.Instance.ConfigBase.LastCard);
                 }
 
+                blnLoaded = true;
                 sbFilter();
 
             }
@@ -449,22 +464,34 @@ namespace SpinerBase.Layers.FrontEnd
 
                 sbclearResultsGrid();
 
-                if (p_card.ResultType == enmResultType.Text)
+                if (p_card.Type == enmCardType.Query)
                 {
-                    objCardText = new uscTextResult(p_card);
-                    objCardText.evRemove += evRemoveTextCardFromResults;
-                    objCardText.evBeginWait += evBeginWait;
-                    objCardText.evEndWait += evEndWait;
-                    grdResults.Children.Add(objCardText);
+                    if (p_card.ResultType == enmResultType.Text)
+                    {
+                        objCardText = new uscTextResult(p_card);
+                        objCardText.evRemove += evRemoveTextCardFromResults;
+                        objCardText.evBeginWait += evBeginWait;
+                        objCardText.evEndWait += evEndWait;
+                        grdResults.Children.Add(objCardText);
+                    }
+                    else
+                    {
+                        objCardGrid = new uscGridResult(p_card);
+                        objCardGrid.evRemove += evRemoveGridCardFromResults;
+                        objCardGrid.evBeginWait += evBeginWait;
+                        objCardGrid.evEndWait += evEndWait;
+                        grdResults.Children.Add(objCardGrid);
+                    }
                 }
                 else
                 {
-                    objCardGrid = new uscGridResult(p_card);
-                    objCardGrid.evRemove += evRemoveGridCardFromResults;
-                    objCardGrid.evBeginWait += evBeginWait;
-                    objCardGrid.evEndWait += evEndWait;
-                    grdResults.Children.Add(objCardGrid);
+                    objCardMigration = new uscMigration(p_card);
+                    objCardMigration.evRemove += evRemoveTextCardFromResults;
+                    objCardMigration.evBeginWait += evBeginWait;
+                    objCardMigration.evEndWait += evEndWait;
+                    grdResults.Children.Add(objCardMigration);
                 }
+                    
 
                 SpinerBaseBO.Instance.ConfigBase.LastCard = p_card;
 
@@ -484,41 +511,44 @@ namespace SpinerBase.Layers.FrontEnd
             try
             {
 
-                objFilteredResults = new List<uscCard>();
-
-                foreach (uscCard card in objCards)
+                if (blnLoaded)
                 {
-                    card.Visibility = Visibility.Visible;
-                }
 
-                //Remove diferent databases cards, if it's connected
-                if (SpinerBaseBO.Instance.actualConnection is null == false)
-                {
-                    objFilteredResults.AddRange(objCards.FindAll(card => card.Card.DataBaseType != SpinerBaseBO.Instance.actualConnection.DataBaseType));
-                }
+                    objFilteredResults = new List<uscCard>();
 
-                //Type Filter
-                if(radQuery.IsChecked == true)
-                {
-                    objFilteredResults.AddRange(objCards.FindAll(card => card.Card.Type != enmCardType.Query));
-                }
-                else
-                {
-                    objFilteredResults.AddRange(objCards.FindAll(card => card.Card.Type != enmCardType.Migration));
-                }
+                    foreach (uscCard card in objCards)
+                    {
+                        card.Visibility = Visibility.Visible;
+                    }
 
-                //Use Filter
-                if (txtFilter.Text.Trim() != "")
-                {
-                    objFilteredResults.AddRange(objCards.FindAll(card => !card.Card.Name.ToUpper().Contains(txtFilter.Text.Trim().ToUpper())));
+                    //Remove diferent databases cards, if it's connected
+                    if (SpinerBaseBO.Instance.actualConnection is null == false)
+                    {
+                        objFilteredResults.AddRange(objCards.FindAll(card => card.Card.DataBaseType != SpinerBaseBO.Instance.actualConnection.DataBaseType));
+                    }
+
+                    //Type Filter
+                    if (radQuery.IsChecked == true)
+                    {
+                        objFilteredResults.AddRange(objCards.FindAll(card => card.Card.Type != enmCardType.Query));
+                    }
+                    else
+                    {
+                        objFilteredResults.AddRange(objCards.FindAll(card => card.Card.Type != enmCardType.Migration));
+                    }
+
+                    //Use Filter
+                    if (txtFilter.Text.Trim() != "")
+                    {
+                        objFilteredResults.AddRange(objCards.FindAll(card => !card.Card.Name.ToUpper().Contains(txtFilter.Text.Trim().ToUpper())));
+                    }
+
+                    foreach (uscCard card in objFilteredResults)
+                    {
+                        card.Visibility = Visibility.Collapsed;
+                    }
+
                 }
-
-                foreach (uscCard card in objFilteredResults)
-                {
-                    card.Visibility = Visibility.Collapsed;
-                }
-
-
             }
             catch (Exception ex)
             {
@@ -582,6 +612,14 @@ namespace SpinerBase.Layers.FrontEnd
                     objCardGrid = null;
                 }
 
+                if (objCardMigration is null == false)
+                {
+                    objCardMigration.evRemove -= evRemoveGridCardFromResults;
+                    objCardMigration.evBeginWait -= evBeginWait;
+                    objCardMigration.evEndWait -= evEndWait;
+                    objCardMigration = null;
+                }
+
                 if (objConnectionConfig is null == false)
                 {
                     objConnectionConfig.evClose -= evRemoveConfigFromResults;
@@ -623,6 +661,8 @@ namespace SpinerBase.Layers.FrontEnd
                 objConnectionSelect = new ConnectionSelect(true);
                 objConnectionSelect.ShowDialog();
                 objConnectionSelect = null;                
+                lblConnection.Content = SpinerBaseBO.Instance.actualConnection.Name.Trim() + " - " + SpinerBaseBO.Instance.actualConnection.DataBaseType.ToString();
+                sbFilter();
             }
             catch (Exception ex)
             {
@@ -686,6 +726,7 @@ namespace SpinerBase.Layers.FrontEnd
         #region Properties
 
         #endregion
+
 
     }
 }

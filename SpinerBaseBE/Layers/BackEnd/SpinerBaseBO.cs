@@ -90,6 +90,11 @@ namespace SpinerBase.Layers.BackEnd
         {
             evProgress?.Invoke(this, new SpinerBaseEventArgs(currentProgress, totalProgress, message));
         }
+        public event EventHandler evFinished;
+        protected virtual void onEvFinished()
+        {
+            evFinished?.Invoke(this, new EventArgs());
+        }
         #endregion
 
         #region Functions       
@@ -199,6 +204,10 @@ namespace SpinerBase.Layers.BackEnd
             catch (Exception e)
             {
                 throw e;
+            }
+            finally
+            {
+                onEvFinished();
             }
         }
 

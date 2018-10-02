@@ -183,3 +183,9 @@ C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\bin\Debug\IronPython.xml
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\bin\Debug\Microsoft.Dynamic.xml
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\bin\Debug\Microsoft.Scripting.Metadata.xml
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEnd\PythonScript.baml
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEnd\ConnectionSelect.g.cs
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEnd\PythonScript.g.cs
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEnd\uscMigration.g.cs
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEnd\ConnectionSelect.baml
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEnd\PythonScript.baml
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEnd\uscMigration.baml

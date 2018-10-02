@@ -133,7 +133,7 @@ namespace SpinerBase.Layers.Repository
                 //Execute python script by parameter
                 objAuxParameter = PythonInterpreter.ProcessParameters(p_card.Parameters);
 
-                foreach (Parameter parameter in p_card.Parameters)
+                foreach (Parameter parameter in objAuxParameter)
                 {
                     strCommand = strCommand.Replace(parameter.Tag, parameter.Value);
                 }
@@ -192,7 +192,7 @@ namespace SpinerBase.Layers.Repository
                 //Execute python script by parameter
                 objAuxParameter = PythonInterpreter.ProcessParameters(p_card.Parameters);
 
-                foreach (Parameter parameter in p_card.Parameters)
+                foreach (Parameter parameter in objAuxParameter)
                 {
                     strCommand = strCommand.Replace(parameter.Tag, parameter.Value);
                 }

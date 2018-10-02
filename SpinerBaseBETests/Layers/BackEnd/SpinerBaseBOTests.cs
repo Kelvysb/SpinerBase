@@ -160,7 +160,7 @@ namespace SpinerBase.Layers.BackEnd.Tests
         {
             try
             {
-                Migration objMigration;
+                Card objMigration;
                 Connection objConnection;
 
                 SpinerBaseBO.InitiateInstance(Environment.CurrentDirectory + "\\SpinerBaseData.json");
@@ -282,21 +282,21 @@ namespace SpinerBase.Layers.BackEnd.Tests
             }
         }
 
-        private Migration fnGetExampleMigration()
+        private Card fnGetExampleMigration()
         {
-            Migration objMigration;
+            Card objMigration;
 
             try
             {
 
-                objMigration = new Migration();
+                objMigration = new Card();
                 objMigration.Name = "Test Card";
                 objMigration.Description = "Test Card";
-                objMigration.Card.Command = "select \"insert into tbTeste(name, surname, age, address) values('\" || name || \"', '\" || surname || \"', \" || age || \", '\" || address || \"')\" as Result from testTable";
-                objMigration.Card.Parameters.Add(new Parameter());
-                objMigration.Card.Parameters.Last().Description = "Age";
-                objMigration.Card.Parameters.Last().Tag = "<%AGE%>";
-                objMigration.Card.Parameters.Last().Value = "20";
+                objMigration.Command = "select \"insert into tbTeste(name, surname, age, address) values('\" || name || \"', '\" || surname || \"', \" || age || \", '\" || address || \"')\" as Result from testTable";
+                objMigration.Parameters.Add(new Parameter());
+                objMigration.Parameters.Last().Description = "Age";
+                objMigration.Parameters.Last().Tag = "<%AGE%>";
+                objMigration.Parameters.Last().Value = "20";
                 objMigration.TargetConnection = fnGetExampleConectionMsSQL();
 
                 return objMigration;

@@ -27,7 +27,7 @@ namespace SpinerBase.Layers.FrontEnd
         private Connection objSelectedConnection;
         private List<uscConnection> objConnections;
         private bool blnDirectConnect;
-        
+
         #endregion
 
         #region Constructor
@@ -108,6 +108,19 @@ namespace SpinerBase.Layers.FrontEnd
                 BMessage.Instance.fnErrorMessage(ex);
             }
         }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                sbClose();
+            }
+            catch (Exception ex)
+            {
+                BMessage.Instance.fnErrorMessage(ex);
+            }
+        }
+
         #endregion
 
         #region Functions
@@ -286,6 +299,17 @@ namespace SpinerBase.Layers.FrontEnd
             }
         }
 
+        private void sbClose()
+        {
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(Properties.Resources.ResourceManager.GetString("msgError") + ex.Message, ex);
+            }
+        }
         #endregion
 
         #region Properties

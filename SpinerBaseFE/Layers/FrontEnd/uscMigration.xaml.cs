@@ -109,6 +109,21 @@ namespace SpinerBase.Layers.FrontEnd
         }
 
 
+        private void objBOMigrate_Finished(object sender, EventArgs e)
+        {
+            try
+            {
+                Dispatcher.BeginInvoke(new Action(delegate ()
+                {
+                    onEvEndWait();
+                }));
+            }
+            catch (Exception ex)
+            {
+                BMessage.Instance.fnErrorMessage(ex);
+            }
+        }
+
         #endregion
 
         #region Constructor
@@ -132,6 +147,7 @@ namespace SpinerBase.Layers.FrontEnd
                 }
 
                 SpinerBaseBO.Instance.evProgress += objBOMigrate_Progress;
+                SpinerBaseBO.Instance.evFinished += objBOMigrate_Finished;
 
 
 
@@ -142,6 +158,8 @@ namespace SpinerBase.Layers.FrontEnd
                 throw;
             }
         }
+
+      
         #endregion
 
         #region Functions
@@ -150,6 +168,7 @@ namespace SpinerBase.Layers.FrontEnd
         {
             try
             {
+                onEvBeginWait();
                 ListLog.Items.Clear();
                 objThreadExecution = new Thread(new ParameterizedThreadStart(SpinerBaseBO.Instance.sbDoMigration));
                 objThreadExecution.Start(card);
@@ -271,7 +290,6 @@ namespace SpinerBase.Layers.FrontEnd
 
 
         #endregion
-
 
     }
 

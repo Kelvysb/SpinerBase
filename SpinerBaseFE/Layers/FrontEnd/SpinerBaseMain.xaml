@@ -39,7 +39,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <RadioButton Name="radQuery" Content="Query" GroupName="grpCardType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" IsChecked="True" Grid.Row="0" Checked="radQuery_Checked"/>
-                            <RadioButton Name="radMigrate" Content="Migrate" GroupName="grpCardType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" Grid.Row="1"  Checked="radQuery_Checked"/>
+                            <RadioButton Name="radMigrate" Content="Migrate" GroupName="grpCardType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" Grid.Row="1" Checked="radQuery_Checked"/>
                         </Grid>
                         
                     </Grid>
