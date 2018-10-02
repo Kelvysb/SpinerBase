@@ -43,6 +43,7 @@ using SpinerBase.Basic;
 using BDataBase;
 using System.Data;
 using SpinerBaseBE.Layers.BackEnd;
+using SpinerBase.Layers.BackEnd;
 
 namespace SpinerBase.Layers.Repository
 {
@@ -114,8 +115,12 @@ namespace SpinerBase.Layers.Repository
         {
 
             DataSet objReturn;
+            DataSet objAuxReturn;
             String strCommand;
             List<Parameter> objAuxParameter;
+            List<string> strStatements;
+            int intTableIndex;
+            string strTableName;
 
             try
             {
@@ -125,7 +130,7 @@ namespace SpinerBase.Layers.Repository
                 strCommand = p_card.Command;
 
                 //Execute pre python script
-                if(p_card.PrePythonScript.Trim() != "")
+                if (p_card.PrePythonScript.Trim() != "")
                 {
                     strCommand = PythonInterpreter.ProcessString(p_card.PrePythonScript, strCommand);
                 }
@@ -138,13 +143,24 @@ namespace SpinerBase.Layers.Repository
                     strCommand = strCommand.Replace(parameter.Tag, parameter.Value);
                 }
 
-                //Execute pos python script
-                if (p_card.PrePythonScript.Trim() != "")
-                {
-                    strCommand = PythonInterpreter.ProcessString(p_card.PosPythonScript, strCommand);
-                }
+                //Separete statements
+                strStatements = strCommand.Split(new string[] { "<!STATEMENT!>" }, StringSplitOptions.None).ToList();
 
-                objReturn = objDataBase.fnExecute(strCommand);
+                objReturn = new DataSet();
+                intTableIndex = 0;
+                foreach (string statement in strStatements)
+                {
+                    strTableName = fnGetTableName(strCommand);
+                    strCommand = fnRemoveTempTags(strCommand);
+                    strCommand = fnRecursiveReplace(statement, objReturn);
+                    objAuxReturn = objDataBase.fnExecute(strCommand);
+                    foreach (DataTable table in objAuxReturn.Tables)
+                    {
+                        table.TableName = "table" + intTableIndex.ToString();
+                        objReturn.Tables.Add(table.Copy());
+                        intTableIndex++;
+                    }
+                }
 
                 //Execute pos python script
                 if (p_card.PosPythonScript.Trim() != "")
@@ -172,6 +188,103 @@ namespace SpinerBase.Layers.Repository
 
             return objReturn;
 
+        }
+
+        private string fnRemoveTempTags(string strCommand)
+        {
+            string strReturn;
+
+            try
+            {
+                strReturn = strCommand;
+
+
+
+                return strReturn;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private string fnGetTableName(string strCommand)
+        {
+
+            string strReturn;
+            int intInitialIndex;
+            int intFinalIndex;
+
+            try
+            {
+                strReturn = "";
+                intInitialIndex = strCommand.IndexOf("<!TABLENAME@");
+                if(intInitialIndex != -1)
+                {
+                    intFinalIndex = strCommand.IndexOf("!>", intInitialIndex);
+                    strReturn = strCommand.Substring(intInitialIndex + 12, intFinalIndex - (intInitialIndex + 12));
+                }
+
+                return strReturn;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private string fnRecursiveReplace(string statement, DataSet objReturn)
+        {
+
+            string strReturn;
+            string strAuxField;
+            int intAuxTableIndex;
+            int intAuxFieldIndex;
+            List<RecursiveParameter> objParameters;
+
+            try
+            {
+
+                strReturn = statement;
+
+                objParameters = SpinerBaseBO.Instance.fnExtractRecursiveParameters(statement);
+ 
+                foreach (RecursiveParameter parameter in objParameters)
+                {                  
+                    
+                    if(int.TryParse(parameter.Table, out intAuxTableIndex))
+                    {
+                        if (int.TryParse(parameter.Field, out intAuxFieldIndex))
+                        {
+                            strAuxField = objReturn.Tables[intAuxTableIndex].Rows[0][intAuxFieldIndex].ToString();
+                        }
+                        else
+                        {
+                            strAuxField = objReturn.Tables[intAuxTableIndex].Rows[0][parameter.Field].ToString();
+                        }
+                    }
+                    else
+                    {
+                        if (int.TryParse(parameter.Field, out intAuxFieldIndex))
+                        {
+                            strAuxField = objReturn.Tables[parameter.Table].Rows[0][intAuxFieldIndex].ToString();
+                        }
+                        else
+                        {
+                            strAuxField = objReturn.Tables[parameter.Table].Rows[0][parameter.Field].ToString();
+                        }
+                    }
+
+                    strReturn = strReturn.Replace(parameter.Tag, strAuxField);
+                }
+         
+                return strReturn;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public String fnExecuteText(Card p_card)
@@ -204,7 +317,7 @@ namespace SpinerBase.Layers.Repository
                 }
 
                 objAuxReturn = objDataBase.fnExecute(strCommand);
-                
+
                 foreach (DataRow row in objAuxReturn.Tables[0].Rows)
                 {
                     foreach (DataColumn column in objAuxReturn.Tables[0].Columns)
@@ -223,7 +336,7 @@ namespace SpinerBase.Layers.Repository
             }
             catch (DataBaseException exbd)
             {
-                if(exbd.Code != DataBaseException.enmDataBaseExeptionCode.NotExists && !exbd.Message.Trim().ToUpper().Contains("NOT EXISTS"))
+                if (exbd.Code != DataBaseException.enmDataBaseExeptionCode.NotExists && !exbd.Message.Trim().ToUpper().Contains("NOT EXISTS"))
                 {
                     throw new Exception(exbd.Message, exbd);
                 }
@@ -251,7 +364,7 @@ namespace SpinerBase.Layers.Repository
                 objDataBase.sbCommit();
             }
             catch (DataBaseException exbd)
-            {              
+            {
                 try
                 {
                     objDataBase.sbRollBack();

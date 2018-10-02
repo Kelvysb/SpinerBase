@@ -306,6 +306,75 @@ namespace SpinerBase.Layers.BackEnd
             }
         }
 
+        public List<RecursiveParameter> fnExtractRecursiveParameters(string p_command)
+        {
+
+            List<RecursiveParameter> objReturn;
+            int intIndex;
+            int intFinalIndex;
+            int intLastIndex;
+            string strAuxTag;
+            string strField;
+            string strTable;
+            try
+            {
+
+                objReturn = new List<RecursiveParameter>();
+
+                intIndex = -1;
+                intFinalIndex = -1;
+                intLastIndex = 0;
+                strAuxTag = "";
+                strField = "";
+                strTable = "";
+
+                do
+                {
+                    intIndex = p_command.IndexOf("<!", intLastIndex);
+
+                    if (intIndex != -1)
+                    {
+                        intFinalIndex = p_command.IndexOf("!>", intIndex);
+
+                        if (intFinalIndex != -1)
+                        {
+
+                            strAuxTag = p_command.Substring(intIndex, intFinalIndex - intIndex + 2);
+
+                            if (!strAuxTag.Contains(" "))
+                            {
+
+                                strField = strAuxTag.Substring(2, strAuxTag.Length - 4);
+
+                                if (strField.Contains("@"))
+                                {
+                                    strTable = strField.Split('@')[1].Trim();
+                                    strField = strField.Split('@')[0].Trim();
+                                }
+
+                                objReturn.Add(new RecursiveParameter(strAuxTag, strField, strTable));
+
+                            }
+
+
+                        }
+
+                        intLastIndex = intIndex + 1;
+                    }
+
+
+                } while (intIndex != -1);
+
+                return objReturn;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
         public void fnConnect(Connection p_connection)
         {
             try
@@ -328,7 +397,6 @@ namespace SpinerBase.Layers.BackEnd
                 throw;
             }
         }
-
 
         public void sbSaveConfig()
         {

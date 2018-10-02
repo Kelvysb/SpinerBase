@@ -147,6 +147,16 @@ namespace SpinerBase.Layers.BackEnd.Tests
                     Assert.Fail("No result");
                 }
 
+                //Recursive test
+                objCard = fnGetExampleCardForRecursive();
+                objReturn = SpinerBaseBO.Instance.fnExecuteCardDataSet(objCard);
+
+                if (objReturn is null)
+                {
+                    Assert.Fail("No result");
+                }
+
+
             }
             catch (Exception ex)
             {
@@ -242,6 +252,34 @@ namespace SpinerBase.Layers.BackEnd.Tests
                 objCard.Name = "Test Card";
                 objCard.Description = "Test Card";
                 objCard.Command = "Select * from testTable where age > <%AGE%>;;";
+                objCard.Parameters.Add(new Parameter());
+                objCard.Parameters.Last().Description = "Age";
+                objCard.Parameters.Last().Tag = "<%AGE%>";
+                objCard.Parameters.Last().Value = "20";
+
+                return objCard;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private Card fnGetExampleCardForRecursive()
+        {
+            Card objCard;
+
+            try
+            {
+
+                objCard = new Card();
+                objCard.DataBaseType = enmDataBaseType.SQLite;
+                objCard.Name = "Test Card";
+                objCard.Description = "Test Card";
+                objCard.Command = "Select * from testTable where age > <%AGE%>\r\n";
+                objCard.Command = objCard.Command + "<!TABLENAME@testTable!><!STATEMENT!>\r\n";
+                objCard.Command = objCard.Command + "Select * from testTable where name = '<!name@0!>'";
                 objCard.Parameters.Add(new Parameter());
                 objCard.Parameters.Last().Description = "Age";
                 objCard.Parameters.Last().Tag = "<%AGE%>";

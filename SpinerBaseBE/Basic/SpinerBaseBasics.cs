@@ -417,6 +417,36 @@ namespace SpinerBase.Basic
         #endregion
     }
 
+    public class RecursiveParameter
+    {
+        #region Declarations
+        public RecursiveParameter(string p_tag, string p_field, string p_table)
+        {
+            try
+            {
+                Tag = p_tag;
+                Field = p_field;
+                Table = p_table;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
+
+        #region Properties
+        [JsonProperty("TAG")]
+        public string Tag { get; set; }
+
+        [JsonProperty("FIELD")]
+        public string Field { get; set; }
+
+        [JsonProperty("TABLE")]
+        public string Table { get; set; }       
+        #endregion
+    }
+
     public class Connection
     {
         public Connection()
