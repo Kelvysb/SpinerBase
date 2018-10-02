@@ -128,3 +128,17 @@ C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Release\Spi
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Release\SpinerBase.pdb
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\bin\Release\Oracle.ManagedDataAccess.dll
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\bin\Release\BDataBase.pdb
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\bin\Release\Microsoft.Scripting.dll
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\bin\Release\IronPython.dll
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\bin\Release\Microsoft.Dynamic.dll
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\bin\Release\Microsoft.Scripting.Metadata.dll
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\bin\Release\Microsoft.Scripting.xml
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\bin\Release\IronPython.xml
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\bin\Release\Microsoft.Dynamic.xml
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\bin\Release\Microsoft.Scripting.Metadata.xml
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Release\Layers\FrontEnd\ConnectionSelect.g.cs
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Release\Layers\FrontEnd\PythonScript.g.cs
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Release\Layers\FrontEnd\uscMigration.g.cs
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Release\Layers\FrontEnd\ConnectionSelect.baml
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Release\Layers\FrontEnd\PythonScript.baml
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Release\Layers\FrontEnd\uscMigration.baml

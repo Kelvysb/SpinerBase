@@ -137,9 +137,9 @@ namespace SpinerBase.Layers.FrontEnd
                 parametersControls = new List<uscParameter>();
                 sbLoadParameters();
 
-                if (Card.TargetConnection is null == false)
+                if (card.TargetConnection is null == false)
                 {
-                    lblConnection.Content = Card.TargetConnection.Name.Trim() + " - " + Card.TargetConnection.DataBaseType.ToString();
+                    lblConnection.Content = card.TargetConnection.Name.Trim() + " - " + card.TargetConnection.DataBaseType.ToString();
                 }
                 else
                 {
@@ -148,9 +148,6 @@ namespace SpinerBase.Layers.FrontEnd
 
                 SpinerBaseBO.Instance.evProgress += objBOMigrate_Progress;
                 SpinerBaseBO.Instance.evFinished += objBOMigrate_Finished;
-
-
-
 
             }
             catch (Exception)
@@ -170,6 +167,7 @@ namespace SpinerBase.Layers.FrontEnd
             {
                 onEvBeginWait();
                 ListLog.Items.Clear();
+                Thread.Sleep(100);
                 objThreadExecution = new Thread(new ParameterizedThreadStart(SpinerBaseBO.Instance.sbDoMigration));
                 objThreadExecution.Start(card);
 
@@ -273,9 +271,10 @@ namespace SpinerBase.Layers.FrontEnd
                 }
                 else
                 {
-                    strMessage = strMessage + " - " + ((p_eventArgs.CurrentProgress/p_eventArgs.TotalProgress)*100).ToString() + "%";
+                    strMessage = strMessage + " - " + ((int)((Double)p_eventArgs.CurrentProgress / p_eventArgs.TotalProgress * 100f)).ToString() + "%";
                     strMessage = strMessage + " - " + p_eventArgs.Message;
                 }
+                ListLog.Items.Add(strMessage);
 
             }
             catch (Exception)

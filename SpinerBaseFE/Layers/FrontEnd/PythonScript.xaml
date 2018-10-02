@@ -31,7 +31,7 @@
                             that returns a string, Example: def main(input): return "Hello"                             
                 </TextBlock>
             </Border>
-            <Button Name="btnok" Style="{StaticResource ButtonRoundStyle}" Margin="0,3,10,2" Grid.Column="1" HorizontalAlignment="Right" ToolTip="Back" Click="btnok_Click">
+            <Button Name="btnok" Style="{StaticResource ButtonRoundStyle}" Margin="0,3,10,2" Grid.Column="1" HorizontalAlignment="Right" ToolTip="Save" Click="btnok_Click">
                 <Grid>
                     <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}"/>
                     <Image Source="/SpinerBase;component/Resources/Save.png"/>

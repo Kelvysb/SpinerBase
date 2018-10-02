@@ -50,13 +50,13 @@
                         <Label Name="lblConnection" Content="Not Connected" Style="{StaticResource stlLabelBase}" Padding="0" Margin="15,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1"/>
                     </Grid>
                 </Border>
-                <Button Name="btnConnect" Style="{StaticResource ButtonRoundStyle}" ToolTip="Copy Result" Margin="1" Grid.Column="0" Click="btnConnect_Click">
+                <Button Name="btnConnect" Style="{StaticResource ButtonRoundStyle}" ToolTip="Connect to target" Margin="1" Grid.Column="0" Click="btnConnect_Click">
                     <Grid>
                         <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}"/>
                         <Image Source="/SpinerBase;component/Resources/Connect.png"/>
                     </Grid>
                 </Button>
-                <Button Name="btnSave" Style="{StaticResource ButtonRoundStyle}" ToolTip="Save Result" Margin="1" Grid.Column="0" Click="btnSave_Click">
+                <Button Name="btnSave" Style="{StaticResource ButtonRoundStyle}" ToolTip="Save Log" Margin="1" Grid.Column="0" Click="btnSave_Click">
                     <Grid>
                         <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}"/>
                         <Image Source="/SpinerBase;component/Resources/Save.png"/>

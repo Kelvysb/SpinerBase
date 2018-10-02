@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpinerBase.Layers.FrontEnd"
         mc:Ignorable="d"
-      Title="SpinerBase Helper Beta Version 1.0.0.5" Height="334.005" Width="636.653" WindowStartupLocation="CenterScreen"
+      Title="SpinerBase Helper Beta Version 1.0.0.6" Height="334.005" Width="636.653" WindowStartupLocation="CenterScreen"
         Background="{StaticResource BackColor}" Icon="/SpinerBase;component/Icon.ico" ShowInTaskbar="False" WindowStyle="ToolWindow">
 
     <Grid Name="grdPrincipal">

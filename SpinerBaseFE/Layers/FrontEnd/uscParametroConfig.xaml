@@ -24,7 +24,7 @@
             <Label Name="lblTag" Style="{StaticResource stlLabelBase}" Content="#TAG;" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0" Margin="10,0,0,0" Grid.Column="0" Grid.Row="1"/>
             <TextBox Name="txtDescription" Style="{StaticResource stlTextBoxBase}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="2,0,10,0" Grid.Column="1" Grid.Row="1" TextChanged="txtDescription_TextChanged"/>
 
-            <Button Name="btnPy" Style="{StaticResource ButtonRoundStyle}" ToolTip="Extract Parameters" Margin="1" Grid.Row="0" Grid.Column="2" Width="35" Height="35" Grid.RowSpan="2" HorizontalAlignment="Left" Click="btnPy_Click">
+            <Button Name="btnPy" Style="{StaticResource ButtonRoundStyle}" ToolTip="Python function" Margin="1" Grid.Row="0" Grid.Column="2" Width="35" Height="35" Grid.RowSpan="2" HorizontalAlignment="Left" Click="btnPy_Click">
                 <Grid>
                     <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}"/>
                     <Image Source="/SpinerBase;component/Resources/Py.png"/>
