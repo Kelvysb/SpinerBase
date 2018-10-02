@@ -38,6 +38,7 @@ com este programa, Se não, veja <http://www.gnu.org/licenses/>.
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -89,6 +90,53 @@ namespace SpinerBaseBE.Layers.BackEnd
 
                 }
 
+
+                return objReturn;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
+        public static DataSet ProcessDataSet(string p_PythonCommand, DataSet p_Value)
+        {
+
+            DataSet objReturn;
+            ScriptSource objSource;
+            ScriptScope objScope;
+            Func<DataSet, DataSet> objExecute;
+
+            try
+            {
+
+                objReturn = p_Value;
+
+                if (!p_PythonCommand.Trim().ToUpper().Contains("DEF MAIN("))
+                {
+                    throw new Exception("Main method not found.");
+                }
+
+                if (!p_PythonCommand.Trim().ToUpper().Contains("IMPORT CLR"))
+                {
+                    throw new Exception("Must import clr library to use dataset.");
+                }
+
+                if (objPyEng is null)
+                {
+                    objPyEng = Python.CreateEngine();
+                }
+
+                objSource = objPyEng.CreateScriptSourceFromString(p_PythonCommand, SourceCodeKind.Statements);
+                objScope = objPyEng.CreateScope();
+
+                objSource.Execute(objScope);
+
+                objExecute = objScope.GetVariable<Func<DataSet, DataSet>>("main");
+
+                objReturn = objExecute(p_Value);
 
                 return objReturn;
 

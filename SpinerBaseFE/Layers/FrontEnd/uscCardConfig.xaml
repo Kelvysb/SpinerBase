@@ -142,13 +142,13 @@
 
         <Grid Margin="4,0,0,4" Grid.Row="2">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Name="btnPrePy" Style="{StaticResource ButtonRoundStyle}" ToolTip="Python function - before parameters replacement" Margin="1" Grid.Column="0" Click="btnPrePy_Click" >
+                <Button Name="btnPrePy" Style="{StaticResource ButtonRoundStyle}" ToolTip="Python function - before parameters replacement, execute on script" Margin="1" Grid.Column="0" Click="btnPrePy_Click" >
                     <Grid>
                         <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}"/>
                         <Image Source="/SpinerBase;component/Resources/PrePy.png"/>
                     </Grid>
                 </Button>
-                <Button Name="btnPosPy" Style="{StaticResource ButtonRoundStyle}" ToolTip="Python function - after parameters replacement" Margin="1" Grid.Column="0" Click="btnPosPy_Click" >
+                <Button Name="btnPosPy" Style="{StaticResource ButtonRoundStyle}" ToolTip="Python function - after execution, execute on result" Margin="1" Grid.Column="0" Click="btnPosPy_Click" >
                     <Grid>
                         <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}"/>
                         <Image Source="/SpinerBase;component/Resources/PosPy.png"/>

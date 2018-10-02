@@ -146,6 +146,12 @@ namespace SpinerBase.Layers.Repository
 
                 objReturn = objDataBase.fnExecute(strCommand);
 
+                //Execute pos python script
+                if (p_card.PosPythonScript.Trim() != "")
+                {
+                    objReturn = PythonInterpreter.ProcessDataSet(p_card.PosPythonScript, objReturn);
+                }
+
             }
             catch (DataBaseException exbd)
             {
@@ -197,12 +203,6 @@ namespace SpinerBase.Layers.Repository
                     strCommand = strCommand.Replace(parameter.Tag, parameter.Value);
                 }
 
-                //Execute pos python script
-                if (p_card.PrePythonScript.Trim() != "")
-                {
-                    strCommand = PythonInterpreter.ProcessString(p_card.PosPythonScript, strCommand);
-                }
-
                 objAuxReturn = objDataBase.fnExecute(strCommand);
                 
                 foreach (DataRow row in objAuxReturn.Tables[0].Rows)
@@ -212,6 +212,12 @@ namespace SpinerBase.Layers.Repository
                         strReturn = strReturn + row[column.ColumnName].ToString() + (char)9;
                     }
                     strReturn = strReturn + (char)13 + (char)10;
+                }
+
+                //Execute pos python script
+                if (p_card.PosPythonScript.Trim() != "")
+                {
+                    strReturn = PythonInterpreter.ProcessString(p_card.PosPythonScript, strReturn);
                 }
 
             }

@@ -85,7 +85,33 @@ namespace SpinerBase.Layers.FrontEnd
             {
                 BMessage.Instance.fnErrorMessage(ex);
             }
-        }     
+        }
+
+        private void btnInitialize_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                sbInitialize();
+            }
+            catch (Exception ex)
+            {
+                BMessage.Instance.fnErrorMessage(ex);
+            }
+        }
+        
+        private void btnClr_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                sbClr();
+            }
+            catch (Exception ex)
+            {
+                BMessage.Instance.fnErrorMessage(ex);
+            }
+        }
+
+       
         #endregion
 
         #region Functions
@@ -122,10 +148,43 @@ namespace SpinerBase.Layers.FrontEnd
                 throw new Exception(Properties.Resources.ResourceManager.GetString("msgError").ToString(), ex);
             }
         }
+
+        private void sbInitialize()
+        {
+            try
+            {
+
+                if(txtCommand.Text.Trim() != "")
+                {
+                    txtCommand.Text = txtCommand.Text + "\r\n";
+                }
+                txtCommand.Text = txtCommand.Text + "def main(input):\r\n\treturn input\r\n";
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(Properties.Resources.ResourceManager.GetString("msgError").ToString(), ex);
+            }
+        }
+        private void sbClr()
+        {
+            try
+            {
+                if(!txtCommand.Text.StartsWith("import clr"))
+                {
+                    txtCommand.Text = txtCommand.Text.Insert(0, "import clr\r\nclr.AddReference('System.Data')\r\nfrom System import Data\r\nfrom System.Data import DataTable\r\n");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(Properties.Resources.ResourceManager.GetString("msgError").ToString(), ex);
+            }
+        }
         #endregion
 
         #region Parameters
         public string Script { get; set; }
+
 
         #endregion
 

@@ -11,24 +11,40 @@
     <Grid Name="grdPrincipal">
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
         <Image Name="imgBackground" Margin="0" Grid.ColumnSpan="2" Grid.RowSpan="3" Source="/SpinerBase;component/Resources/SpinerBaseBackground.jpg" HorizontalAlignment="Left" VerticalAlignment="Stretch" Stretch="UniformToFill" Width="450"/>
+
+        <StackPanel Orientation="Horizontal">
+            <Button Name="btnInitialize" Style="{StaticResource ButtonRoundStyle}" Margin="5" Grid.Column="1" HorizontalAlignment="Right" ToolTip="Initialize main function" Height="40" Click="btnInitialize_Click">
+                <Grid>
+                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}"/>
+                    <Image Source="/SpinerBase;component/Resources/Plus.png"/>
+                </Grid>
+            </Button>
+            <Button Name="btnClr" Style="{StaticResource ButtonRoundStyle}" Margin="5" Grid.Column="1" HorizontalAlignment="Right" ToolTip="Import clr library" Height="40" Click="btnClr_Click">
+                <Grid>
+                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}"/>
+                    <Image Source="/SpinerBase;component/Resources/Import.png"/>
+                </Grid>
+            </Button>
+        </StackPanel>
         
-        <TextBox Name="txtCommand" Text="" Style="{StaticResource stlTextBoxBase}" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Grid.Row="0"/>
+        <TextBox Name="txtCommand" Text="" Style="{StaticResource stlTextBoxBase}" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Grid.Row="1"/>
         
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="65"/>
             </Grid.ColumnDefinitions>
             <Border Style="{StaticResource ButtonRoundRectangleStyle}" Margin="5" Grid.Column="0">
                 <TextBlock Style="{StaticResource stlTextBlockBase}" Margin="5">
-                            Create an function called main with a single string parameter 
+                            Create an function called main with a single parameter 
                             <LineBreak/>
-                            that returns a string, Example: def main(input): return "Hello"                             
+                            Example: def main(input): return "Hello"                             
                 </TextBlock>
             </Border>
             <Button Name="btnok" Style="{StaticResource ButtonRoundStyle}" Margin="0,3,10,2" Grid.Column="1" HorizontalAlignment="Right" ToolTip="Save" Click="btnok_Click">
