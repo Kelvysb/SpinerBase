@@ -45,6 +45,13 @@ using Newtonsoft.Json;
 
 namespace SpinerBase.Basic
 {
+
+    public enum enmCardType
+    {
+        Query = 0,
+        Migration = 1
+    }
+
     public enum enmResultType
     {
         Text = 0,
@@ -231,6 +238,9 @@ namespace SpinerBase.Basic
                 Result = "";
                 ResultType = enmResultType.Text;
                 DataBaseType = enmDataBaseType.MsSQL;
+                TargetConnection = null;
+                PrePythonScript = "";
+                PosPythonScript = "";
             }
             catch (Exception)
             {
@@ -332,6 +342,9 @@ namespace SpinerBase.Basic
         #endregion
 
         #region Properties
+        [JsonProperty("TYPE")]
+        public enmCardType Type { get; set; }
+
         [JsonProperty("NAME")]
         public String Name { get; set; }
 
@@ -347,8 +360,11 @@ namespace SpinerBase.Basic
         [JsonProperty("COMMAND")]
         public String Command { get; set; }
 
-        [JsonProperty("PYTHONSCRIPT")]
-        public string PythonScript { get; set; }
+        [JsonProperty("PREPYTHONSCRIPT")]
+        public string PrePythonScript { get; set; }
+
+        [JsonProperty("POSPYTHONSCRIPT")]
+        public string PosPythonScript { get; set; }
 
         [JsonProperty("RESULT")]
         public String Result { get; set; }
@@ -358,6 +374,9 @@ namespace SpinerBase.Basic
 
         [JsonProperty("DATABASETYPE")]
         public enmDataBaseType DataBaseType { get; set; }
+
+        [JsonProperty("TARGETCONNECTION")]
+        public Connection TargetConnection { get; set; }
         #endregion
     }
 
@@ -371,6 +390,7 @@ namespace SpinerBase.Basic
                 Tag = "";
                 Description = "";
                 Value = "";
+                PythonScript = "";
             }
             catch (Exception)
             {
@@ -388,6 +408,9 @@ namespace SpinerBase.Basic
 
         [JsonProperty("VALUE")]
         public string Value { get; set; }
+
+        [JsonProperty("PYTHONSCRIPT")]
+        public string PythonScript { get; set; }
 
         [JsonProperty("")]
         public enmParameterType Type { get; set; }
@@ -435,141 +458,6 @@ namespace SpinerBase.Basic
         [JsonProperty("DATABASETYPE")]
         public enmDataBaseType DataBaseType { get; set; }
         #endregion
-    }
-
-    public class Migration
-    {
-
-        #region Constructor
-        public Migration()
-        {
-            try
-            {
-                Name = "";
-                Description = "";
-                Card = new Card();
-                TargetConnection = null;
-                UseTempFile = true;
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        #endregion
-
-        #region Functions
-        public Migration Clone()
-        {
-            try
-            {
-                return Migration.Deserialize(Serialize());
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public String Serialize()
-        {
-            try
-            {
-                return JsonConvert.SerializeObject(this, Formatting.Indented);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public static Migration Deserialize(String p_strJson)
-        {
-            try
-            {
-                return JsonConvert.DeserializeObject<Migration>(p_strJson);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public void Save(String p_path)
-        {
-
-            StreamWriter objFile;
-
-            try
-            {
-
-                if (File.Exists(p_path))
-                {
-                    File.Delete(p_path);
-                }
-                objFile = new StreamWriter(p_path);
-                objFile.Write(this.Serialize());
-                objFile.Close();
-                objFile.Dispose();
-                objFile = null;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public static Migration Load(String p_path)
-        {
-            Migration objReturn;
-            String strFile;
-            StreamReader objFile;
-
-            try
-            {
-                objReturn = null;
-
-                if (!File.Exists(p_path))
-                {
-                    throw new FileNotFoundException(p_path);
-                }
-
-                objFile = new StreamReader(p_path);
-                strFile = objFile.ReadToEnd();
-                objFile.Close();
-                objFile.Dispose();
-                objFile = null;
-                objReturn = Migration.Deserialize(strFile);
-
-                return objReturn;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }    
-        #endregion
-
-        #region Properties
-
-        [JsonProperty("NAME")]
-        public String Name { get; set; }
-
-        [JsonProperty("DESCRIPTION")]
-        public String Description { get; set; }
-
-        [JsonProperty("CARD")]
-        public Card Card { get; set; }
-
-        [JsonProperty("TARGETCONNECTION")]
-        public Connection TargetConnection { get; set; }
-
-        [JsonProperty("USETEMPFILE")]
-        public bool UseTempFile { get; set; }
-
-        #endregion
-
     }
 
 }

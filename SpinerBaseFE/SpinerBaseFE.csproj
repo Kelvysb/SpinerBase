@@ -109,6 +109,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Layers\FrontEnd\ConnectionSelect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Layers\FrontEnd\PythonScript.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Layers\FrontEnd\uscCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -133,6 +141,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Layers\FrontEnd\uscMigration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Layers\FrontEnd\uscTextResult.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -149,6 +161,12 @@
   <ItemGroup>
     <Compile Include="Layers\FrontEnd\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Layers\FrontEnd\ConnectionSelect.xaml.cs">
+      <DependentUpon>ConnectionSelect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Layers\FrontEnd\PythonScript.xaml.cs">
+      <DependentUpon>PythonScript.xaml</DependentUpon>
     </Compile>
     <Compile Include="Layers\FrontEnd\uscCard.xaml.cs">
       <DependentUpon>uscCard.xaml</DependentUpon>
@@ -167,6 +185,9 @@
     </Compile>
     <Compile Include="Layers\FrontEnd\uscConnectionConfig.xaml.cs">
       <DependentUpon>uscConnectionConfig.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Layers\FrontEnd\uscMigration.xaml.cs">
+      <DependentUpon>uscMigration.xaml</DependentUpon>
     </Compile>
     <Compile Include="Layers\FrontEnd\uscTextResult.xaml.cs">
       <DependentUpon>uscTextResult.xaml</DependentUpon>
@@ -283,6 +304,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\About.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Py.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\PosPy.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\PrePy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

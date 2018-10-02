@@ -27,6 +27,13 @@
             <Setter Property="FontSize" Value="12"/>
         </Style>
 
+        <Style x:Key="stlListBoxBase" TargetType="ListBox">
+            <Setter Property="FontFamily" Value="{StaticResource Font}"/>
+            <Setter Property="Foreground" Value="{StaticResource FontColor}"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+
         <Style x:Key="stlTextBlockBase" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="{StaticResource Font}"/>
             <Setter Property="Foreground" Value="{StaticResource FontColor}"/>

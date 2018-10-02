@@ -34,6 +34,7 @@ com este programa, Se não, veja <http://www.gnu.org/licenses/>.
 'GitHub: https://github.com/Kelvysb/SpinerBase
 */
 
+using BControls;
 using SpinerBase.Basic;
 using System;
 using System.Collections.Generic;
@@ -72,7 +73,20 @@ namespace SpinerBase.Layers.FrontEnd
             {
                 throw;
             }
-        }        
+        }
+
+        private void btnPy_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                sbPython();
+            }
+            catch (Exception ex)
+            {
+                BMessage.Instance.fnErrorMessage(ex);
+            }
+        }
+      
         #endregion
 
         #region Constructor
@@ -116,11 +130,31 @@ namespace SpinerBase.Layers.FrontEnd
                 throw;
             }
         }
+
+        private void sbPython()
+        {
+
+            PythonScript objPyWindow;
+
+            try
+            {
+                objPyWindow = new PythonScript(parameter.PythonScript, "Parameter: " + parameter.Description);
+                objPyWindow.ShowDialog();
+                parameter.PythonScript = objPyWindow.Script;
+                objPyWindow = null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(Properties.Resources.ResourceManager.GetString("msgError").ToString(), ex);
+            }
+        }
+
         #endregion
 
         #region Properties
         public Parameter parameter { get; set; }
         #endregion
+
 
     }
 }

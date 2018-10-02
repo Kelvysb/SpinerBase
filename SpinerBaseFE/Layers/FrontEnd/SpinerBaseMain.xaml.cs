@@ -497,6 +497,16 @@ namespace SpinerBase.Layers.FrontEnd
                     objFilteredResults.AddRange(objCards.FindAll(card => card.Card.DataBaseType != SpinerBaseBO.Instance.actualConnection.DataBaseType));
                 }
 
+                //Type Filter
+                if(radQuery.IsChecked == true)
+                {
+                    objFilteredResults.AddRange(objCards.FindAll(card => card.Card.Type != enmCardType.Query));
+                }
+                else
+                {
+                    objFilteredResults.AddRange(objCards.FindAll(card => card.Card.Type != enmCardType.Migration));
+                }
+
                 //Use Filter
                 if (txtFilter.Text.Trim() != "")
                 {
@@ -605,16 +615,14 @@ namespace SpinerBase.Layers.FrontEnd
 
         private void sbConnect()
         {
+
+            ConnectionSelect objConnectionSelect;
+
             try
             {
-
-                grdResults.Children.Clear();
-                objConnectionConfig = new uscConnectionConfig();
-                objConnectionConfig.evClose += evRemoveConfigFromResults;
-                objConnectionConfig.evBeginWait += evBeginWait;
-                objConnectionConfig.evEndWait += evEndWait;
-                grdResults.Children.Add(objConnectionConfig);
-
+                objConnectionSelect = new ConnectionSelect(true);
+                objConnectionSelect.ShowDialog();
+                objConnectionSelect = null;                
             }
             catch (Exception ex)
             {

@@ -127,6 +127,18 @@ namespace SpinerBase.Layers.FrontEnd
             }
         }
 
+        private void radQuery_Checked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                sbUpdateFileds();
+            }
+            catch (Exception ex)
+            {
+                BMessage.Instance.fnErrorMessage(ex);
+            }
+        }
+
         private void txtCommand_TextChanged(object sender, TextChangedEventArgs e)
         {
             try
@@ -162,6 +174,32 @@ namespace SpinerBase.Layers.FrontEnd
                 BMessage.Instance.fnErrorMessage(ex);
             }
         }
+
+        private void btnPrePy_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                sbPrePy();
+            }
+            catch (Exception ex)
+            {
+                BMessage.Instance.fnErrorMessage(ex);
+            }
+        }
+        
+        private void btnPosPy_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                sbPosPy();
+            }
+            catch (Exception ex)
+            {
+                BMessage.Instance.fnErrorMessage(ex);
+            }
+        }
+
+        
         #endregion
 
         #region Constructor
@@ -267,6 +305,16 @@ namespace SpinerBase.Layers.FrontEnd
                 }
 
 
+                if (objCard.Type == enmCardType.Query)
+                {
+                    radQuery.IsChecked = true;
+                }
+                else
+                {
+                    radMigrate.IsChecked = true;
+                }
+
+
             }
             catch (Exception ex)
             {
@@ -309,6 +357,15 @@ namespace SpinerBase.Layers.FrontEnd
                     else
                     {
                         objCard.ResultType = enmResultType.Text;
+                    }
+
+                    if ((bool)radQuery.IsChecked)
+                    {
+                        objCard.Type = enmCardType.Query;
+                    }
+                    else
+                    {
+                        objCard.Type = enmCardType.Migration;
                     }
 
                 }
@@ -383,12 +440,46 @@ namespace SpinerBase.Layers.FrontEnd
                 throw;
             }
         }
+
+        private void sbPrePy()
+        {
+            PythonScript objPyWindow;
+
+            try
+            {
+                objPyWindow = new PythonScript(Card.PrePythonScript, "Card Pre Python Script: " + Card.Name);
+                objPyWindow.ShowDialog();
+                Card.PrePythonScript = objPyWindow.Script;
+                objPyWindow = null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(Properties.Resources.ResourceManager.GetString("msgError").ToString(), ex);
+            }
+        }
+        private void sbPosPy()
+        {
+            PythonScript objPyWindow;
+
+            try
+            {
+                objPyWindow = new PythonScript(Card.PosPythonScript, "Card Pos Python Script: " + Card.Name);
+                objPyWindow.ShowDialog();
+                Card.PosPythonScript = objPyWindow.Script;
+                objPyWindow = null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(Properties.Resources.ResourceManager.GetString("msgError").ToString(), ex);
+            }
+        }
         #endregion
 
         #region Properties
         public Card Card { get => objCard; set => objCard = value; }
+
         #endregion
 
-
+        
     }
 }

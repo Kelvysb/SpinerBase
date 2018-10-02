@@ -7,7 +7,7 @@
              mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="450">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="170"/>
+            <RowDefinition Height="190"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="57"/>
         </Grid.RowDefinitions>
@@ -46,6 +46,7 @@
             
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="55"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="55"/>
@@ -71,11 +72,30 @@
                             <RadioButton Name="radMySql" Content="MySQL" GroupName="grpDataBaseType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" Grid.Row="1"  Grid.Column="0" Checked="radMsSql_Checked"/>
                             <RadioButton Name="radSqlite" Content="Sqlite" GroupName="grpDataBaseType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" Grid.Row="0" Grid.Column="1" Checked="radMsSql_Checked"/>
                             <RadioButton Name="radOracle" Content="Oracle" GroupName="grpDataBaseType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" Grid.Row="1" Grid.Column="1" Checked="radMsSql_Checked"/>
-                            
+
                         </Grid>
                     </Grid>
                 </Border>
                 <Border Grid.Row="1" Style="{StaticResource ButtonRoundRectangleStyle}"  Margin="2">
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="15"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Card Type:" Style="{StaticResource stlLabelBase}" Padding="0" Margin="10,0,0,0" Grid.Row="0"/>
+                        <Grid  Grid.Row="1" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <RadioButton Name="radQuery" Content="Query" GroupName="grpCardType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" IsChecked="True" Grid.Column="0" Checked="radQuery_Checked"/>
+                            <RadioButton Name="radMigrate" Content="Migrate" GroupName="grpCardType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" Grid.Column="1"  Checked="radQuery_Checked"/>
+                        </Grid>
+
+
+                    </Grid>
+                </Border>
+                <Border Grid.Row="2" Style="{StaticResource ButtonRoundRectangleStyle}"  Margin="2">
                     <Grid >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="15"/>
@@ -90,11 +110,11 @@
                             <RadioButton Name="radGrid" Content="Grid" GroupName="grpResultType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" IsChecked="True" Grid.Column="0" Checked="radGrid_Checked"/>
                             <RadioButton Name="radText" Content="Text" GroupName="grpResultType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" Grid.Column="1"  Checked="radGrid_Checked"/>
                         </Grid>
-                        
-                        
+
+
                     </Grid>
                 </Border>
-                <Grid Grid.Row="2">
+                <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="55"/>
                         <ColumnDefinition Width="*"/>
@@ -117,11 +137,23 @@
         </Grid>
 
         <Border BorderThickness="0,2,0,2" BorderBrush="{StaticResource DetailColor}" Grid.Row="1">
-            <TextBox Name="txtCommand" Text="" Style="{StaticResource stlTextBoxBase}" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextChanged="txtCommand_TextChanged"/>
+            <TextBox Name="txtCommand" Text="" Style="{StaticResource stlTextBoxBase}" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextChanged="txtCommand_TextChanged"/>
         </Border>
 
         <Grid Margin="4,0,0,4" Grid.Row="2">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Name="btnPrePy" Style="{StaticResource ButtonRoundStyle}" ToolTip="Save" Margin="1" Grid.Column="0" Click="btnPrePy_Click" >
+                    <Grid>
+                        <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}"/>
+                        <Image Source="/SpinerBase;component/Resources/PrePy.png"/>
+                    </Grid>
+                </Button>
+                <Button Name="btnPosPy" Style="{StaticResource ButtonRoundStyle}" ToolTip="Save" Margin="1" Grid.Column="0" Click="btnPosPy_Click" >
+                    <Grid>
+                        <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}"/>
+                        <Image Source="/SpinerBase;component/Resources/PosPy.png"/>
+                    </Grid>
+                </Button>
                 <Button Name="btnSave" Style="{StaticResource ButtonRoundStyle}" ToolTip="Save" Margin="1" Grid.Column="0" Click="btnSave_Click">
                     <Grid>
                         <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}"/>

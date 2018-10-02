@@ -42,6 +42,7 @@ using System.Threading.Tasks;
 using SpinerBase.Basic;
 using BDataBase;
 using System.Data;
+using SpinerBaseBE.Layers.BackEnd;
 
 namespace SpinerBase.Layers.Repository
 {
@@ -114,6 +115,7 @@ namespace SpinerBase.Layers.Repository
 
             DataSet objReturn;
             String strCommand;
+            List<Parameter> objAuxParameter;
 
             try
             {
@@ -122,9 +124,24 @@ namespace SpinerBase.Layers.Repository
 
                 strCommand = p_card.Command;
 
+                //Execute pre python script
+                if(p_card.PrePythonScript.Trim() != "")
+                {
+                    strCommand = PythonInterpreter.ProcessString(p_card.PrePythonScript, strCommand);
+                }
+
+                //Execute python script by parameter
+                objAuxParameter = PythonInterpreter.ProcessParameters(p_card.Parameters);
+
                 foreach (Parameter parameter in p_card.Parameters)
                 {
                     strCommand = strCommand.Replace(parameter.Tag, parameter.Value);
+                }
+
+                //Execute pos python script
+                if (p_card.PrePythonScript.Trim() != "")
+                {
+                    strCommand = PythonInterpreter.ProcessString(p_card.PosPythonScript, strCommand);
                 }
 
                 objReturn = objDataBase.fnExecute(strCommand);
@@ -157,6 +174,7 @@ namespace SpinerBase.Layers.Repository
             String strReturn;
             DataSet objAuxReturn;
             String strCommand;
+            List<Parameter> objAuxParameter;
 
             try
             {
@@ -165,9 +183,24 @@ namespace SpinerBase.Layers.Repository
 
                 strCommand = p_card.Command;
 
+                //Execute pre python script
+                if (p_card.PrePythonScript.Trim() != "")
+                {
+                    strCommand = PythonInterpreter.ProcessString(p_card.PrePythonScript, strCommand);
+                }
+
+                //Execute python script by parameter
+                objAuxParameter = PythonInterpreter.ProcessParameters(p_card.Parameters);
+
                 foreach (Parameter parameter in p_card.Parameters)
                 {
                     strCommand = strCommand.Replace(parameter.Tag, parameter.Value);
+                }
+
+                //Execute pos python script
+                if (p_card.PrePythonScript.Trim() != "")
+                {
+                    strCommand = PythonInterpreter.ProcessString(p_card.PosPythonScript, strCommand);
                 }
 
                 objAuxReturn = objDataBase.fnExecute(strCommand);

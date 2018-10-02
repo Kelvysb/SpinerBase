@@ -143,12 +143,22 @@ namespace SpinerBase.Layers.BackEnd
             }
         }
 
-        public void sbDoMigration(Migration p_migration)
+        public void sbDoMigration(Object p_migration)
         {
 
-            //StreamWriter fileOutput;
-            //StreamReader fileInput;
-            Repository.SpinerBaseRep objSourceRepository;
+            try            
+            {
+                sbDoMigration((Card)p_migration);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public void sbDoMigration(Card p_migration)
+        {
+
             Repository.SpinerBaseRep objTargetRepository;
             DataSet objReturn;
             int intProcessed;
@@ -160,7 +170,7 @@ namespace SpinerBase.Layers.BackEnd
 
                 //Read    
                 onEvProgress(0, 0, "Reading source data.");
-                objReturn = objRepository.fnExecuteDataSet(p_migration.Card);
+                objReturn = objRepository.fnExecuteDataSet(p_migration);
                 onEvProgress(0, 0, "Data retreived.");
 
                 //Prepare target
