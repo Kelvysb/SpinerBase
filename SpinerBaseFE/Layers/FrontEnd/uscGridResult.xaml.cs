@@ -67,7 +67,6 @@ namespace SpinerBase.Layers.FrontEnd
         private List<uscParameter> parametersControls;
         private Card card;
         private DataSet objDataSet;
-        private int intTableIndex;
         #endregion
 
         #region Events
@@ -137,6 +136,18 @@ namespace SpinerBase.Layers.FrontEnd
         {
             evEndWait?.Invoke(this, new EventArgs());
         }
+
+        private void cmbTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                sbSelectTable();
+            }
+            catch (Exception ex)
+            {
+                BMessage.Instance.fnErrorMessage(ex);
+            }
+        }      
         #endregion
 
         #region Constructor
@@ -144,7 +155,6 @@ namespace SpinerBase.Layers.FrontEnd
         {
             try
             {
-                intTableIndex = 0;
                 InitializeComponent();
                 card = p_card;
                 grdResult.ItemsSource = null;
@@ -169,8 +179,13 @@ namespace SpinerBase.Layers.FrontEnd
                 objDataSet = SpinerBaseBO.Instance.fnExecuteCardDataSet(card);
                 if(objDataSet is null == false)
                 {
-                    intTableIndex = 0;
-                    grdResult.ItemsSource = objDataSet.Tables[intTableIndex].DefaultView;
+                    cmbTable.Items.Clear();
+                    foreach (DataTable table in objDataSet.Tables)
+                    {
+                        cmbTable.Items.Add(table.TableName);
+                    }
+                    cmbTable.SelectedIndex = 0;
+                    grdResult.ItemsSource = objDataSet.Tables[cmbTable.SelectedIndex].DefaultView;
                 }
                 else
                 {
@@ -194,7 +209,7 @@ namespace SpinerBase.Layers.FrontEnd
             {
                 if (objDataSet is null == false)
                 {
-                    Clipboard.SetText(BGlobal.GlobalFunctions.fnDataTableToText(objDataSet.Tables[intTableIndex], ";", true));
+                    Clipboard.SetText(BGlobal.GlobalFunctions.fnDataTableToText(objDataSet.Tables[cmbTable.SelectedIndex], ";", true));
                 }
             }
             catch (Exception ex)
@@ -222,7 +237,7 @@ namespace SpinerBase.Layers.FrontEnd
                     if (objDialog.ShowDialog() == CommonFileDialogResult.Ok)
                     {
                         objFile = new StreamWriter(objDialog.FileName);
-                        objFile.Write(BGlobal.GlobalFunctions.fnDataTableToText(objDataSet.Tables[intTableIndex], ";", true));
+                        objFile.Write(BGlobal.GlobalFunctions.fnDataTableToText(objDataSet.Tables[cmbTable.SelectedIndex], ";", true));
                         objFile.Close();
                         objFile.Dispose();
                         objFile = null;
@@ -260,14 +275,29 @@ namespace SpinerBase.Layers.FrontEnd
                 throw;
             }
         }
+
+        private void sbSelectTable()
+        {
+            try
+            {
+                if(objDataSet is null == false)
+                {
+                    grdResult.ItemsSource = objDataSet.Tables[cmbTable.SelectedIndex].DefaultView;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(Properties.Resources.ResourceManager.GetString("msgError").ToString(), ex);
+            }
+        }
         #endregion
 
         #region Properties
         public Card Card { get => card; set => card = value; }
 
 
-        #endregion
 
+        #endregion
 
     }
 }

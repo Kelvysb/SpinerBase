@@ -69,7 +69,7 @@ namespace SpinerBase.Layers.BackEnd.Tests
             {
                 //Basic Test
                 SpinerBaseBO.InitiateInstance(Environment.CurrentDirectory + "\\SpinerBaseData.json");
-                String strTestString = "teste string to Stract <%TAGS%> from This is the next #<%TAG%> and <%ComplexTAG%>";
+                String strTestString = "teste string to Stract <%TAGS%> from This is the next #<%TAG%>  <%TAG%> and <%ComplexTAG%>";
                 List<Parameter> testReturn;
                 testReturn = SpinerBaseBO.Instance.fnExtractParameters(strTestString);
 
@@ -237,9 +237,6 @@ namespace SpinerBase.Layers.BackEnd.Tests
             }
         }
 
-
-
-
         private Card fnGetExampleCardForDataSet()
         {
             Card objCard;
@@ -279,7 +276,7 @@ namespace SpinerBase.Layers.BackEnd.Tests
                 objCard.Description = "Test Card";
                 objCard.Command = "Select * from testTable where age > <%AGE%>\r\n";
                 objCard.Command = objCard.Command + "<!TABLENAME@testTable!><!STATEMENT!>\r\n";
-                objCard.Command = objCard.Command + "Select * from testTable where name = '<!name@0!>'";
+                objCard.Command = objCard.Command + "Select * from testTable where name = '<!name@testTable!>'";
                 objCard.Parameters.Add(new Parameter());
                 objCard.Parameters.Last().Description = "Age";
                 objCard.Parameters.Last().Tag = "<%AGE%>";
@@ -305,7 +302,7 @@ namespace SpinerBase.Layers.BackEnd.Tests
                 objCard.DataBaseType = enmDataBaseType.SQLite;
                 objCard.Name = "Test Card";
                 objCard.Description = "Test Card";
-                objCard.Command = "";
+                objCard.Command = "select * from testTable";
                 objCard.Parameters.Add(new Parameter());
                 objCard.Parameters.Last().Description = "Age";
                 objCard.Parameters.Last().Tag = "<%AGE%>";

@@ -34,11 +34,29 @@
             </Grid>
         </Grid>
 
-        <Border BorderThickness="0,2,0,2" BorderBrush="{StaticResource DetailColor}" Grid.Row="1">
-            <DataGrid Name="grdResult" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" SelectionUnit="Cell" IsReadOnly="True">
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0">
+                <Border Style="{StaticResource ButtonRoundRectangleStyle}" Width="200" Margin="2" >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Table:" Style="{StaticResource stlLabelBase}" Grid.Column="0"/>
+                        <ComboBox x:Name="cmbTable" Margin="1,1,10,1" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2" SelectionChanged="cmbTable_SelectionChanged"/>
+                    </Grid>
+                </Border>
+            </StackPanel>
+            <Border BorderThickness="0,2,0,2" BorderBrush="{StaticResource DetailColor}" Grid.Row="1">
+                <DataGrid Name="grdResult" CanUserResizeRows="False" CanUserAddRows="False" CanUserDeleteRows="False" SelectionUnit="Cell" IsReadOnly="True">
 
-            </DataGrid>
-        </Border>
+                </DataGrid>
+            </Border>
+        </Grid>
 
         <Grid Margin="4,0,0,4" Grid.Row="2">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

@@ -20,7 +20,7 @@ namespace SpinerBaseBE.Layers.BackEnd.Tests
             try
             {
 
-                strCommand = "def process(n):\r\n";
+                strCommand = "def main(n):\r\n";
                 strCommand = strCommand + "\treturn n.replace('<%TEST%>', '<%REPLACED%>')";                             
                 strreturn = PythonInterpreter.ProcessString(strCommand, "Command test = <%TEST%>");
 

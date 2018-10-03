@@ -40,6 +40,7 @@ using System.Linq;
 using SpinerBase.Basic;
 using System.Data;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace SpinerBase.Layers.BackEnd
 {
@@ -60,7 +61,7 @@ namespace SpinerBase.Layers.BackEnd
             public string Message { get; set; }
         }
         #endregion
-    
+
         #region Declarations
         private string strBasePath;
         private static SpinerBaseBO instance;
@@ -114,7 +115,7 @@ namespace SpinerBase.Layers.BackEnd
         {
             try
             {
-                if(objRepository != null)
+                if (objRepository != null)
                 {
                     return objRepository.fnExecuteDataSet(p_card);
                 }
@@ -151,7 +152,7 @@ namespace SpinerBase.Layers.BackEnd
         public void sbDoMigration(Object p_migration)
         {
 
-            try            
+            try
             {
                 sbDoMigration((Card)p_migration);
             }
@@ -171,7 +172,7 @@ namespace SpinerBase.Layers.BackEnd
             try
 
             {
-                intProcessed = 0;               
+                intProcessed = 0;
 
                 //Read    
                 onEvProgress(0, 0, "Reading source data.");
@@ -215,86 +216,70 @@ namespace SpinerBase.Layers.BackEnd
         {
 
             List<Parameter> objReturn;
-            int intIndex;
-            int intFinalIndex;
-            int intLastIndex;
             string strAuxTag;
             string strAuxDescription;
             string strAuxType;
+            MatchCollection objMatchs;
+
             try
             {
 
                 objReturn = new List<Parameter>();
-
-                intIndex = -1;
-                intFinalIndex = -1;
-                intLastIndex = 0;
+              
                 strAuxTag = "";
                 strAuxDescription = "";
                 strAuxType = "";
 
-                do
+                objMatchs = Regex.Matches(p_command, "(<%).*?(%>)");
+
+                foreach (Match match in objMatchs)
                 {
-                    intIndex = p_command.IndexOf("<%", intLastIndex);
-
-                    if(intIndex != -1)
+                    if (match.Success)
                     {
-                        intFinalIndex = p_command.IndexOf("%>", intIndex);
+                        strAuxTag = p_command.Substring(match.Index, match.Length);
 
-                        if(intFinalIndex != -1)
+
+                        if (!strAuxTag.Contains(" ") && objReturn.FindIndex(item => item.Tag == strAuxTag) == -1)
                         {
 
-                            strAuxTag = p_command.Substring(intIndex,  intFinalIndex - intIndex + 2);
-                            
-                            if(!strAuxTag.Contains(" "))
+                            objReturn.Add(new Parameter());
+
+                            strAuxDescription = strAuxTag.Substring(2, strAuxTag.Length - 4);
+
+                            if (strAuxDescription.Contains("|"))
                             {
-
-                                objReturn.Add(new Parameter());
-
-                                strAuxDescription = strAuxTag.Substring(2, strAuxTag.Length - 4);
-
-                                if(strAuxDescription.Contains("|"))
-                                {
-                                    strAuxType = strAuxDescription.Split('|')[1].Trim();
-                                    strAuxDescription = strAuxDescription.Split('|')[0].Trim();
-                                }
-                                else
-                                {
-                                    strAuxType = "TEXT";
-                                }
-
-                                if (strAuxType.Trim().ToUpper() == "NUMBER")
-                                {
-                                    objReturn.Last().Type = enmParameterType.Number;
-                                }
-                                else if (strAuxType.Trim().ToUpper() == "SEPARATEDNUMBER")
-                                {
-                                    objReturn.Last().Type = enmParameterType.SeparatedNumber;
-                                }
-                                else if (strAuxType.Trim().ToUpper() == "DATETIME")
-                                {
-                                    objReturn.Last().Type = enmParameterType.DateTime;
-                                }
-                                else
-                                {
-                                    objReturn.Last().Type = enmParameterType.Text;
-                                }
-
-                                objReturn.Last().Tag = strAuxTag;
-                                objReturn.Last().Description = strAuxDescription;
-
+                                strAuxType = strAuxDescription.Split('|')[1].Trim();
+                                strAuxDescription = strAuxDescription.Split('|')[0].Trim();
+                            }
+                            else
+                            {
+                                strAuxType = "TEXT";
                             }
 
+                            if (strAuxType.Trim().ToUpper() == "NUMBER")
+                            {
+                                objReturn.Last().Type = enmParameterType.Number;
+                            }
+                            else if (strAuxType.Trim().ToUpper() == "SEPARATEDNUMBER")
+                            {
+                                objReturn.Last().Type = enmParameterType.SeparatedNumber;
+                            }
+                            else if (strAuxType.Trim().ToUpper() == "DATETIME")
+                            {
+                                objReturn.Last().Type = enmParameterType.DateTime;
+                            }
+                            else
+                            {
+                                objReturn.Last().Type = enmParameterType.Text;
+                            }
+
+                            objReturn.Last().Tag = strAuxTag;
+                            objReturn.Last().Description = strAuxDescription;
 
                         }
 
-                        intLastIndex = intIndex + 1;
                     }
-
-
-                } while (intIndex != -1);
-
-
+                }
 
 
                 return objReturn;
@@ -310,60 +295,42 @@ namespace SpinerBase.Layers.BackEnd
         {
 
             List<RecursiveParameter> objReturn;
-            int intIndex;
-            int intFinalIndex;
-            int intLastIndex;
             string strAuxTag;
             string strField;
             string strTable;
+            MatchCollection objMatchs;
             try
             {
 
                 objReturn = new List<RecursiveParameter>();
 
-                intIndex = -1;
-                intFinalIndex = -1;
-                intLastIndex = 0;
                 strAuxTag = "";
                 strField = "";
                 strTable = "";
 
-                do
+                objMatchs = Regex.Matches(p_command, "(<!).*?(!>)");
+
+                foreach (Match match in objMatchs)
                 {
-                    intIndex = p_command.IndexOf("<!", intLastIndex);
-
-                    if (intIndex != -1)
+                    if (match.Success)
                     {
-                        intFinalIndex = p_command.IndexOf("!>", intIndex);
-
-                        if (intFinalIndex != -1)
+                        strAuxTag = p_command.Substring(match.Index, match.Length);
+                        if (!strAuxTag.Contains(" ") && objReturn.FindIndex(item => item.Tag == strAuxTag) == -1)
                         {
 
-                            strAuxTag = p_command.Substring(intIndex, intFinalIndex - intIndex + 2);
+                            strField = strAuxTag.Substring(2, strAuxTag.Length - 4);
 
-                            if (!strAuxTag.Contains(" "))
+                            if (strField.Contains("@"))
                             {
-
-                                strField = strAuxTag.Substring(2, strAuxTag.Length - 4);
-
-                                if (strField.Contains("@"))
-                                {
-                                    strTable = strField.Split('@')[1].Trim();
-                                    strField = strField.Split('@')[0].Trim();
-                                }
-
-                                objReturn.Add(new RecursiveParameter(strAuxTag, strField, strTable));
-
+                                strTable = strField.Split('@')[1].Trim();
+                                strField = strField.Split('@')[0].Trim();
                             }
 
+                            objReturn.Add(new RecursiveParameter(strAuxTag, strField, strTable));
 
                         }
-
-                        intLastIndex = intIndex + 1;
                     }
-
-
-                } while (intIndex != -1);
+                }
 
                 return objReturn;
 
@@ -374,13 +341,56 @@ namespace SpinerBase.Layers.BackEnd
             }
         }
 
+        public string fnGetTableName(string strCommand)
+        {
+
+            string strReturn;
+            string strTag;
+            Match objMatch;
+
+            try
+            {
+
+                strReturn = "";
+                objMatch = Regex.Match(strCommand, @"(<!TABLENAME@).*?(!>)");
+
+                if (objMatch.Success)
+                {
+                    strTag = strCommand.Substring(objMatch.Index, objMatch.Length);
+                    strTag = strTag.Replace("<!", "").Replace("!>", "");
+                    strReturn = strTag.Split('@')[1];
+                }
+
+                return strReturn;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public string fnRemoveSpecialTags(string strCommand)
+        {
+
+            string strReturn;
+            try
+            {
+                strReturn = strCommand;
+                strReturn = Regex.Replace(strReturn, @"(<!TABLENAME@).*?(!>)", "");
+                return strReturn;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public void fnConnect(Connection p_connection)
         {
             try
             {
 
-                if(objRepository is null == false)
+                if (objRepository is null == false)
                 {
                     objRepository.Dispose();
                     objRepository = null;
@@ -414,10 +424,11 @@ namespace SpinerBase.Layers.BackEnd
 
         #region Properties
         public static SpinerBaseBO Instance
-        { get
+        {
+            get
             {
                 return instance;
-            }            
+            }
         }
 
         public SpinerBaseConfig ConfigBase { get => configBase; }
@@ -426,7 +437,7 @@ namespace SpinerBase.Layers.BackEnd
         {
             get
             {
-                if(objRepository != null)
+                if (objRepository != null)
                 {
                     return objRepository.Connection;
                 }

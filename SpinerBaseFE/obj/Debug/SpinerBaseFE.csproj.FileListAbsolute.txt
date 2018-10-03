@@ -189,3 +189,7 @@ C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Debug\Layer
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEnd\ConnectionSelect.baml
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEnd\PythonScript.baml
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEnd\uscMigration.baml
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEnd\ConnectionSelect.g.cs
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEnd\uscMigration.g.cs
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEnd\ConnectionSelect.baml
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseFE\obj\Debug\Layers\FrontEnd\uscMigration.baml

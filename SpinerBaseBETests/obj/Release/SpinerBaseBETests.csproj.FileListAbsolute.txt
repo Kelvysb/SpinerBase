@@ -73,3 +73,12 @@ C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBETests\bin\Releas
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBETests\bin\Release\IronPython.xml
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBETests\bin\Release\Microsoft.Dynamic.xml
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBETests\bin\Release\Microsoft.Scripting.Metadata.xml
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Release\Microsoft.Scripting.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Release\IronPython.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Release\Oracle.ManagedDataAccess.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Release\Microsoft.Dynamic.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Release\Microsoft.Scripting.Metadata.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Release\Microsoft.Scripting.xml
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Release\IronPython.xml
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Release\Microsoft.Dynamic.xml
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Release\Microsoft.Scripting.Metadata.xml

@@ -37,13 +37,13 @@ com este programa, Se não, veja <http://www.gnu.org/licenses/>.
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SpinerBase.Basic;
 using BDataBase;
 using System.Data;
 using SpinerBaseBE.Layers.BackEnd;
 using SpinerBase.Layers.BackEnd;
+using System.Text.RegularExpressions;
+
 
 namespace SpinerBase.Layers.Repository
 {
@@ -129,45 +129,60 @@ namespace SpinerBase.Layers.Repository
 
                 strCommand = p_card.Command;
 
-                //Execute pre python script
-                if (p_card.PrePythonScript.Trim() != "")
+                if (strCommand.Trim() != "")
                 {
-                    strCommand = PythonInterpreter.ProcessString(p_card.PrePythonScript, strCommand);
-                }
 
-                //Execute python script by parameter
-                objAuxParameter = PythonInterpreter.ProcessParameters(p_card.Parameters);
-
-                foreach (Parameter parameter in objAuxParameter)
-                {
-                    strCommand = strCommand.Replace(parameter.Tag, parameter.Value);
-                }
-
-                //Separete statements
-                strStatements = strCommand.Split(new string[] { "<!STATEMENT!>" }, StringSplitOptions.None).ToList();
-
-                objReturn = new DataSet();
-                intTableIndex = 0;
-                foreach (string statement in strStatements)
-                {
-                    strTableName = fnGetTableName(strCommand);
-                    strCommand = fnRemoveTempTags(strCommand);
-                    strCommand = fnRecursiveReplace(statement, objReturn);
-                    objAuxReturn = objDataBase.fnExecute(strCommand);
-                    foreach (DataTable table in objAuxReturn.Tables)
+                    //Execute pre python script
+                    if (p_card.PrePythonScript.Trim() != "")
                     {
-                        table.TableName = "table" + intTableIndex.ToString();
-                        objReturn.Tables.Add(table.Copy());
-                        intTableIndex++;
+                        strCommand = PythonInterpreter.ProcessString(p_card.PrePythonScript, strCommand);
+                    }
+
+                    //Execute python script by parameter
+                    objAuxParameter = PythonInterpreter.ProcessParameters(p_card.Parameters);
+
+                    foreach (Parameter parameter in objAuxParameter)
+                    {
+                        strCommand = strCommand.Replace(parameter.Tag, parameter.Value);
+                    }
+
+                    //Separete statements
+                    strStatements = strCommand.Split(new string[] { "<!STATEMENT!>" }, StringSplitOptions.None).ToList();
+
+                    objReturn = new DataSet();
+                    intTableIndex = 0;
+                    foreach (string statement in strStatements)
+                    {
+                        strCommand = statement;
+                        strTableName = SpinerBaseBO.Instance.fnGetTableName(strCommand);
+                        strCommand = SpinerBaseBO.Instance.fnRemoveSpecialTags(strCommand);
+                        strCommand = fnRecursiveReplace(strCommand, objReturn);
+                        objAuxReturn = objDataBase.fnExecute(strCommand);
+                        foreach (DataTable table in objAuxReturn.Tables)
+                        {
+                            if (strTableName.Trim() != "")
+                            {
+                                table.TableName = strTableName;
+                            }
+                            else
+                            {
+                                table.TableName = "table_" + intTableIndex.ToString();
+                            }
+                            objReturn.Tables.Add(table.Copy());
+                            intTableIndex++;
+                        }
+                    }
+
+                    //Execute pos python script
+                    if (p_card.PosPythonScript.Trim() != "")
+                    {
+                        objReturn = PythonInterpreter.ProcessDataSet(p_card.PosPythonScript, objReturn);
                     }
                 }
-
-                //Execute pos python script
-                if (p_card.PosPythonScript.Trim() != "")
+                else
                 {
-                    objReturn = PythonInterpreter.ProcessDataSet(p_card.PosPythonScript, objReturn);
+                    throw new Exception("Empty command");
                 }
-
             }
             catch (DataBaseException exbd)
             {
@@ -190,110 +205,17 @@ namespace SpinerBase.Layers.Repository
 
         }
 
-        private string fnRemoveTempTags(string strCommand)
-        {
-            string strReturn;
-
-            try
-            {
-                strReturn = strCommand;
-
-
-
-                return strReturn;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private string fnGetTableName(string strCommand)
-        {
-
-            string strReturn;
-            int intInitialIndex;
-            int intFinalIndex;
-
-            try
-            {
-                strReturn = "";
-                intInitialIndex = strCommand.IndexOf("<!TABLENAME@");
-                if(intInitialIndex != -1)
-                {
-                    intFinalIndex = strCommand.IndexOf("!>", intInitialIndex);
-                    strReturn = strCommand.Substring(intInitialIndex + 12, intFinalIndex - (intInitialIndex + 12));
-                }
-
-                return strReturn;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        private string fnRecursiveReplace(string statement, DataSet objReturn)
-        {
-
-            string strReturn;
-            string strAuxField;
-            int intAuxTableIndex;
-            int intAuxFieldIndex;
-            List<RecursiveParameter> objParameters;
-
-            try
-            {
-
-                strReturn = statement;
-
-                objParameters = SpinerBaseBO.Instance.fnExtractRecursiveParameters(statement);
- 
-                foreach (RecursiveParameter parameter in objParameters)
-                {                  
-                    
-                    if(int.TryParse(parameter.Table, out intAuxTableIndex))
-                    {
-                        if (int.TryParse(parameter.Field, out intAuxFieldIndex))
-                        {
-                            strAuxField = objReturn.Tables[intAuxTableIndex].Rows[0][intAuxFieldIndex].ToString();
-                        }
-                        else
-                        {
-                            strAuxField = objReturn.Tables[intAuxTableIndex].Rows[0][parameter.Field].ToString();
-                        }
-                    }
-                    else
-                    {
-                        if (int.TryParse(parameter.Field, out intAuxFieldIndex))
-                        {
-                            strAuxField = objReturn.Tables[parameter.Table].Rows[0][intAuxFieldIndex].ToString();
-                        }
-                        else
-                        {
-                            strAuxField = objReturn.Tables[parameter.Table].Rows[0][parameter.Field].ToString();
-                        }
-                    }
-
-                    strReturn = strReturn.Replace(parameter.Tag, strAuxField);
-                }
-         
-                return strReturn;
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
         public String fnExecuteText(Card p_card)
         {
 
             String strReturn;
+            DataSet objReturn;
             DataSet objAuxReturn;
             String strCommand;
             List<Parameter> objAuxParameter;
+            List<string> strStatements;
+            int intTableIndex;
+            string strTableName;
 
             try
             {
@@ -301,36 +223,74 @@ namespace SpinerBase.Layers.Repository
                 objAuxReturn = null;
 
                 strCommand = p_card.Command;
-
-                //Execute pre python script
-                if (p_card.PrePythonScript.Trim() != "")
+                if (strCommand.Trim() != "")
                 {
-                    strCommand = PythonInterpreter.ProcessString(p_card.PrePythonScript, strCommand);
-                }
-
-                //Execute python script by parameter
-                objAuxParameter = PythonInterpreter.ProcessParameters(p_card.Parameters);
-
-                foreach (Parameter parameter in objAuxParameter)
-                {
-                    strCommand = strCommand.Replace(parameter.Tag, parameter.Value);
-                }
-
-                objAuxReturn = objDataBase.fnExecute(strCommand);
-
-                foreach (DataRow row in objAuxReturn.Tables[0].Rows)
-                {
-                    foreach (DataColumn column in objAuxReturn.Tables[0].Columns)
+                    //Execute pre python script
+                    if (p_card.PrePythonScript.Trim() != "")
                     {
-                        strReturn = strReturn + row[column.ColumnName].ToString() + (char)9;
+                        strCommand = PythonInterpreter.ProcessString(p_card.PrePythonScript, strCommand);
                     }
-                    strReturn = strReturn + (char)13 + (char)10;
-                }
 
-                //Execute pos python script
-                if (p_card.PosPythonScript.Trim() != "")
+                    //Execute python script by parameter
+                    objAuxParameter = PythonInterpreter.ProcessParameters(p_card.Parameters);
+
+                    foreach (Parameter parameter in objAuxParameter)
+                    {
+                        strCommand = strCommand.Replace(parameter.Tag, parameter.Value);
+                    }
+
+                    //Separete statements
+                    strStatements = strCommand.Split(new string[] { "<!STATEMENT!>" }, StringSplitOptions.None).ToList();
+
+                    objReturn = new DataSet();
+                    intTableIndex = 0;
+                    foreach (string statement in strStatements)
+                    {
+                        strCommand = statement;
+                        strTableName = SpinerBaseBO.Instance.fnGetTableName(strCommand);
+                        strCommand = SpinerBaseBO.Instance.fnRemoveSpecialTags(strCommand);
+                        strCommand = fnRecursiveReplace(strCommand, objReturn);
+                        objAuxReturn = objDataBase.fnExecute(strCommand);
+                        foreach (DataTable table in objAuxReturn.Tables)
+                        {
+                            if (strTableName.Trim() != "")
+                            {
+                                table.TableName = strTableName;
+                            }
+                            else
+                            {
+                                table.TableName = "table_" + intTableIndex.ToString();
+                            }
+                            objReturn.Tables.Add(table.Copy());
+                            intTableIndex++;
+                        }
+                    }
+
+                    foreach (DataTable table in objReturn.Tables)
+                    {
+                        if (objReturn.Tables.Count > 1)
+                        {
+                            strReturn = strReturn + table.TableName + ":" + (char)13 + (char)10;
+                        }
+                        foreach (DataRow row in table.Rows)
+                        {
+                            foreach (DataColumn column in table.Columns)
+                            {
+                                strReturn = strReturn + row[column.ColumnName].ToString() + (char)9;
+                            }
+                            strReturn = strReturn + (char)13 + (char)10;
+                        }
+                    }
+
+                    //Execute pos python script
+                    if (p_card.PosPythonScript.Trim() != "")
+                    {
+                        strReturn = PythonInterpreter.ProcessString(p_card.PosPythonScript, strReturn);
+                    }
+                }
+                else
                 {
-                    strReturn = PythonInterpreter.ProcessString(p_card.PosPythonScript, strReturn);
+                    throw new Exception("Empty command");
                 }
 
             }
@@ -381,6 +341,60 @@ namespace SpinerBase.Layers.Repository
                 throw;
             }
 
+        }
+
+        private string fnRecursiveReplace(string statement, DataSet objReturn)
+        {
+
+            string strReturn;
+            string strAuxField;
+            int intAuxTableIndex;
+            int intAuxFieldIndex;
+            List<RecursiveParameter> objParameters;
+
+            try
+            {
+
+                strReturn = statement;
+
+                objParameters = SpinerBaseBO.Instance.fnExtractRecursiveParameters(statement);
+
+                foreach (RecursiveParameter parameter in objParameters)
+                {
+
+                    if (int.TryParse(parameter.Table, out intAuxTableIndex))
+                    {
+                        if (int.TryParse(parameter.Field, out intAuxFieldIndex))
+                        {
+                            strAuxField = objReturn.Tables[intAuxTableIndex].Rows[0][intAuxFieldIndex].ToString();
+                        }
+                        else
+                        {
+                            strAuxField = objReturn.Tables[intAuxTableIndex].Rows[0][parameter.Field].ToString();
+                        }
+                    }
+                    else
+                    {
+                        if (int.TryParse(parameter.Field, out intAuxFieldIndex))
+                        {
+                            strAuxField = objReturn.Tables[parameter.Table].Rows[0][intAuxFieldIndex].ToString();
+                        }
+                        else
+                        {
+                            strAuxField = objReturn.Tables[parameter.Table].Rows[0][parameter.Field].ToString();
+                        }
+                    }
+
+                    strReturn = strReturn.Replace(parameter.Tag, strAuxField);
+                }
+
+                return strReturn;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public bool isOpen()
