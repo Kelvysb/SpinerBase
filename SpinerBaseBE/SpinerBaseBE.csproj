@@ -36,10 +36,6 @@
     <Reference Include="BControls">
       <HintPath>..\..\BControls\Compiled\BControls.dll</HintPath>
     </Reference>
-    <Reference Include="BDataBase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\BDataBase\Compiled\BDataBase.dll</HintPath>
-    </Reference>
     <Reference Include="BGlobal">
       <HintPath>..\..\BGlobal\Compiled\BGlobal.dll</HintPath>
     </Reference>
@@ -108,6 +104,12 @@
     <None Include="app.config" />
     <None Include="LICENSE" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\BDataBase\BDataBase\BDataBase.vbproj">
+      <Project>{3efbcffd-0a19-41b4-a418-5d2ff536bfbf}</Project>
+      <Name>BDataBase</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

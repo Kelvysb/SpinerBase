@@ -189,6 +189,44 @@ namespace SpinerBaseBE.Layers.BackEnd
             }
 
         }
+
+        public static string ValidatePython(string p_PythonCommand)
+        {
+
+            string strReturn;
+            ScriptSource objSource;
+            ScriptScope objScope;
+
+            try
+            {
+
+                strReturn = "";
+
+                if (!p_PythonCommand.Trim().ToUpper().Contains("DEF MAIN("))
+                {
+                    throw new Exception("Main method not found.");
+                }
+
+                if (objPyEng is null)
+                {
+                    objPyEng = Python.CreateEngine();
+                }
+
+                objSource = objPyEng.CreateScriptSourceFromString(p_PythonCommand, SourceCodeKind.Statements);
+                objScope = objPyEng.CreateScope();
+
+                objSource.Execute(objScope);
+
+
+            }
+            catch (Exception ex)
+            {
+                strReturn = ex.Message;
+            }
+
+            return strReturn;
+
+        }
         #endregion
 
     }

@@ -661,7 +661,14 @@ namespace SpinerBase.Layers.FrontEnd
                 objConnectionSelect = new ConnectionSelect(true);
                 objConnectionSelect.ShowDialog();
                 objConnectionSelect = null;                
-                lblConnection.Content = SpinerBaseBO.Instance.actualConnection.Name.Trim() + " - " + SpinerBaseBO.Instance.actualConnection.DataBaseType.ToString();
+                if(SpinerBaseBO.Instance.actualConnection is null == false)
+                {
+                    lblConnection.Content = SpinerBaseBO.Instance.actualConnection.Name.Trim() + " - " + SpinerBaseBO.Instance.actualConnection.DataBaseType.ToString();
+                }
+                else
+                {
+                    lblConnection.Content = "Not connected.";
+                }
                 sbFilter();
             }
             catch (Exception ex)

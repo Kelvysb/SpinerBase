@@ -246,7 +246,13 @@ namespace SpinerBase.Layers.BackEnd
 
                             strAuxDescription = strAuxTag.Substring(2, strAuxTag.Length - 4);
 
-                            if (strAuxDescription.Contains("|"))
+                            if (strAuxDescription.Contains("@"))
+                            if (strAuxDescription.Contains("@"))
+                            {
+                                strAuxType = strAuxDescription.Split('@')[1].Trim();
+                                strAuxDescription = strAuxDescription.Split('@')[0].Trim();
+                            }
+                            else if (strAuxDescription.Contains("|"))
                             {
                                 strAuxType = strAuxDescription.Split('|')[1].Trim();
                                 strAuxDescription = strAuxDescription.Split('|')[0].Trim();
@@ -259,12 +265,8 @@ namespace SpinerBase.Layers.BackEnd
                             if (strAuxType.Trim().ToUpper() == "NUMBER")
                             {
                                 objReturn.Last().Type = enmParameterType.Number;
-                            }
-                            else if (strAuxType.Trim().ToUpper() == "SEPARATEDNUMBER")
-                            {
-                                objReturn.Last().Type = enmParameterType.SeparatedNumber;
-                            }
-                            else if (strAuxType.Trim().ToUpper() == "DATETIME")
+                            }                 
+                            else if (strAuxType.Trim().ToUpper() == "DATETIME" || strAuxType.Trim().ToUpper() == "DATE")
                             {
                                 objReturn.Last().Type = enmParameterType.DateTime;
                             }

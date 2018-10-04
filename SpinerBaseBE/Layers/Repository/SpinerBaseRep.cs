@@ -171,6 +171,7 @@ namespace SpinerBase.Layers.Repository
                             objReturn.Tables.Add(table.Copy());
                             intTableIndex++;
                         }
+
                     }
 
                     //Execute pos python script
@@ -350,6 +351,8 @@ namespace SpinerBase.Layers.Repository
             string strAuxField;
             int intAuxTableIndex;
             int intAuxFieldIndex;
+            string strAuxTableName = "";
+            string strAuxFieldName = "";
             List<RecursiveParameter> objParameters;
 
             try
@@ -362,26 +365,29 @@ namespace SpinerBase.Layers.Repository
                 foreach (RecursiveParameter parameter in objParameters)
                 {
 
-                    if (int.TryParse(parameter.Table, out intAuxTableIndex))
+                    strAuxTableName = parameter.Table;
+                    strAuxFieldName = parameter.Field;
+
+                    if (int.TryParse(strAuxTableName, out intAuxTableIndex))
                     {
-                        if (int.TryParse(parameter.Field, out intAuxFieldIndex))
+                        if (int.TryParse(strAuxFieldName, out intAuxFieldIndex))
                         {
                             strAuxField = objReturn.Tables[intAuxTableIndex].Rows[0][intAuxFieldIndex].ToString();
                         }
                         else
                         {
-                            strAuxField = objReturn.Tables[intAuxTableIndex].Rows[0][parameter.Field].ToString();
+                            strAuxField = objReturn.Tables[intAuxTableIndex].Rows[0][strAuxFieldName].ToString();
                         }
                     }
                     else
                     {
-                        if (int.TryParse(parameter.Field, out intAuxFieldIndex))
+                        if (int.TryParse(strAuxFieldName, out intAuxFieldIndex))
                         {
-                            strAuxField = objReturn.Tables[parameter.Table].Rows[0][intAuxFieldIndex].ToString();
+                            strAuxField = objReturn.Tables[strAuxTableName].Rows[0][intAuxFieldIndex].ToString();
                         }
                         else
                         {
-                            strAuxField = objReturn.Tables[parameter.Table].Rows[0][parameter.Field].ToString();
+                            strAuxField = objReturn.Tables[strAuxTableName].Rows[0][strAuxFieldName].ToString();
                         }
                     }
 
@@ -393,7 +399,14 @@ namespace SpinerBase.Layers.Repository
             }
             catch (Exception)
             {
-                throw;
+                if(strAuxFieldName.Trim() != "" || strAuxTableName.Trim() != "")
+                {
+                    throw new Exception("Field '" + strAuxFieldName + "' not found on table '" + strAuxTableName + "' (Recursive parameters).");
+                }
+                else
+                {
+                    throw;
+                }
             }
         }
 

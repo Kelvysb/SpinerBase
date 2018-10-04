@@ -74,6 +74,24 @@ namespace SpinerBase.Layers.FrontEnd
                 throw;
             }
         }
+
+        private void dtpParameter_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                sbUpdateValue();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private void txtParameterNumber_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsDigit(e.Text, e.Text.Length - 1))
+                e.Handled = true;
+        }
         #endregion
 
         #region Constructor
@@ -83,6 +101,26 @@ namespace SpinerBase.Layers.FrontEnd
             {
                 InitializeComponent();
                 parameter = p_parameter;
+
+                if (parameter.Type == enmParameterType.DateTime)
+                {
+                    txtParameterNumber.Visibility = Visibility.Collapsed;
+                    txtParameter.Visibility = Visibility.Collapsed;
+                    dtpParameter.Visibility = Visibility.Visible;
+                }
+                else if (parameter.Type == enmParameterType.Number)
+                {
+                    txtParameterNumber.Visibility = Visibility.Visible;
+                    txtParameter.Visibility = Visibility.Collapsed;
+                    dtpParameter.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    txtParameterNumber.Visibility = Visibility.Collapsed;
+                    txtParameter.Visibility = Visibility.Visible;
+                    dtpParameter.Visibility = Visibility.Collapsed;
+                }
+
                 Update();
             }
             catch (Exception)
@@ -95,10 +133,34 @@ namespace SpinerBase.Layers.FrontEnd
         #region Functions
         public void Update()
         {
+
+            DateTime objAuxDate;
+
             try
             {
                 lblParameter.Content = parameter.Description;
-                txtParameter.Text = parameter.Value;
+
+                if (parameter.Type == enmParameterType.DateTime)
+                {
+                    if(DateTime.TryParse(parameter.Value, out objAuxDate))
+                    {
+                        dtpParameter.SelectedDate = objAuxDate;
+                    }
+                    else{
+                        objAuxDate = DateTime.Now;
+                        parameter.Value = objAuxDate.ToString();
+                        dtpParameter.SelectedDate = objAuxDate;
+                    }
+                }
+                else if (parameter.Type == enmParameterType.Number)
+                {
+                    txtParameterNumber.Text = parameter.Value;
+                }
+                else
+                {
+                    txtParameter.Text = parameter.Value;
+                }
+
             }
             catch (Exception)
             {
@@ -110,7 +172,19 @@ namespace SpinerBase.Layers.FrontEnd
         {
             try
             {
-                parameter.Value = txtParameter.Text;
+                if (parameter.Type == enmParameterType.DateTime)
+                {
+                    parameter.Value = dtpParameter.SelectedDate.ToString();
+                }
+                else if (parameter.Type == enmParameterType.Number)
+                {
+                    parameter.Value = txtParameterNumber.Text;
+                }
+                else
+                {
+                    parameter.Value = txtParameter.Text;
+                }
+
             }
             catch (Exception)
             {
@@ -121,7 +195,9 @@ namespace SpinerBase.Layers.FrontEnd
 
         #region Properties
         public Parameter parameter { get; set; }
+
         #endregion
 
+        
     }
 }

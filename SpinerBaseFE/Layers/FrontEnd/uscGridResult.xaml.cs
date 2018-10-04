@@ -280,7 +280,7 @@ namespace SpinerBase.Layers.FrontEnd
         {
             try
             {
-                if(objDataSet is null == false)
+                if(objDataSet is null == false && cmbTable.SelectedIndex != -1)
                 {
                     grdResult.ItemsSource = objDataSet.Tables[cmbTable.SelectedIndex].DefaultView;
                 }

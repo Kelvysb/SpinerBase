@@ -35,6 +35,7 @@ com este programa, Se não, veja <http://www.gnu.org/licenses/>.
 */
 
 using BControls;
+using SpinerBaseBE.Layers.BackEnd;
 using System;
 using System.Windows;
 
@@ -129,17 +130,26 @@ namespace SpinerBase.Layers.FrontEnd
 
         private void sbOk()
         {
+            string strValidation;
             try
             {
 
-                if (txtCommand.Text.Trim() != "" &&  txtCommand.Text.Trim().ToUpper().Contains("DEF MAIN("))
+                Script = txtCommand.Text;
+                if (Script.Trim() != "")
                 {
-                    Script = txtCommand.Text;
-                    this.Close();
+                    strValidation = PythonInterpreter.ValidatePython(Script);
+                    if(strValidation.Trim() == "")
+                    {
+                        this.Close();
+                    }
+                    else
+                    {
+                        BMessage.Instance.fnMessage(strValidation, Properties.Resources.ResourceManager.GetString("AppName").ToString(), MessageBoxButton.OK, BMessage.enm_MessageImages.Critical); ;
+                    }
                 }
-                else if(txtCommand.Text.Trim() != "")
+                else
                 {
-                    BMessage.Instance.fnMessage("Main method not found.", Properties.Resources.ResourceManager.GetString("AppName").ToString(), MessageBoxButton.OK, BMessage.enm_MessageImages.Warning);
+                    this.Close();
                 }
 
             }

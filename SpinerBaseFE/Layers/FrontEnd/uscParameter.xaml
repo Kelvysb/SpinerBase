@@ -13,7 +13,9 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Name="lblParameter" Style="{StaticResource stlLabelBase}" Content="Parameter:" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="0"/>
-            <TextBox Name="txtParameter" Style="{StaticResource stlTextBoxBase}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="2,0,10,0" Grid.Column="1" TextChanged="txtParameter_TextChanged"/>
+            <TextBox Name="txtParameter" Style="{StaticResource stlTextBoxBase}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="2,0,10,0" Grid.Column="1" TextChanged="txtParameter_TextChanged" Visibility="Visible"/>
+            <DatePicker Name="dtpParameter" Style="{StaticResource stlDatePickerBase}" VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" Margin="2,0,10,0" Grid.Column="1"  Visibility="Collapsed" SelectedDateChanged="dtpParameter_SelectedDateChanged"/>
+            <TextBox Name="txtParameterNumber" InputScope="Number" Style="{StaticResource stlTextBoxBase}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="2,0,10,0" Grid.Column="1" TextChanged="txtParameter_TextChanged" Visibility="Collapsed" PreviewTextInput="txtParameterNumber_PreviewTextInput"/>
         </Grid>
     </Border>
 </UserControl>

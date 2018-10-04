@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -149,6 +150,10 @@ namespace SpinerBase.Layers.FrontEnd
                     sbSelectConnection(SpinerBaseBO.Instance.actualConnection);
                 }
 
+                //Force bring to front
+                Topmost = true;
+                Thread.Sleep(100);
+                Topmost = false;
             }
             catch (Exception ex)
             {

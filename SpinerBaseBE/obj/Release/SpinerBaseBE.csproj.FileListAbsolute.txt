@@ -89,3 +89,4 @@ C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Release\IronPython.W
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Release\Microsoft.Dynamic.xml
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Release\Microsoft.Scripting.xml
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Release\Microsoft.Scripting.Metadata.xml
+C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBE\obj\Release\SpinerBaseBE.csprojAssemblyReference.cache
