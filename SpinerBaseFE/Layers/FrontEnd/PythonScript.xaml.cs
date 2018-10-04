@@ -37,6 +37,7 @@ com este programa, Se não, veja <http://www.gnu.org/licenses/>.
 using BControls;
 using SpinerBaseBE.Layers.BackEnd;
 using System;
+using System.Threading;
 using System.Windows;
 
 namespace SpinerBase.Layers.FrontEnd
@@ -121,6 +122,9 @@ namespace SpinerBase.Layers.FrontEnd
             try
             {
                 txtCommand.Text = Script;
+                Topmost = true;
+                Thread.Sleep(100);
+                Topmost = false;
             }
             catch (Exception ex)
             {
@@ -182,7 +186,7 @@ namespace SpinerBase.Layers.FrontEnd
             {
                 if(!txtCommand.Text.StartsWith("import clr"))
                 {
-                    txtCommand.Text = txtCommand.Text.Insert(0, "import clr\r\nclr.AddReference('System.Data')\r\nfrom System import Data\r\nfrom System.Data import DataTable\r\n");
+                    txtCommand.Text = txtCommand.Text.Insert(0, "import clr\r\nclr.AddReference('System.Data')\r\nfrom System import Data\r\nfrom System.Data import DataSet\r\nfrom System.Data import DataTable\r\nfrom System.Data import DataColumn\r\nfrom System.Data import DataRow\r\n");
                 }
             }
             catch (Exception ex)
