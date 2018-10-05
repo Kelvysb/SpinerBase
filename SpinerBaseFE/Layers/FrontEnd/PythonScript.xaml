@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SpinerBase.Layers.FrontEnd"
        mc:Ignorable="d" Name="PythonScriptEditor"
       Title="SpinerBase - Python" Height="500" Width="450" WindowStartupLocation="CenterScreen"
-        Background="{StaticResource BackColor}" Icon="/SpinerBase;component/Icon.ico" ShowInTaskbar="False" WindowStyle="ToolWindow" Loaded="PythonScript_Loaded">
+        Background="{StaticResource BackColor}" Icon="/SpinerBase;component/Icon.ico" ShowInTaskbar="True" WindowStyle="ToolWindow" ResizeMode="CanResize" Loaded="PythonScript_Loaded">
 
     <Grid Name="grdPrincipal">
 
@@ -16,7 +16,7 @@
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
-        <Image Name="imgBackground" Margin="0" Grid.ColumnSpan="2" Grid.RowSpan="3" Source="/SpinerBase;component/Resources/SpinerBaseBackground.jpg" HorizontalAlignment="Left" VerticalAlignment="Stretch" Stretch="UniformToFill" Width="450"/>
+        <Image Name="imgBackground" Margin="0" Grid.ColumnSpan="2" Grid.RowSpan="3" Source="/SpinerBase;component/Resources/SpinerBaseBackground.jpg"  HorizontalAlignment="Left" VerticalAlignment="Stretch" Stretch="UniformToFill"/>
 
         <StackPanel Orientation="Horizontal">
             <Button Name="btnInitialize" Style="{StaticResource ButtonRoundStyle}" Margin="5" Grid.Column="1" HorizontalAlignment="Right" ToolTip="Initialize main function" Height="40" Click="btnInitialize_Click">
