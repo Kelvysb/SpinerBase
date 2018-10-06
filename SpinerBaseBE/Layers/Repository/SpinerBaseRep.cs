@@ -320,15 +320,32 @@ namespace SpinerBase.Layers.Repository
         {
             try
             {
-                objDataBase.sbBegin();
+                sbExecuteDirect(p_command, true);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void sbExecuteDirect(string p_command, bool blnAutoCommit)
+        {
+            try
+            {
+                if (blnAutoCommit)                
+                    objDataBase.sbBegin();
+                
                 objDataBase.sbExecute(p_command);
-                objDataBase.sbCommit();
+
+                if (blnAutoCommit)
+                    objDataBase.sbCommit();
             }
             catch (DataBaseException exbd)
             {
                 try
                 {
-                    objDataBase.sbRollBack();
+                    if (blnAutoCommit)
+                        objDataBase.sbRollBack();
                 }
                 catch (Exception)
                 {
@@ -342,6 +359,42 @@ namespace SpinerBase.Layers.Repository
                 throw;
             }
 
+        }
+
+        public  void Begin()
+        {
+            try
+            {
+                objDataBase.sbBegin();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void Commit()
+        {
+            try
+            {
+                objDataBase.sbCommit();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void RollBack()
+        {
+            try
+            {
+                objDataBase.sbRollBack();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private string fnRecursiveReplace(string statement, DataSet objReturn)

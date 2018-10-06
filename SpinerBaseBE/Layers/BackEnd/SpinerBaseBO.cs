@@ -47,9 +47,9 @@ namespace SpinerBase.Layers.BackEnd
     public class SpinerBaseBO
     {
         #region Types
-        public class SpinerBaseEventArgs : EventArgs
+        public class SpinerBaseMigrateEventArgs : EventArgs
         {
-            public SpinerBaseEventArgs(int currentProgress, int totalProgress, string message)
+            public SpinerBaseMigrateEventArgs(int currentProgress, int totalProgress, string message)
             {
                 CurrentProgress = currentProgress;
                 TotalProgress = totalProgress;
@@ -58,6 +58,36 @@ namespace SpinerBase.Layers.BackEnd
 
             public int CurrentProgress { get; set; }
             public int TotalProgress { get; set; }
+            public string Message { get; set; }
+        }
+        public class SpinerBaseExecuteEventArgs : EventArgs
+        {
+            public SpinerBaseExecuteEventArgs(string p_TextReturn, DataSet p_GridReturn, string message)
+            {
+                TextReturn = p_TextReturn;
+                GridReturn = p_GridReturn;
+                Message = message;
+            }
+
+            public string TextReturn { get; set; }
+            public DataSet GridReturn { get; set; }
+            public string Message { get; set; }
+        }
+        public class SpinerBaseFinishEventArgs : EventArgs
+        {
+            public SpinerBaseFinishEventArgs(string message)
+            {
+                Error = null;
+                Message = message;
+            }
+
+            public SpinerBaseFinishEventArgs(string message, Exception p_Error)
+            {
+                Error = p_Error;
+                Message = message;
+            }
+
+            public Exception Error { get; set; }
             public string Message { get; set; }
         }
         #endregion
@@ -86,15 +116,24 @@ namespace SpinerBase.Layers.BackEnd
         #endregion
 
         #region Events
-        public event EventHandler<SpinerBaseEventArgs> evProgress;
+        public event EventHandler<SpinerBaseExecuteEventArgs> evExecute;
+        protected virtual void onEvExecute(string p_TextReturn, DataSet p_GridReturn, string message)
+        {
+            evExecute?.Invoke(this, new SpinerBaseExecuteEventArgs(p_TextReturn, p_GridReturn, message));
+        }
+        public event EventHandler<SpinerBaseMigrateEventArgs> evProgress;
         protected virtual void onEvProgress(int currentProgress, int totalProgress, string message)
         {
-            evProgress?.Invoke(this, new SpinerBaseEventArgs(currentProgress, totalProgress, message));
+            evProgress?.Invoke(this, new SpinerBaseMigrateEventArgs(currentProgress, totalProgress, message));
         }
-        public event EventHandler evFinished;
-        protected virtual void onEvFinished()
+        public event EventHandler<SpinerBaseFinishEventArgs> evFinished;
+        protected virtual void onEvFinished(string p_Message)
         {
-            evFinished?.Invoke(this, new EventArgs());
+            evFinished?.Invoke(this, new SpinerBaseFinishEventArgs(p_Message));
+        }
+        protected virtual void onEvFinished(string p_Message, Exception p_Error)
+        {
+            evFinished?.Invoke(this, new SpinerBaseFinishEventArgs(p_Message, p_Error));
         }
         #endregion
 
@@ -130,6 +169,28 @@ namespace SpinerBase.Layers.BackEnd
             }
         }
 
+        public void sbExecuteCardDataSetAsync(Object p_card)
+        {
+            DataSet objReturn;
+            try
+            {
+                if (objRepository != null)
+                {
+                    objReturn = objRepository.fnExecuteDataSet((Card)p_card);
+                    onEvExecute("", objReturn, "Ok");
+                    onEvFinished("Ok");
+                }
+                else
+                {
+                    onEvFinished("Error", new Exception("Not connected"));
+                }
+            }
+            catch (Exception ex)
+            {
+                onEvFinished("Error", ex);
+            }
+        }
+
         public String fnExecuteCardText(Card p_card)
         {
             try
@@ -146,6 +207,30 @@ namespace SpinerBase.Layers.BackEnd
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        public void sbExecuteCardTextAsync(Object p_card)
+        {
+
+            string strReturn;
+            try
+            {
+                if (objRepository != null)
+                {
+                    strReturn = objRepository.fnExecuteText((Card)p_card);
+                    onEvExecute(strReturn, null, "Ok");
+                    onEvFinished("Ok");
+
+                }
+                else
+                {
+                    onEvFinished("Error", new Exception("Not connected"));                    
+                }
+            }
+            catch (Exception ex)
+            {
+                onEvFinished("Error", ex);
             }
         }
 
@@ -168,7 +253,7 @@ namespace SpinerBase.Layers.BackEnd
             Repository.SpinerBaseRep objTargetRepository;
             DataSet objReturn;
             int intProcessed;
-
+            bool blnSucess;
             try
 
             {
@@ -185,22 +270,36 @@ namespace SpinerBase.Layers.BackEnd
 
                 //Write
                 onEvProgress(0, objReturn.Tables[0].Rows.Count, "Sending data to target.");
+                objTargetRepository.Begin();
+                blnSucess = true;
                 foreach (DataRow row in objReturn.Tables[0].Rows)
                 {
                     intProcessed++;
                     try
                     {
-                        objTargetRepository.sbExecuteDirect(row[0].ToString());
+                        objTargetRepository.sbExecuteDirect(row[0].ToString(), false);
                         onEvProgress(intProcessed, objReturn.Tables[0].Rows.Count, "Processed: " + row[0].ToString());
                     }
                     catch (Exception ex)
                     {
                         onEvProgress(intProcessed, objReturn.Tables[0].Rows.Count, "Error: " + ex.Message);
+                        blnSucess = false;
+                        break;
                     }
                 }
 
-                onEvProgress(intProcessed, objReturn.Tables[0].Rows.Count, "Finished.");
+                if (blnSucess)
+                {
+                    onEvProgress(intProcessed, objReturn.Tables[0].Rows.Count, "Finished with sucess.");
+                    objTargetRepository.Commit();
+                }
+                else
+                {
+                    onEvProgress(intProcessed, objReturn.Tables[0].Rows.Count, "Finished with error.");
+                    objTargetRepository.RollBack();
+                }
 
+               
             }
             catch (Exception e)
             {
@@ -208,8 +307,9 @@ namespace SpinerBase.Layers.BackEnd
             }
             finally
             {
-                onEvFinished();
+                onEvFinished("Ok");
             }
+
         }
 
         public List<Parameter> fnExtractParameters(string p_command)

@@ -335,6 +335,8 @@ namespace SpinerBase.Layers.FrontEnd
                     wrpCards.Children.Add(card);
                 }
 
+                blnLoaded = true;
+
                 if (SpinerBaseBO.Instance.ConfigBase.LastConnection is null == false)
                 {
                     SpinerBaseBO.Instance.fnConnect(SpinerBaseBO.Instance.ConfigBase.LastConnection);
@@ -345,8 +347,7 @@ namespace SpinerBase.Layers.FrontEnd
                 {
                     sbSelectCard(SpinerBaseBO.Instance.ConfigBase.LastCard);
                 }
-
-                blnLoaded = true;
+                
                 sbFilter();
 
             }
@@ -598,6 +599,7 @@ namespace SpinerBase.Layers.FrontEnd
 
                 if (objCardText is null == false)
                 {
+                    objCardText.DisposeEvents();
                     objCardText.evRemove -= evRemoveTextCardFromResults;
                     objCardText.evBeginWait -= evBeginWait;
                     objCardText.evEndWait -= evEndWait;
@@ -606,6 +608,7 @@ namespace SpinerBase.Layers.FrontEnd
 
                 if (objCardGrid is null == false)
                 {
+                    objCardGrid.DisposeEvents();
                     objCardGrid.evRemove -= evRemoveGridCardFromResults;
                     objCardGrid.evBeginWait -= evBeginWait;
                     objCardGrid.evEndWait -= evEndWait;
@@ -614,6 +617,7 @@ namespace SpinerBase.Layers.FrontEnd
 
                 if (objCardMigration is null == false)
                 {
+                    objCardMigration.DisposeEvents();
                     objCardMigration.evRemove -= evRemoveGridCardFromResults;
                     objCardMigration.evBeginWait -= evBeginWait;
                     objCardMigration.evEndWait -= evEndWait;

@@ -73,6 +73,7 @@ namespace SpinerBase.Layers.FrontEnd
         {
             try
             {
+                DisposeEvents();
                 onEvREmove();
             }
             catch (Exception ex)
@@ -93,7 +94,7 @@ namespace SpinerBase.Layers.FrontEnd
             evEndWait?.Invoke(this, new EventArgs());
         }
 
-        private void objBOMigrate_Progress(object sender, SpinerBaseEventArgs e)
+        private void objBOMigrate_Progress(object sender, SpinerBaseMigrateEventArgs e)
         {
             try
             {
@@ -109,13 +110,17 @@ namespace SpinerBase.Layers.FrontEnd
         }
 
 
-        private void objBOMigrate_Finished(object sender, EventArgs e)
+        private void objBOMigrate_Finished(object sender, SpinerBaseFinishEventArgs e)
         {
             try
             {
                 Dispatcher.BeginInvoke(new Action(delegate ()
                 {
                     onEvEndWait();
+                    if (e.Error is null == false)
+                    {
+                        BMessage.Instance.fnErrorMessage(e.Error);
+                    }
                 }));
             }
             catch (Exception ex)
@@ -257,7 +262,7 @@ namespace SpinerBase.Layers.FrontEnd
             }
         }
 
-        private void sbAddLog(SpinerBaseEventArgs p_eventArgs)
+        private void sbAddLog(SpinerBaseMigrateEventArgs p_eventArgs)
         {
 
             string strMessage;
@@ -275,12 +280,28 @@ namespace SpinerBase.Layers.FrontEnd
                     strMessage = strMessage + " - " + p_eventArgs.Message;
                 }
                 ListLog.Items.Add(strMessage);
+                ListLog.SelectedIndex = ListLog.Items.Count - 1;
+                ListLog.ScrollIntoView(ListLog.SelectedItem);
 
             }
             catch (Exception)
             {
              
             }            
+        }
+
+        public void DisposeEvents()
+        {
+            try
+            {
+                SpinerBaseBO.Instance.evProgress -= objBOMigrate_Progress;
+                SpinerBaseBO.Instance.evFinished -= objBOMigrate_Finished;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         #endregion
 

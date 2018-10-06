@@ -54,6 +54,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static SpinerBase.Layers.BackEnd.SpinerBaseBO;
 
 namespace SpinerBase.Layers.FrontEnd
 {
@@ -66,6 +67,7 @@ namespace SpinerBase.Layers.FrontEnd
         #region Declarations
         private List<uscParameter> parametersControls;
         private Card card;
+        private Thread objThreadExecution;
         #endregion
 
         #region Events
@@ -116,6 +118,7 @@ namespace SpinerBase.Layers.FrontEnd
         {
             try
             {
+                DisposeEvents();
                 onEvREmove();
             }
             catch (Exception ex)
@@ -135,6 +138,40 @@ namespace SpinerBase.Layers.FrontEnd
         {
             evEndWait?.Invoke(this, new EventArgs());
         }
+
+        private void evExecuteReturn(object sender, SpinerBaseExecuteEventArgs e)
+        {
+            try
+            {
+                Dispatcher.BeginInvoke(new Action(delegate ()
+                {
+                    sbSetResult(e.TextReturn);
+                }));
+            }
+            catch (Exception ex)
+            {
+                BMessage.Instance.fnErrorMessage(ex);
+            }
+        }
+
+        private void evExecuteFinish(object sender, SpinerBaseFinishEventArgs e)
+        {
+            try
+            {
+                Dispatcher.BeginInvoke(new Action(delegate ()
+                {
+                    onEvEndWait();
+                    if (e.Error is null == false)
+                    {
+                        BMessage.Instance.fnErrorMessage(e.Error);
+                    }
+                }));
+            }
+            catch (Exception ex)
+            {
+                BMessage.Instance.fnErrorMessage(ex);
+            }
+        }
         #endregion
 
         #region Constructor
@@ -147,6 +184,9 @@ namespace SpinerBase.Layers.FrontEnd
                 txtResult.Text = "";
                 parametersControls = new List<uscParameter>();
                 sbLoadParameters();
+                SpinerBaseBO.Instance.evExecute += evExecuteReturn;
+                SpinerBaseBO.Instance.evFinished += evExecuteFinish;
+
             }
             catch (Exception)
             {
@@ -161,8 +201,9 @@ namespace SpinerBase.Layers.FrontEnd
         {
             try
             {
-                onEvBeginWait();         
-                txtResult.Text = SpinerBaseBO.Instance.fnExecuteCardText(card);
+                onEvBeginWait();
+                objThreadExecution = new Thread(new ParameterizedThreadStart(SpinerBaseBO.Instance.sbExecuteCardTextAsync));
+                objThreadExecution.Start(card);               
             }
             catch (Exception ex)
             {
@@ -225,6 +266,19 @@ namespace SpinerBase.Layers.FrontEnd
             }
         }
 
+        private void sbSetResult(string strResult)
+        {
+            try
+            {
+                txtResult.Text = strResult;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(Properties.Resources.ResourceManager.GetString("msgError").ToString(), ex);
+            }
+        }
+
+
         private void sbLoadParameters()
         {
             try
@@ -243,6 +297,20 @@ namespace SpinerBase.Layers.FrontEnd
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        public void DisposeEvents()
+        {
+            try
+            {
+                SpinerBaseBO.Instance.evExecute -= evExecuteReturn;
+                SpinerBaseBO.Instance.evFinished -= evExecuteFinish;
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

@@ -44,6 +44,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -54,6 +55,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static SpinerBase.Layers.BackEnd.SpinerBaseBO;
 
 namespace SpinerBase.Layers.FrontEnd
 {
@@ -67,6 +69,7 @@ namespace SpinerBase.Layers.FrontEnd
         private List<uscParameter> parametersControls;
         private Card card;
         private DataSet objDataSet;
+        private Thread objThreadExecution;
         #endregion
 
         #region Events
@@ -117,6 +120,7 @@ namespace SpinerBase.Layers.FrontEnd
         {
             try
             {
+                DisposeEvents();
                 onEvREmove();
             }
             catch (Exception ex)
@@ -148,6 +152,40 @@ namespace SpinerBase.Layers.FrontEnd
                 BMessage.Instance.fnErrorMessage(ex);
             }
         }      
+
+        private void evExecuteGridReturn(object sender, SpinerBaseExecuteEventArgs e)
+        {
+            try
+            {
+                Dispatcher.BeginInvoke(new Action(delegate ()
+                {
+                    sbSetResult(e.GridReturn);
+                }));
+            }
+            catch (Exception ex)
+            {
+                BMessage.Instance.fnErrorMessage(ex);
+            }
+        }
+
+        private void evExecuteGridFinish(object sender, SpinerBaseFinishEventArgs e)
+        {
+            try
+            {
+                Dispatcher.BeginInvoke(new Action(delegate ()
+                {
+                    onEvEndWait();
+                    if(e.Error is null == false)
+                    {
+                        BMessage.Instance.fnErrorMessage(e.Error);
+                    }
+                }));
+            }
+            catch (Exception ex)
+            {
+                BMessage.Instance.fnErrorMessage(ex);
+            }
+        }
         #endregion
 
         #region Constructor
@@ -160,6 +198,10 @@ namespace SpinerBase.Layers.FrontEnd
                 grdResult.ItemsSource = null;
                 parametersControls = new List<uscParameter>();
                 sbLoadParameters();
+
+                SpinerBaseBO.Instance.evExecute += evExecuteGridReturn;
+                SpinerBaseBO.Instance.evFinished += evExecuteGridFinish;
+
             }
             catch (Exception)
             {
@@ -176,30 +218,12 @@ namespace SpinerBase.Layers.FrontEnd
             try
             {
                 onEvBeginWait();
-                objDataSet = SpinerBaseBO.Instance.fnExecuteCardDataSet(card);
-                if(objDataSet is null == false)
-                {
-                    cmbTable.Items.Clear();
-                    foreach (DataTable table in objDataSet.Tables)
-                    {
-                        cmbTable.Items.Add(table.TableName);
-                    }
-                    cmbTable.SelectedIndex = 0;
-                    grdResult.ItemsSource = objDataSet.Tables[cmbTable.SelectedIndex].DefaultView;
-                }
-                else
-                {
-                   grdResult.ItemsSource = null;
-                   BMessage.Instance.fnMessage(Properties.Resources.ResourceManager.GetString("msgNoData").ToString(), Properties.Resources.ResourceManager.GetString("AppName").ToString(), MessageBoxButton.OK);
-                }
+                objThreadExecution = new Thread(new ParameterizedThreadStart(SpinerBaseBO.Instance.sbExecuteCardDataSetAsync));
+                objThreadExecution.Start(card);                
             }
             catch (Exception ex)
             {
                 throw new Exception(Properties.Resources.ResourceManager.GetString("msgError").ToString(), ex);
-            }
-            finally
-            {
-                onEvEndWait();
             }
         }
 
@@ -276,6 +300,33 @@ namespace SpinerBase.Layers.FrontEnd
             }
         }
 
+        private void sbSetResult(DataSet gridReturn)
+        {
+            try
+            {
+                objDataSet = gridReturn;
+                if (objDataSet is null == false)
+                {
+                    cmbTable.Items.Clear();
+                    foreach (DataTable table in objDataSet.Tables)
+                    {
+                        cmbTable.Items.Add(table.TableName);
+                    }
+                    cmbTable.SelectedIndex = 0;
+                    grdResult.ItemsSource = objDataSet.Tables[cmbTable.SelectedIndex].DefaultView;
+                }
+                else
+                {
+                    grdResult.ItemsSource = null;
+                    BMessage.Instance.fnMessage(Properties.Resources.ResourceManager.GetString("msgNoData").ToString(), Properties.Resources.ResourceManager.GetString("AppName").ToString(), MessageBoxButton.OK);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(Properties.Resources.ResourceManager.GetString("msgError").ToString(), ex);
+            }
+        }
+
         private void sbSelectTable()
         {
             try
@@ -288,6 +339,20 @@ namespace SpinerBase.Layers.FrontEnd
             catch (Exception ex)
             {
                 throw new Exception(Properties.Resources.ResourceManager.GetString("msgError").ToString(), ex);
+            }
+        }
+
+        public void DisposeEvents()
+        {
+            try
+            {
+                SpinerBaseBO.Instance.evExecute -= evExecuteGridReturn;
+                SpinerBaseBO.Instance.evFinished -= evExecuteGridFinish;
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
         #endregion

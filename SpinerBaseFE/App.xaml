@@ -439,8 +439,8 @@
                         <Border
           CornerRadius="2"
 
-          Background="{StaticResource LightColor}"
-          BorderBrush="{StaticResource  LightColor}"
+          Background="{StaticResource BaseColor}"
+          BorderBrush="{StaticResource  BaseColor}"
           BorderThickness="0" 
                             Width="8"
                             Margin="8,0,-2,0"/>

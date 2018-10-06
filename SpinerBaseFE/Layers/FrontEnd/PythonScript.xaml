@@ -22,13 +22,25 @@
             <Button Name="btnInitialize" Style="{StaticResource ButtonRoundStyle}" Margin="5" Grid.Column="1" HorizontalAlignment="Right" ToolTip="Initialize main function" Height="40" Click="btnInitialize_Click">
                 <Grid>
                     <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}"/>
-                    <Image Source="/SpinerBase;component/Resources/Plus.png"/>
+                    <Image Source="/SpinerBase;component/Resources/defMain.png"/>
                 </Grid>
             </Button>
             <Button Name="btnClr" Style="{StaticResource ButtonRoundStyle}" Margin="5" Grid.Column="1" HorizontalAlignment="Right" ToolTip="Import clr library" Height="40" Click="btnClr_Click">
                 <Grid>
                     <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}"/>
-                    <Image Source="/SpinerBase;component/Resources/Import.png"/>
+                    <Image Source="/SpinerBase;component/Resources/ImportClr.png"/>
+                </Grid>
+            </Button>
+            <Button Name="btnDate" Style="{StaticResource ButtonRoundStyle}" Margin="5" Grid.Column="1" HorizontalAlignment="Right" ToolTip="Add auxiliary date functions" Height="40" Click="btnDate_Click">
+                <Grid>
+                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}"/>
+                    <Image Source="/SpinerBase;component/Resources/ImportDate.png"/>
+                </Grid>
+            </Button>
+            <Button Name="btnAux" Style="{StaticResource ButtonRoundStyle}" Margin="5" Grid.Column="1" HorizontalAlignment="Right" ToolTip="Add auxiliary functions" Height="40" Click="btnAux_Click">
+                <Grid>
+                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}"/>
+                    <Image Source="/SpinerBase;component/Resources/DefAux.png"/>
                 </Grid>
             </Button>
         </StackPanel>

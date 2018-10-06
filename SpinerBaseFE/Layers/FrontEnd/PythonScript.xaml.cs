@@ -113,7 +113,29 @@ namespace SpinerBase.Layers.FrontEnd
             }
         }
 
-       
+        private void btnDate_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                sbDate();
+            }
+            catch (Exception ex)
+            {
+                BMessage.Instance.fnErrorMessage(ex);
+            }
+        }
+
+        private void btnAux_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                sbAux();
+            }
+            catch (Exception ex)
+            {
+                BMessage.Instance.fnErrorMessage(ex);
+            }
+        }
         #endregion
 
         #region Functions
@@ -186,8 +208,32 @@ namespace SpinerBase.Layers.FrontEnd
             {
                 if(!txtCommand.Text.StartsWith("import clr"))
                 {
-                    txtCommand.Text = txtCommand.Text.Insert(0, "import clr\r\nclr.AddReference('System.Data')\r\nfrom System import Data\r\nfrom System.Data import DataSet\r\nfrom System.Data import DataTable\r\nfrom System.Data import DataColumn\r\nfrom System.Data import DataRow\r\n");
+                    txtCommand.Text = txtCommand.Text.Insert(0, "import clr\r\nclr.AddReference('System')\r\nclr.AddReference('System.Data')\r\nfrom System import Data\r\nfrom System.Data import DataSet\r\nfrom System.Data import DataTable\r\nfrom System.Data import DataColumn\r\nfrom System.Data import DataRow\r\n");
                 }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(Properties.Resources.ResourceManager.GetString("msgError").ToString(), ex);
+            }
+        }
+
+        private void sbDate()
+        {
+            try
+            {
+                txtCommand.Text = txtCommand.Text + "\r\nfrom System import DateTime\r\ndef isDate(input):\r\n\ttry:\r\n\t\ttestDate = DateTime.Parse(input)\r\n\t\treturn True\r\n\texcept:\r\n\t\treturn False\r\n\r\ndef formatDate(input, format):\r\n\ttestDate = DateTime.Parse(input)\r\n\tstrReturn = testDate.ToString(format)\r\n\treturn strReturn\r\n";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(Properties.Resources.ResourceManager.GetString("msgError").ToString(), ex);
+            }
+        }
+
+        private void sbAux()
+        {
+            try
+            {
+                txtCommand.Text = txtCommand.Text + "\r\ndef isString(input):\r\n\tif str(input) == \"System.Int64\" or str(input) == \"System.Int32\" or str(input) == \"System.Int16\" or str(input) == \"System.Double\" or str(input) == \"System.Float\" or str(input) == \"System.Decimal\":\r\n\t\treturn False\r\n\telse:\r\n\t\treturn True\r\n";
             }
             catch (Exception ex)
             {
@@ -200,8 +246,8 @@ namespace SpinerBase.Layers.FrontEnd
         public string Script { get; set; }
 
 
-        #endregion
 
+        #endregion
         
     }
 }
