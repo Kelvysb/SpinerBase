@@ -63,7 +63,8 @@ namespace SpinerBase.Basic
         MsSQL = 0,
         MySQL = 1,
         SQLite = 2,
-        Oracle = 3
+        Oracle = 3,
+        Postgre = 4
     }
 
     public enum enmParameterType

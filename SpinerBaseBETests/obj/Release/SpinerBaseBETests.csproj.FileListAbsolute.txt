@@ -82,3 +82,12 @@ C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Release\Microso
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Release\IronPython.xml
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Release\Microsoft.Dynamic.xml
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Release\Microsoft.Scripting.Metadata.xml
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Release\Npgsql.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Release\System.ValueTuple.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Release\System.Threading.Tasks.Extensions.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Release\Npgsql.pdb
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Release\Npgsql.xml
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Release\System.ValueTuple.xml
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Release\System.Threading.Tasks.Extensions.xml
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBETests\bin\Release\System.Runtime.CompilerServices.Unsafe.xml

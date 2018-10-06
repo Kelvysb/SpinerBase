@@ -103,18 +103,6 @@ namespace SpinerBase.Layers.FrontEnd
             }
         }
 
-        private void radMsSql_Checked(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                sbUpdateFileds();
-            }
-            catch (Exception ex)
-            {
-                BMessage.Instance.fnErrorMessage(ex);
-            }
-        }
-
         private void radGrid_Checked(object sender, RoutedEventArgs e)
         {
             try
@@ -152,6 +140,18 @@ namespace SpinerBase.Layers.FrontEnd
         }
 
         private void txtName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                sbUpdateFileds();
+            }
+            catch (Exception ex)
+            {
+                BMessage.Instance.fnErrorMessage(ex);
+            }
+        }
+
+        private void cmbType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
@@ -210,6 +210,12 @@ namespace SpinerBase.Layers.FrontEnd
                 InitializeComponent();
                 objCard = p_card;
                 parametersControls = new List<uscParameterConfig>();
+                cmbType.Items.Add("MsSql");
+                cmbType.Items.Add("MySql");
+                cmbType.Items.Add("Sqlite");
+                cmbType.Items.Add("Oracle");
+                cmbType.Items.Add("Postgre");
+                cmbType.SelectedIndex = 0;
                 sbLoadParameters();
                 sbSetFields();
                 blnLoaded = true;
@@ -276,24 +282,7 @@ namespace SpinerBase.Layers.FrontEnd
                 txtCommand.Text = objCard.Command;
                 txtName.Text = objCard.Name;
                 txtDescription.Text = objCard.Description;
-
-                if (objCard.DataBaseType == enmDataBaseType.MsSQL)
-                {
-                    radMsSql.IsChecked = true;
-                }
-                else if (objCard.DataBaseType == enmDataBaseType.MySQL)
-                {
-                    radMySql.IsChecked = true;
-                }
-                else if (objCard.DataBaseType == enmDataBaseType.SQLite)
-                {
-                    radSqlite.IsChecked = true;
-                }
-                else
-                {
-                    radOracle.IsChecked = true;
-                }
-
+                cmbType.SelectedIndex = (int)objCard.DataBaseType;
 
                 if (objCard.ResultType == enmResultType.Grid)
                 {
@@ -332,24 +321,8 @@ namespace SpinerBase.Layers.FrontEnd
                     objCard.Command = txtCommand.Text;
                     objCard.Name = txtName.Text;
                     objCard.Description = txtDescription.Text;
-
-                    if ((bool)radMsSql.IsChecked)
-                    {
-                        objCard.DataBaseType = enmDataBaseType.MsSQL;
-                    }
-                    else if ((bool)radMySql.IsChecked)
-                    {
-                        objCard.DataBaseType = enmDataBaseType.MySQL;
-                    }
-                    else if((bool)radSqlite.IsChecked)
-                    {
-                        objCard.DataBaseType = enmDataBaseType.SQLite;
-                    }
-                    else
-                    {
-                        objCard.DataBaseType = enmDataBaseType.Oracle;
-                    }
-
+                    objCard.DataBaseType = (enmDataBaseType)cmbType.SelectedIndex;
+                 
                     if ((bool)radGrid.IsChecked)
                     {
                         objCard.ResultType = enmResultType.Grid;
@@ -478,8 +451,10 @@ namespace SpinerBase.Layers.FrontEnd
         #region Properties
         public Card Card { get => objCard; set => objCard = value; }
 
+
+
         #endregion
 
-        
+
     }
 }

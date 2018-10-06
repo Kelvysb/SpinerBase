@@ -60,19 +60,7 @@
                         </Grid.RowDefinitions>
                         <Label Content="Data Base Type:" Style="{StaticResource stlLabelBase}" Padding="0" Margin="10,0,0,0" Grid.Row="0"/>
                         <Grid  Grid.Row="1" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <RadioButton Name="radMsSql" Content="MsSQL" GroupName="grpDataBaseType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" IsChecked="True" Grid.Row="0" Grid.Column="0" Checked="radMsSql_Checked"/>
-                            <RadioButton Name="radMySql" Content="MySQL" GroupName="grpDataBaseType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" Grid.Row="1"  Grid.Column="0" Checked="radMsSql_Checked"/>
-                            <RadioButton Name="radSqlite" Content="Sqlite" GroupName="grpDataBaseType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" Grid.Row="0" Grid.Column="1" Checked="radMsSql_Checked"/>
-                            <RadioButton Name="radOracle" Content="Oracle" GroupName="grpDataBaseType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" Grid.Row="1" Grid.Column="1" Checked="radMsSql_Checked"/>
-
+                            <ComboBox x:Name="cmbType" Margin="8,5" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="2" SelectionChanged="cmbType_SelectionChanged"/>
                         </Grid>
                     </Grid>
                 </Border>

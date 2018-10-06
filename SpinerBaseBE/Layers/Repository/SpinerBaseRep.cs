@@ -88,9 +88,13 @@ namespace SpinerBase.Layers.Repository
                     dataBaseConfig.Type = DataBase.enmDataBaseType.SqLite;
                     dataBaseConfig.Server = p_connection.Server + "\\" + p_connection.DataBase;
                 }
+                else if (p_connection.DataBaseType == enmDataBaseType.Oracle)
+                {                    
+                    dataBaseConfig.Type = DataBase.enmDataBaseType.Oracle;
+                }
                 else
                 {
-                    dataBaseConfig.Type = DataBase.enmDataBaseType.Oracle;
+                    dataBaseConfig.Type = DataBase.enmDataBaseType.Postgre;
                 }
 
                 dataBaseConfig.DataBase = p_connection.DataBase;

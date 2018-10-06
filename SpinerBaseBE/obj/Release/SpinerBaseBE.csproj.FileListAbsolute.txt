@@ -90,3 +90,13 @@ C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Release\Microsoft.Dy
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Release\Microsoft.Scripting.xml
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Release\Microsoft.Scripting.Metadata.xml
 C:\Users\k.boniek.pantaleao\Source\Repos\SpinerBase\SpinerBaseBE\obj\Release\SpinerBaseBE.csprojAssemblyReference.cache
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Release\Npgsql.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Release\System.ValueTuple.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Release\System.Threading.Tasks.Extensions.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Release\Npgsql.pdb
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Release\Npgsql.xml
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Release\System.ValueTuple.xml
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Release\System.Threading.Tasks.Extensions.xml
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\obj\Release\SpinerBaseBE.csprojAssemblyReference.cache
