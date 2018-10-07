@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpinerBase.Layers.FrontEnd"
        mc:Ignorable="d" Name="PythonScriptEditor"
-      Title="SpinerBase - Python" Height="500" Width="450" WindowStartupLocation="CenterScreen"
+      Title="SpinerBase - Python" Height="500" Width="480" WindowStartupLocation="CenterScreen"
         Background="{StaticResource BackColor}" Icon="/SpinerBase;component/Icon.ico" ShowInTaskbar="True" WindowStyle="ToolWindow" ResizeMode="CanResize" Loaded="PythonScript_Loaded">
 
     <Grid Name="grdPrincipal">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
@@ -19,30 +19,47 @@
         <Image Name="imgBackground" Margin="0" Grid.ColumnSpan="2" Grid.RowSpan="3" Source="/SpinerBase;component/Resources/SpinerBaseBackground.jpg"  HorizontalAlignment="Left" VerticalAlignment="Stretch" Stretch="UniformToFill"/>
 
         <StackPanel Orientation="Horizontal">
-            <Button Name="btnInitialize" Style="{StaticResource ButtonRoundStyle}" Margin="5" Grid.Column="1" HorizontalAlignment="Right" ToolTip="Initialize main function" Height="40" Click="btnInitialize_Click">
+            <Button Name="btnInitialize" Style="{StaticResource ButtonRoundStyle}" Margin="2" Grid.Column="1" HorizontalAlignment="Right" ToolTip="Initialize main function" Height="40" Click="btnInitialize_Click">
                 <Grid>
                     <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}"/>
                     <Image Source="/SpinerBase;component/Resources/defMain.png"/>
                 </Grid>
             </Button>
-            <Button Name="btnClr" Style="{StaticResource ButtonRoundStyle}" Margin="5" Grid.Column="1" HorizontalAlignment="Right" ToolTip="Import clr library" Height="40" Click="btnClr_Click">
+            <Button Name="btnClr" Style="{StaticResource ButtonRoundStyle}" Margin="2" Grid.Column="1" HorizontalAlignment="Right" ToolTip="Import clr library" Height="40" Click="btnClr_Click">
                 <Grid>
                     <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}"/>
                     <Image Source="/SpinerBase;component/Resources/ImportClr.png"/>
                 </Grid>
             </Button>
-            <Button Name="btnDate" Style="{StaticResource ButtonRoundStyle}" Margin="5" Grid.Column="1" HorizontalAlignment="Right" ToolTip="Add auxiliary date functions" Height="40" Click="btnDate_Click">
+            <Button Name="btnDate" Style="{StaticResource ButtonRoundStyle}" Margin="2" Grid.Column="1" HorizontalAlignment="Right" ToolTip="Add auxiliary date functions" Height="40" Click="btnDate_Click">
                 <Grid>
                     <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}"/>
                     <Image Source="/SpinerBase;component/Resources/ImportDate.png"/>
                 </Grid>
             </Button>
-            <Button Name="btnAux" Style="{StaticResource ButtonRoundStyle}" Margin="5" Grid.Column="1" HorizontalAlignment="Right" ToolTip="Add auxiliary functions" Height="40" Click="btnAux_Click">
+            <Button Name="btnAux" Style="{StaticResource ButtonRoundStyle}" Margin="2" Grid.Column="1" HorizontalAlignment="Right" ToolTip="Add auxiliary functions" Height="40" Click="btnAux_Click">
                 <Grid>
                     <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}"/>
                     <Image Source="/SpinerBase;component/Resources/DefAux.png"/>
                 </Grid>
             </Button>
+            <Button Name="btnTemplateMigrate" Style="{StaticResource ButtonRoundStyle}" Margin="2" Grid.Column="1" HorizontalAlignment="Right" ToolTip="Migration template" Height="40" Click="btnTemplateMigrate_Click">
+                <Grid>
+                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}"/>
+                    <Image Source="/SpinerBase;component/Resources/MigrateTemplate.png"/>
+                </Grid>
+            </Button>
+            <Border VerticalAlignment="Stretch" Width="180" Height="40" Margin="2" HorizontalAlignment="Stretch" Style="{StaticResource ButtonRoundRectangleStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Target Table: " Padding="0" Margin="2" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource stlLabelBase}" Grid.Column="0" />
+                    <TextBox Name="txtTargetTable" Text="" ToolTip="Target table for migration template." Style="{StaticResource stlTextBoxBase}" Height="20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="4" Grid.Column="1"/>
+                </Grid>
+            </Border>
+            
         </StackPanel>
         
         <TextBox Name="txtCommand" Text="" Style="{StaticResource stlTextBoxBase}" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" Grid.Row="1"/>

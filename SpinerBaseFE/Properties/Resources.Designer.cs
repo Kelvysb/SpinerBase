@@ -170,6 +170,16 @@ namespace SpinerBase.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MigrateTemplate {
+            get {
+                object obj = ResourceManager.GetObject("MigrateTemplate", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Added.
         /// </summary>
         internal static string msgAdded {

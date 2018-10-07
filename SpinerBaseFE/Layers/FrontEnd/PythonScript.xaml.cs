@@ -136,6 +136,18 @@ namespace SpinerBase.Layers.FrontEnd
                 BMessage.Instance.fnErrorMessage(ex);
             }
         }
+
+        private void btnTemplateMigrate_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                sbMigrate();
+            }
+            catch (Exception ex)
+            {
+                BMessage.Instance.fnErrorMessage(ex);
+            }
+        }    
         #endregion
 
         #region Functions
@@ -240,6 +252,78 @@ namespace SpinerBase.Layers.FrontEnd
                 throw new Exception(Properties.Resources.ResourceManager.GetString("msgError").ToString(), ex);
             }
         }
+
+        private void sbMigrate()
+        {
+            string strCommand;
+            string strTargetTable;
+
+            try
+            {
+                txtCommand.Text = "";
+                strTargetTable = txtTargetTable.Text;
+                if (strTargetTable.Trim() == "")
+                    strTargetTable = "TARGET_TABLE";
+
+                sbClr();
+
+                strCommand = "\r\ndef main(input):\r\n";
+                strCommand = strCommand + "\tobjReturn = DataSet()\r\n";
+                strCommand = strCommand + "\tobjReturn.Tables.Add(DataTable(\"returnTable\"))\r\n";
+                strCommand = strCommand + "\tobjReturn.Tables[0].Columns.Add(\"return\")\r\n"; 
+                strCommand = strCommand + "\tstrAuxCommand = \"\"\r\n";
+                strCommand = strCommand + "\t\r\n";
+                strCommand = strCommand + "\tintTableIndex = 0\r\n";
+                strCommand = strCommand + "\tstrBaseCommand = \"insert into " + strTargetTable + "(\"\r\n";
+                strCommand = strCommand + "\tstrBaseCommand = strBaseCommand + getColumns(input.Tables[intTableIndex])\r\n";
+                strCommand = strCommand + "\tstrBaseCommand = strBaseCommand + \")\"\r\n";
+                strCommand = strCommand + "\t\r\n";
+                strCommand = strCommand + "\tfor row in input.Tables[intTableIndex].Rows:\r\n";
+                strCommand = strCommand + "\t\tstrAuxCommand = strBaseCommand  + \" Values(\"\r\n";
+                strCommand = strCommand + "\t\tstrAuxCommand = strAuxCommand  + getValues(input.Tables[intTableIndex], row)\r\n";
+                strCommand = strCommand + "\t\tstrAuxCommand = strAuxCommand + \")\"\r\n";
+                strCommand = strCommand + "\t\tobjReturn.Tables[0].Rows.Add(strAuxCommand)\r\n";
+                strCommand = strCommand + "\t\r\n";
+                strCommand = strCommand + "\treturn objReturn\r\n";
+
+                txtCommand.Text = txtCommand.Text + strCommand;
+
+                sbDate();
+
+                sbAux();
+
+                strCommand = "\r\ndef getColumns(input):\r\n";
+                strCommand = strCommand + "\tstrReturn = \"\"\r\n";
+                strCommand = strCommand + "\tfor column in input.Columns:\r\n";
+                strCommand = strCommand + "\t\tstrReturn = strReturn + column.ColumnName\r\n";
+                strCommand = strCommand + "\t\tif input.Columns.IndexOf(column) != input.Columns.Count - 1:\r\n";
+                strCommand = strCommand + "\t\t\tstrReturn = strReturn + \", \"\r\n";
+                strCommand = strCommand + "\treturn strReturn\r\n";
+                strCommand = strCommand + "\r\n";
+                strCommand = strCommand + "def getValues(input, row):\r\n";
+                strCommand = strCommand + "\tstrReturn = \"\"\r\n";
+                strCommand = strCommand + "\tfor column in input.Columns:\r\n";
+                strCommand = strCommand + "\t\t\tif row.IsNull(input.Columns.IndexOf(column)) == False:\r\n";
+                strCommand = strCommand + "\t\t\t\tif isDate(str(row[input.Columns.IndexOf(column)])):\r\n";
+                strCommand = strCommand + "\t\t\t\t\tstrReturn = strReturn + \"'\" +  formatDate(str(row[input.Columns.IndexOf(column)]), \"MM-dd-yyyy HH:mm:ss\").replace(\"'\", \"''\") + \"'\"\r\n";
+                strCommand = strCommand + "\t\t\t\telif isString(column.DataType):\r\n";
+                strCommand = strCommand + "\t\t\t\t\tstrReturn = strReturn + \"'\" + str(row[input.Columns.IndexOf(column)]).replace(\"'\", \"''\") + \"'\"\r\n";
+                strCommand = strCommand + "\t\t\t\telse:\r\n";
+                strCommand = strCommand + "\t\t\t\t\tstrReturn = strReturn + str(row[input.Columns.IndexOf(column)]).replace(\",\", \".\")\r\n";
+                strCommand = strCommand + "\t\t\telse:\r\n";
+                strCommand = strCommand + "\t\t\t\tstrReturn = strReturn + \"NULL\"\r\n";
+                strCommand = strCommand + "\t\t\tif input.Columns.IndexOf(column) != input.Columns.Count - 1:\r\n";
+                strCommand = strCommand + "\t\t\t\tstrReturn = strReturn + \", \"\r\n";
+                strCommand = strCommand + "\treturn strReturn\r\n";
+
+                txtCommand.Text = txtCommand.Text + strCommand;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(Properties.Resources.ResourceManager.GetString("msgError").ToString(), ex);
+            }
+        }
         #endregion
 
         #region Parameters
@@ -248,6 +332,7 @@ namespace SpinerBase.Layers.FrontEnd
 
 
         #endregion
+
         
     }
 }
