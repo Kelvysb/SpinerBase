@@ -99,3 +99,4 @@ C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\obj\Release\SpinerBaseBE
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\obj\Release\SpinerBaseBE.csproj.CopyComplete
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\obj\Release\SpinerBaseBE.dll
 C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\obj\Release\SpinerBaseBE.pdb
+C:\Users\Kelvy\Documents\GitHub\SpinerBase\SpinerBaseBE\obj\Release\SpinerBaseBE.csprojAssemblyReference.cache

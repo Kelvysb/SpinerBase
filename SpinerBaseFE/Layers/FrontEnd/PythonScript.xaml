@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpinerBase.Layers.FrontEnd"
        mc:Ignorable="d" Name="PythonScriptEditor"
-      Title="SpinerBase - Python" Height="500" Width="480" WindowStartupLocation="CenterScreen"
+      Title="SpinerBase - Python" Height="500" Width="480" MinHeight="500" MinWidth="480" WindowStartupLocation="CenterScreen"
         Background="{StaticResource BackColor}" Icon="/SpinerBase;component/Icon.ico" ShowInTaskbar="True" WindowStyle="ToolWindow" ResizeMode="CanResize" Loaded="PythonScript_Loaded">
 
     <Grid Name="grdPrincipal">
