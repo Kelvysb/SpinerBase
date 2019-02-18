@@ -89,8 +89,6 @@ namespace SpinerBase.Layers.FrontEnd
                                         (FontFamily)FindResource("Font"),
                                         strWorkDirectory + "\\Log");
 
-                SpinerBaseBO.InitiateInstance(strWorkDirectory + "\\SpinerBaseData.json");
-
             }
             catch (Exception)
             {

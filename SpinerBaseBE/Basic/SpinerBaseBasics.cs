@@ -413,14 +413,14 @@ namespace SpinerBase.Basic
         [JsonProperty("PYTHONSCRIPT")]
         public string PythonScript { get; set; }
 
-        [JsonProperty("")]
+        [JsonProperty("Type")]
         public enmParameterType Type { get; set; }
         #endregion
     }
 
     public class RecursiveParameter
     {
-        #region Declarations
+        #region Constructor
         public RecursiveParameter(string p_tag, string p_field, string p_table)
         {
             try
@@ -488,6 +488,140 @@ namespace SpinerBase.Basic
 
         [JsonProperty("DATABASETYPE")]
         public enmDataBaseType DataBaseType { get; set; }
+        #endregion
+    }
+
+    public class PaternReport
+    {
+        #region Constructors
+        public PaternReport()
+        {
+            try
+            {
+                Name = "";
+                Description = "";
+                Parameters = new List<Parameter>();
+                Body = "";
+                PrePythonScript = "";
+                PosPythonScript = "";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
+
+        #region Methods
+        public PaternReport Clone()
+        {
+            try
+            {
+                return PaternReport.Deserialize(Serialize());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public String Serialize()
+        {
+            try
+            {
+                return JsonConvert.SerializeObject(this, Formatting.Indented);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static PaternReport Deserialize(String p_strJson)
+        {
+            try
+            {
+                return JsonConvert.DeserializeObject<PaternReport>(p_strJson);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void Save(String p_path)
+        {
+
+            StreamWriter objFile;
+
+            try
+            {
+
+                if (File.Exists(p_path))
+                {
+                    File.Delete(p_path);
+                }
+                objFile = new StreamWriter(p_path);
+                objFile.Write(this.Serialize());
+                objFile.Close();
+                objFile.Dispose();
+                objFile = null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static PaternReport Load(String p_path)
+        {
+            PaternReport objReturn;
+            String strFile;
+            StreamReader objFile;
+
+            try
+            {
+                objReturn = null;
+
+                if (!File.Exists(p_path))
+                {
+                    throw new FileNotFoundException(p_path);
+                }
+
+                objFile = new StreamReader(p_path);
+                strFile = objFile.ReadToEnd();
+                objFile.Close();
+                objFile.Dispose();
+                objFile = null;
+                objReturn = PaternReport.Deserialize(strFile);
+
+                return objReturn;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
+
+        #region Properties
+        [JsonProperty("NAME")]
+        public String Name { get; set; }
+
+        [JsonProperty("DESCRIPTION")]
+        public String Description { get; set; }
+
+        [JsonProperty("BODY")]
+        public String Body { get; set; }
+
+        [JsonProperty("PARAMETERS")]
+        public List<Parameter> Parameters { get; set; }
+
+        [JsonProperty("PREPYTHONSCRIPT")]
+        public string PrePythonScript { get; set; }
+
+        [JsonProperty("POSPYTHONSCRIPT")]
+        public string PosPythonScript { get; set; }
         #endregion
     }
 

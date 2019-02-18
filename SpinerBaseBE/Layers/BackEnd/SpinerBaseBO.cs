@@ -41,6 +41,7 @@ using SpinerBase.Basic;
 using System.Data;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace SpinerBase.Layers.BackEnd
 {
@@ -73,6 +74,7 @@ namespace SpinerBase.Layers.BackEnd
             public DataSet GridReturn { get; set; }
             public string Message { get; set; }
         }
+
         public class SpinerBaseFinishEventArgs : EventArgs
         {
             public SpinerBaseFinishEventArgs(string message)
@@ -97,6 +99,7 @@ namespace SpinerBase.Layers.BackEnd
         private static SpinerBaseBO instance;
         private SpinerBaseConfig configBase;
         private Repository.SpinerBaseRep objRepository;
+        private Dictionary<String, String> startupParams;
         #endregion
 
         #region Constructor
@@ -107,6 +110,46 @@ namespace SpinerBase.Layers.BackEnd
                 strBasePath = p_basePath;
                 configBase = SpinerBaseConfig.Load(strBasePath);
                 objRepository = null;
+                startupParams = null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private SpinerBaseBO(String p_basePath, Dictionary<String, String> p_params)
+        {
+            try
+            {
+                strBasePath = p_basePath;
+                configBase = SpinerBaseConfig.Load(strBasePath);
+                objRepository = null;
+                startupParams = p_params;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static void InitiateInstance(String p_Path)
+        {
+            try
+            {
+                instance = new SpinerBaseBO(p_Path);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static void InitiateInstance(String p_Path, Dictionary<String, String> p_params)
+        {
+            try
+            {
+                instance = new SpinerBaseBO(p_Path, p_params);
             }
             catch (Exception)
             {
@@ -138,17 +181,7 @@ namespace SpinerBase.Layers.BackEnd
         #endregion
 
         #region Functions       
-        public static void InitiateInstance(String p_Path)
-        {
-            try
-            {
-                instance = new SpinerBaseBO(p_Path);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        
 
         public DataSet fnExecuteCardDataSet(Card p_card)
         {
@@ -279,10 +312,12 @@ namespace SpinerBase.Layers.BackEnd
                     {
                         objTargetRepository.sbExecuteDirect(row[0].ToString(), false);
                         onEvProgress(intProcessed, objReturn.Tables[0].Rows.Count, "Processed: " + row[0].ToString());
+                        Thread.Sleep(10);
                     }
                     catch (Exception ex)
-                    {
+                    {                
                         onEvProgress(intProcessed, objReturn.Tables[0].Rows.Count, "Error: " + ex.Message);
+                        Thread.Sleep(10);
                         blnSucess = false;
                         break;
                     }
@@ -291,14 +326,15 @@ namespace SpinerBase.Layers.BackEnd
                 if (blnSucess)
                 {
                     onEvProgress(intProcessed, objReturn.Tables[0].Rows.Count, "Finished with sucess.");
+                    Thread.Sleep(100);
                     objTargetRepository.Commit();
                 }
                 else
                 {
                     onEvProgress(intProcessed, objReturn.Tables[0].Rows.Count, "Finished with error.");
+                    Thread.Sleep(100);
                     objTargetRepository.RollBack();
                 }
-
                
             }
             catch (Exception e)
@@ -307,6 +343,7 @@ namespace SpinerBase.Layers.BackEnd
             }
             finally
             {
+                Thread.Sleep(100);
                 onEvFinished("Ok");
             }
 
@@ -550,6 +587,8 @@ namespace SpinerBase.Layers.BackEnd
 
             }
         }
+
+        public Dictionary<string, string> StartupParams { get => startupParams; set => startupParams = value; }
 
         #endregion
     }
