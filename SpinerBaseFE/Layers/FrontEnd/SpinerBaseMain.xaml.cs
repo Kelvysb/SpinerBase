@@ -62,7 +62,9 @@ namespace SpinerBase.Layers.FrontEnd
         private uscGridResult objCardGrid;
         private uscTextResult objCardText;
         private uscMigration objCardMigration;
+        private uscReport objCardReport;
         private uscCardConfig objCardEditor;
+        private uscReportEdit objReportEditor;
         private bool blnLoaded = false;
         #endregion
 
@@ -445,9 +447,18 @@ namespace SpinerBase.Layers.FrontEnd
 
                 sbclearResultsGrid();
 
-                objCardEditor = new uscCardConfig(p_card);
-                objCardEditor.evSaved += evCardSaved;
-                grdResults.Children.Add(objCardEditor);
+                if (p_card.Type == enmCardType.Report)
+                {
+                    objReportEditor = new uscReportEdit(p_card);
+                    objReportEditor.evSaved += evCardSaved;
+                    grdResults.Children.Add(objReportEditor);
+                }
+                else
+                {
+                    objCardEditor = new uscCardConfig(p_card);
+                    objCardEditor.evSaved += evCardSaved;
+                    grdResults.Children.Add(objCardEditor);
+                }
 
             }
             catch (Exception ex)
@@ -482,13 +493,21 @@ namespace SpinerBase.Layers.FrontEnd
                         grdResults.Children.Add(objCardGrid);
                     }
                 }
-                else
+                else if (p_card.Type == enmCardType.Migration)
                 {
                     objCardMigration = new uscMigration(p_card);
                     objCardMigration.evRemove += evRemoveTextCardFromResults;
                     objCardMigration.evBeginWait += evBeginWait;
                     objCardMigration.evEndWait += evEndWait;
                     grdResults.Children.Add(objCardMigration);
+                }
+                else
+                {
+                    objCardReport = new uscReport(p_card);
+                    objCardReport.evRemove += evRemoveTextCardFromResults;
+                    objCardReport.evBeginWait += evBeginWait;
+                    objCardReport.evEndWait += evEndWait;
+                    grdResults.Children.Add(objCardReport);
                 }
                     
 
@@ -531,9 +550,13 @@ namespace SpinerBase.Layers.FrontEnd
                     {
                         objFilteredResults.AddRange(objCards.FindAll(card => card.Card.Type != enmCardType.Query));
                     }
-                    else
+                    else if(radMigrate.IsChecked == true)
                     {
                         objFilteredResults.AddRange(objCards.FindAll(card => card.Card.Type != enmCardType.Migration));
+                    }
+                    else
+                    {
+                        objFilteredResults.AddRange(objCards.FindAll(card => card.Card.Type != enmCardType.Report));
                     }
 
                     //Use Filter
@@ -622,6 +645,14 @@ namespace SpinerBase.Layers.FrontEnd
                     objCardMigration = null;
                 }
 
+                if (objCardReport is null == false)
+                {
+                    objCardReport.evRemove -= evRemoveGridCardFromResults;
+                    objCardReport.evBeginWait -= evBeginWait;
+                    objCardReport.evEndWait -= evEndWait;
+                    objCardReport = null;
+                }
+
                 if (objConnectionConfig is null == false)
                 {
                     objConnectionConfig.evClose -= evRemoveConfigFromResults;
@@ -629,6 +660,13 @@ namespace SpinerBase.Layers.FrontEnd
                     objConnectionConfig.evEndWait -= evEndWait;
                     objConnectionConfig = null;
                 }
+
+                if (objReportEditor is null == false)
+                {
+                    objReportEditor.evSaved -= evCardSaved;
+                    objReportEditor = null;
+                }
+
 
                 if (objCardEditor is null == false)
                 {

@@ -49,7 +49,8 @@ namespace SpinerBase.Basic
     public enum enmCardType
     {
         Query = 0,
-        Migration = 1
+        Migration = 1,
+        Report = 2
     }
 
     public enum enmResultType
@@ -240,6 +241,8 @@ namespace SpinerBase.Basic
                 ResultType = enmResultType.Text;
                 DataBaseType = enmDataBaseType.MsSQL;
                 TargetConnection = null;
+                DefaultConnection = null;
+                Report = null;
                 PrePythonScript = "";
                 PosPythonScript = "";
             }
@@ -378,6 +381,12 @@ namespace SpinerBase.Basic
 
         [JsonProperty("TARGETCONNECTION")]
         public Connection TargetConnection { get; set; }
+
+        [JsonProperty("DEFAULTCONNECTION")]
+        public Connection DefaultConnection { get; set; }
+
+        [JsonProperty("REPORT")]
+        public PaternReport Report { get; set; }
         #endregion
     }
 
@@ -498,12 +507,8 @@ namespace SpinerBase.Basic
         {
             try
             {
-                Name = "";
-                Description = "";
-                Parameters = new List<Parameter>();
+                Cards = new List<Card>();
                 Body = "";
-                PrePythonScript = "";
-                PosPythonScript = "";
             }
             catch (Exception)
             {
@@ -605,23 +610,12 @@ namespace SpinerBase.Basic
         #endregion
 
         #region Properties
-        [JsonProperty("NAME")]
-        public String Name { get; set; }
-
-        [JsonProperty("DESCRIPTION")]
-        public String Description { get; set; }
-
         [JsonProperty("BODY")]
         public String Body { get; set; }
 
-        [JsonProperty("PARAMETERS")]
-        public List<Parameter> Parameters { get; set; }
+        [JsonProperty("CARDS")]
+        public List<Card> Cards { get; set; }
 
-        [JsonProperty("PREPYTHONSCRIPT")]
-        public string PrePythonScript { get; set; }
-
-        [JsonProperty("POSPYTHONSCRIPT")]
-        public string PosPythonScript { get; set; }
         #endregion
     }
 

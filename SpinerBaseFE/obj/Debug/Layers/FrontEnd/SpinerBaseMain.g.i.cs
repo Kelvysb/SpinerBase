@@ -89,7 +89,7 @@ namespace SpinerBase.Layers.FrontEnd {
         #line hidden
         
         
-        #line 41 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
+        #line 42 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.RadioButton radQuery;
         
@@ -97,7 +97,7 @@ namespace SpinerBase.Layers.FrontEnd {
         #line hidden
         
         
-        #line 42 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
+        #line 43 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.RadioButton radMigrate;
         
@@ -105,7 +105,15 @@ namespace SpinerBase.Layers.FrontEnd {
         #line hidden
         
         
-        #line 51 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
+        #line 44 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.RadioButton radReport;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 53 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.WrapPanel wrpCards;
         
@@ -113,7 +121,7 @@ namespace SpinerBase.Layers.FrontEnd {
         #line hidden
         
         
-        #line 59 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
+        #line 61 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btnAdd;
         
@@ -121,7 +129,7 @@ namespace SpinerBase.Layers.FrontEnd {
         #line hidden
         
         
-        #line 65 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
+        #line 67 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btnImport;
         
@@ -129,7 +137,7 @@ namespace SpinerBase.Layers.FrontEnd {
         #line hidden
         
         
-        #line 71 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
+        #line 73 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btnConnect;
         
@@ -137,7 +145,7 @@ namespace SpinerBase.Layers.FrontEnd {
         #line hidden
         
         
-        #line 85 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
+        #line 87 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lblConnection;
         
@@ -145,7 +153,7 @@ namespace SpinerBase.Layers.FrontEnd {
         #line hidden
         
         
-        #line 89 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
+        #line 91 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btnAbout;
         
@@ -153,7 +161,7 @@ namespace SpinerBase.Layers.FrontEnd {
         #line hidden
         
         
-        #line 102 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
+        #line 104 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Grid grdResults;
         
@@ -161,7 +169,7 @@ namespace SpinerBase.Layers.FrontEnd {
         #line hidden
         
         
-        #line 106 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
+        #line 108 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Grid grdLoading;
         
@@ -239,7 +247,7 @@ namespace SpinerBase.Layers.FrontEnd {
             case 8:
             this.radQuery = ((System.Windows.Controls.RadioButton)(target));
             
-            #line 41 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
+            #line 42 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
             this.radQuery.Checked += new System.Windows.RoutedEventHandler(this.radQuery_Checked);
             
             #line default
@@ -248,58 +256,67 @@ namespace SpinerBase.Layers.FrontEnd {
             case 9:
             this.radMigrate = ((System.Windows.Controls.RadioButton)(target));
             
-            #line 42 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
+            #line 43 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
             this.radMigrate.Checked += new System.Windows.RoutedEventHandler(this.radQuery_Checked);
             
             #line default
             #line hidden
             return;
             case 10:
-            this.wrpCards = ((System.Windows.Controls.WrapPanel)(target));
+            this.radReport = ((System.Windows.Controls.RadioButton)(target));
+            
+            #line 44 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
+            this.radReport.Checked += new System.Windows.RoutedEventHandler(this.radQuery_Checked);
+            
+            #line default
+            #line hidden
             return;
             case 11:
+            this.wrpCards = ((System.Windows.Controls.WrapPanel)(target));
+            return;
+            case 12:
             this.btnAdd = ((System.Windows.Controls.Button)(target));
             
-            #line 59 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
+            #line 61 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
             this.btnAdd.Click += new System.Windows.RoutedEventHandler(this.btnAdd_Click);
             
             #line default
             #line hidden
             return;
-            case 12:
+            case 13:
             this.btnImport = ((System.Windows.Controls.Button)(target));
             
-            #line 65 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
+            #line 67 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
             this.btnImport.Click += new System.Windows.RoutedEventHandler(this.btnImport_Click);
             
             #line default
             #line hidden
             return;
-            case 13:
+            case 14:
             this.btnConnect = ((System.Windows.Controls.Button)(target));
             
-            #line 71 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
+            #line 73 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
             this.btnConnect.Click += new System.Windows.RoutedEventHandler(this.btnConnect_Click);
             
             #line default
             #line hidden
             return;
-            case 14:
+            case 15:
             this.lblConnection = ((System.Windows.Controls.Label)(target));
             return;
-            case 15:
+            case 16:
             this.btnAbout = ((System.Windows.Controls.Button)(target));
             
-            #line 89 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
+            #line 91 "..\..\..\..\Layers\FrontEnd\SpinerBaseMain.xaml"
             this.btnAbout.Click += new System.Windows.RoutedEventHandler(this.btnAbout_Click);
             
             #line default
             #line hidden
             return;
-            case 16:
+            case 17:
             this.grdResults = ((System.Windows.Controls.Grid)(target));
             return;
-            case 17:
+            case 18:
             this.grdLoading = ((System.Windows.Controls.Grid)(target));
             return;
             }
