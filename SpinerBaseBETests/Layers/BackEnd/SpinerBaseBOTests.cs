@@ -188,6 +188,29 @@ namespace SpinerBase.Layers.BackEnd.Tests
             }
         }
 
+        [TestMethod()]
+        public void sbExecuteReportTest()
+        {
+            try
+            {
+                Card objCardReport;
+                Connection objConnection;
+                string result;
+
+                SpinerBaseBO.InitiateInstance(Environment.CurrentDirectory + "\\SpinerBaseData.json");
+
+                objConnection = fnGetExampleConection();
+                objCardReport = fnGetExampleReport();
+
+                result = SpinerBaseBO.Instance.sbExecuteReport(objCardReport);
+
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("Error: " + ex.Message);
+            }
+        }
+
         private Connection fnGetExampleConection()
         {
             Connection objConnection;
@@ -335,6 +358,35 @@ namespace SpinerBase.Layers.BackEnd.Tests
                 objMigration.TargetConnection = fnGetExampleConectionMsSQL();
 
                 return objMigration;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private Card fnGetExampleReport()
+        {
+            Card objReportCard;
+
+            try
+            {
+
+
+                //TODO create report test card
+                objReportCard = new Card();
+                objReportCard.Type = enmCardType.Report;
+                objReportCard.Name = "TestReport";
+                objReportCard.Description = "Test Card";
+                objReportCard.Command = "select \"insert into tbTeste(name, surname, age, address) values('\" || name || \"', '\" || surname || \"', \" || age || \", '\" || address || \"')\" as Result from testTable";
+                objReportCard.Parameters.Add(new Parameter());
+                objReportCard.Parameters.Last().Description = "Age";
+                objReportCard.Parameters.Last().Tag = "<%AGE%>";
+                objReportCard.Parameters.Last().Value = "20";
+                objReportCard.TargetConnection = fnGetExampleConectionMsSQL();
+
+                return objReportCard;
 
             }
             catch (Exception)

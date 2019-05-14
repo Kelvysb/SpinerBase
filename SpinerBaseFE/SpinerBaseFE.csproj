@@ -160,6 +160,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Layers\FrontEnd\uscReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Layers\FrontEnd\uscReportEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Layers\FrontEnd\uscTextResult.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -203,6 +211,12 @@
     </Compile>
     <Compile Include="Layers\FrontEnd\uscMigration.xaml.cs">
       <DependentUpon>uscMigration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Layers\FrontEnd\uscReport.xaml.cs">
+      <DependentUpon>uscReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Layers\FrontEnd\uscReportEdit.xaml.cs">
+      <DependentUpon>uscReportEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="Layers\FrontEnd\uscTextResult.xaml.cs">
       <DependentUpon>uscTextResult.xaml</DependentUpon>

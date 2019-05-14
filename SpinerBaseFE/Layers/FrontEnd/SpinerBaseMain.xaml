@@ -29,17 +29,19 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="200"/>
                         </Grid.ColumnDefinitions>
                         <Label Name="lblFilter" Content="Filter:" Style="{StaticResource stlLabelBase}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0"/>
                         <TextBox Name="txtFilter" Text="" Style="{StaticResource stlTextBoxBase}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,10,0" TextChanged="txtFilter_TextChanged"/>
                         <Grid Grid.Column="2">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <RadioButton Name="radQuery" Content="Query" GroupName="grpCardType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" IsChecked="True" Grid.Row="0" Checked="radQuery_Checked"/>
-                            <RadioButton Name="radMigrate" Content="Migrate" GroupName="grpCardType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" Grid.Row="1" Checked="radQuery_Checked"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <RadioButton Name="radQuery" Content="Query" GroupName="grpCardType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" IsChecked="True" Grid.Column="0" Checked="radQuery_Checked"/>
+                            <RadioButton Name="radMigrate" Content="Migrate" GroupName="grpCardType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" Grid.Column="1" Checked="radQuery_Checked"/>
+                            <RadioButton Name="radReport" Content="Report" GroupName="grpCardType" Margin="5,0,0,0" Style="{StaticResource stlRadioButtonBase}" Grid.Column="2" Checked="radQuery_Checked"/>
                         </Grid>
                         
                     </Grid>

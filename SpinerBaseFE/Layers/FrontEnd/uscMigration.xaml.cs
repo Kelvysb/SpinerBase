@@ -282,6 +282,7 @@ namespace SpinerBase.Layers.FrontEnd
                 ListLog.Items.Add(strMessage);
                 ListLog.SelectedIndex = ListLog.Items.Count - 1;
                 ListLog.ScrollIntoView(ListLog.SelectedItem);
+                ListLog.UpdateLayout();
 
             }
             catch (Exception)
